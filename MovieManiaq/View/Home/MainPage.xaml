@@ -24,7 +24,8 @@
                     <DataTemplate>
                         <CarouselView Style="{StaticResource CarouselView}"
                                       ItemsSource="{Binding results}"
-                                      IndicatorView="{x:Reference Indicator_NowShowing}">
+                                      IndicatorView="{x:Reference Indicator_NowShowing}"
+                                      CurrentItemChanged="NowShowing_CurrentItemChanged">
                             <CarouselView.ItemsLayout>
                                 <LinearItemsLayout Orientation="Horizontal"
                                                    ItemSpacing="5"/>
@@ -38,7 +39,8 @@
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="10*"/>
                                                 <RowDefinition Height="80*"/>
-                                                <RowDefinition Height="20*"/>
+                                                <RowDefinition Height="10*"/>
+                                                <RowDefinition Height="10*"/>
                                             </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="30*"/>
@@ -64,6 +66,15 @@
                                                    HorizontalTextAlignment="Center"
                                                    Style="{StaticResource Label}"
                                                    Text="{Binding release_date}"/>
+                                            <Label Grid.Row="3"
+                                                   Grid.Column="0"
+                                                   HorizontalTextAlignment="Center"
+                                                   Style="{StaticResource Label}"
+                                                   Text="Read More">
+                                                <Label.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="NowShowing_Tapped"/>
+                                                </Label.GestureRecognizers>
+                                            </Label>
                                         </Grid>
                                     </Frame>
                                 </DataTemplate>
@@ -86,7 +97,8 @@
                     <DataTemplate>
                         <CarouselView Style="{StaticResource CarouselView}"
                                       ItemsSource="{Binding results}"
-                                      IndicatorView="{x:Reference Indicator_Trending}">
+                                      IndicatorView="{x:Reference Indicator_Trending}"
+                                      CurrentItemChanged="Trending_CurrentItemChanged">
                             <CarouselView.ItemsLayout>
                                 <LinearItemsLayout Orientation="Horizontal"
                                                    ItemSpacing="20"/>
@@ -99,7 +111,8 @@
                                         <Grid>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="10*"/>
-                                                <RowDefinition Height="90*"/>
+                                                <RowDefinition Height="80*"/>
+                                                <RowDefinition Height="10*"/>
                                                 <RowDefinition Height="10*"/>
                                             </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
@@ -114,14 +127,8 @@
                                             <Label Grid.Row="0"
                                                    Grid.Column="1"
                                                    HorizontalTextAlignment="Start"
-                                                   Style="{StaticResource Label}">
-                                                <Label.FormattedText>
-                                                    <FormattedString>
-                                                        <Span Text="{Binding title}"/>
-                                                        <Span Text="{Binding name}"/>
-                                                    </FormattedString>
-                                                </Label.FormattedText>
-                                            </Label>
+                                                   Style="{StaticResource Label}"
+                                                   Text="{Binding title}"/>
                                             <Label Grid.Row="1"
                                                    Grid.Column="1"
                                                    HorizontalTextAlignment="Start"
@@ -131,13 +138,16 @@
                                             <Label Grid.Row="2"
                                                    Grid.Column="1"
                                                    HorizontalTextAlignment="Center"
-                                                   Style="{StaticResource Label}">
-                                                <Label.FormattedText>
-                                                    <FormattedString>
-                                                        <Span Text="{Binding release_date}"/>
-                                                        <Span Text="{Binding first_air_date}"/>
-                                                    </FormattedString>
-                                                </Label.FormattedText>
+                                                   Style="{StaticResource Label}"
+                                                   Text="{Binding release_date}"/>
+                                            <Label Grid.Row="3"
+                                                   Grid.Column="0"
+                                                   HorizontalTextAlignment="Center"
+                                                   Style="{StaticResource Label}"
+                                                   Text="Read More">
+                                                <Label.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="Trending_Tapped"/>
+                                                </Label.GestureRecognizers>
                                             </Label>
                                         </Grid>
                                     </Frame>
@@ -161,7 +171,8 @@
                     <DataTemplate>
                         <CarouselView Style="{StaticResource CarouselView}"
                                       ItemsSource="{Binding results}"
-                                      IndicatorView="{x:Reference Indicator_UpComing}">
+                                      IndicatorView="{x:Reference Indicator_UpComing}"
+                                      CurrentItemChanged="UpComing_CurrentItemChanged">
                             <CarouselView.ItemsLayout>
                                 <LinearItemsLayout Orientation="Horizontal"
                                                    ItemSpacing="20"/>
@@ -174,7 +185,8 @@
                                         <Grid>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="10*"/>
-                                                <RowDefinition Height="90*"/>
+                                                <RowDefinition Height="80*"/>
+                                                <RowDefinition Height="10*"/>
                                                 <RowDefinition Height="10*"/>
                                             </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
@@ -202,6 +214,15 @@
                                                    HorizontalTextAlignment="Center"
                                                    Style="{StaticResource Label}"
                                                    Text="{Binding release_date}"/>
+                                            <Label Grid.Row="3"
+                                                   Grid.Column="0"
+                                                   HorizontalTextAlignment="Center"
+                                                   Style="{StaticResource Label}"
+                                                   Text="Read More">
+                                                <Label.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="UpComing_Tapped"/>
+                                                </Label.GestureRecognizers>
+                                            </Label>
                                         </Grid>
                                     </Frame>
                                 </DataTemplate>
@@ -224,7 +245,8 @@
                     <DataTemplate>
                         <CarouselView Style="{StaticResource CarouselView}"
                                       ItemsSource="{Binding results}"
-                                      IndicatorView="{x:Reference Indicator_TopRated}">
+                                      IndicatorView="{x:Reference Indicator_TopRated}"
+                                      CurrentItemChanged="TopRated_CurrentItemChanged">
                             <CarouselView.ItemsLayout>
                                 <LinearItemsLayout Orientation="Horizontal"
                                                    ItemSpacing="20"/>
@@ -237,7 +259,8 @@
                                         <Grid>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="10*"/>
-                                                <RowDefinition Height="90*"/>
+                                                <RowDefinition Height="80*"/>
+                                                <RowDefinition Height="10*"/>
                                                 <RowDefinition Height="10*"/>
                                             </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
@@ -265,6 +288,15 @@
                                                    HorizontalTextAlignment="Center"
                                                    Style="{StaticResource Label}"
                                                    Text="{Binding release_date}"/>
+                                            <Label Grid.Row="3"
+                                                   Grid.Column="0"
+                                                   HorizontalTextAlignment="Center"
+                                                   Style="{StaticResource Label}"
+                                                   Text="Read More">
+                                                <Label.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="TopRated_Tapped"/>
+                                                </Label.GestureRecognizers>
+                                            </Label>
                                         </Grid>
                                     </Frame>
                                 </DataTemplate>
@@ -287,7 +319,8 @@
                     <DataTemplate>
                         <CarouselView Style="{StaticResource CarouselView}"
                                       ItemsSource="{Binding results}"
-                                      IndicatorView="{x:Reference Indicator_Popular}">
+                                      IndicatorView="{x:Reference Indicator_Popular}"
+                                      CurrentItemChanged="Popular_CurrentItemChanged">
                             <CarouselView.ItemsLayout>
                                 <LinearItemsLayout Orientation="Horizontal"
                                                    ItemSpacing="20"/>
@@ -300,7 +333,8 @@
                                         <Grid>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="10*"/>
-                                                <RowDefinition Height="90*"/>
+                                                <RowDefinition Height="80*"/>
+                                                <RowDefinition Height="10*"/>
                                                 <RowDefinition Height="10*"/>
                                             </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
@@ -328,6 +362,15 @@
                                                    HorizontalTextAlignment="Center"
                                                    Style="{StaticResource Label}"
                                                    Text="{Binding release_date}"/>
+                                            <Label Grid.Row="3"
+                                                   Grid.Column="0"
+                                                   HorizontalTextAlignment="Center"
+                                                   Style="{StaticResource Label}"
+                                                   Text="Read More">
+                                                <Label.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="Popular_Tapped"/>
+                                                </Label.GestureRecognizers>
+                                            </Label>
                                         </Grid>
                                     </Frame>
                                 </DataTemplate>
