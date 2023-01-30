@@ -28,8 +28,12 @@ namespace MovieManiaq.ViewModel.Detail
             if (valid_connect)
             {
                 var detail = await DetailClass.GetDetailMovieAsync(MovieID);
-                ListDetailMovie.Clear();
-                ListDetailMovie.Add(detail);
+                ListDetail.Clear();
+                ListDetail.Add(detail);
+
+                var credits = await CreditsClass.GetCreditsAsync(MovieID);
+                ListCredits.Clear();
+                ListCredits.Add(credits);
             }
 
             IsBusy = false;

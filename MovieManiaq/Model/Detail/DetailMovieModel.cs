@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using static MovieManiaq.Model.Response.Movie.CreditsModel;
 using static MovieManiaq.Model.Response.Movie.DetailModel;
 
 namespace MovieManiaq.Model.Detail
@@ -46,20 +47,36 @@ namespace MovieManiaq.Model.Detail
             set { SetProperty(ref isvisible, value); }
         }
 
-        private IList<DetailRoot> listdetailmovie { get; set; }
+        private IList<DetailRoot> listdetail { get; set; }
 
-        public IList<DetailRoot> ListDetailMovie
+        public IList<DetailRoot> ListDetail
         {
             get
             {
-                if (listdetailmovie == null)
+                if (listdetail == null)
                 {
-                    listdetailmovie = new ObservableCollection<DetailRoot>();
+                    listdetail = new ObservableCollection<DetailRoot>();
                 }
 
-                return listdetailmovie;
+                return listdetail;
             }
-            set { listdetailmovie = value; }
+            set { listdetail = value; }
+        }
+
+        private IList<CreditsRoot> listcredits { get; set; }
+
+        public IList<CreditsRoot> ListCredits
+        {
+            get
+            {
+                if (listcredits == null)
+                {
+                    listcredits = new ObservableCollection<CreditsRoot>();
+                }
+
+                return listcredits;
+            }
+            set { listcredits = value; }
         }
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")

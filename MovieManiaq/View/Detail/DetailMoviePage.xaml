@@ -12,7 +12,7 @@
             <ActivityIndicator Style="{StaticResource ActivityIndicator}"
                                IsRunning="{Binding IsBusy}"
                                IsVisible="{Binding IsVisible}"/>
-            <CollectionView ItemsSource="{Binding ListDetailMovie}">
+            <CollectionView ItemsSource="{Binding ListDetail}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout>
@@ -304,11 +304,129 @@
                                                Style="{StaticResource IndicatorView}"
                                                HorizontalOptions="CenterAndExpand"/>
                             </Grid>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Label Style="{StaticResource Label}"
+                   Text="Credits"
+                   FontSize="Large"
+                   HorizontalTextAlignment="Start"
+                   Margin="3"/>
+            <CollectionView ItemsSource="{Binding ListCredits}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
                             <Label Style="{StaticResource Label}"
-                                   Text="Credits"
-                                   FontSize="Large"
-                                   HorizontalTextAlignment="Start"
-                                   Margin="3"/>
+                                   FontSize="Medium"
+                                   HorizontalTextAlignment="Center"
+                                   Margin="3">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Cast "/>
+                                        <Span Text="{Binding cast.Count}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <CarouselView Style="{StaticResource CarouselView}"
+                                          ItemsSource="{Binding cast}"
+                                          IndicatorView="{x:Reference Indicator_Cast}"
+                                          HeightRequest="150">
+                                <CarouselView.ItemsLayout>
+                                    <LinearItemsLayout Orientation="Horizontal"
+                                                       ItemSpacing="5"/>
+                                </CarouselView.ItemsLayout>
+                                <CarouselView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Frame Style="{StaticResource Frame}">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="50*"/>
+                                                    <RowDefinition Height="50*"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="30*"/>
+                                                    <ColumnDefinition Width="70*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Image Grid.Row="0"
+                                                       Grid.Column="0"
+                                                       Grid.RowSpan="2"
+                                                       Source="{Binding profile_url}"/>
+                                                <Label Grid.Row="0"
+                                                       Grid.Column="1"
+                                                       HorizontalTextAlignment="Center"
+                                                       FontSize="Large"
+                                                       Style="{StaticResource Label}"
+                                                       Text="{Binding name}"/>
+                                                <Label Grid.Row="1"
+                                                       Grid.Column="1"
+                                                       HorizontalTextAlignment="Center"
+                                                       FontSize="Medium"
+                                                       Style="{StaticResource Label}"
+                                                       Text="{Binding character}"/>
+                                            </Grid>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CarouselView.ItemTemplate>
+                            </CarouselView>
+                            <IndicatorView x:Name="Indicator_Cast"
+                                           Style="{StaticResource IndicatorView}"
+                                           HorizontalOptions="CenterAndExpand"/>
+                            <Label Style="{StaticResource Label}"
+                                   FontSize="Medium"
+                                   HorizontalTextAlignment="Center"
+                                   Margin="3">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Crew "/>
+                                        <Span Text="{Binding crew.Count}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <CarouselView Style="{StaticResource CarouselView}"
+                                          ItemsSource="{Binding crew}"
+                                          IndicatorView="{x:Reference Indicator_Crew}"
+                                          HeightRequest="150">
+                                <CarouselView.ItemsLayout>
+                                    <LinearItemsLayout Orientation="Horizontal"
+                                                       ItemSpacing="5"/>
+                                </CarouselView.ItemsLayout>
+                                <CarouselView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Frame Style="{StaticResource Frame}">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="50*"/>
+                                                    <RowDefinition Height="50*"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="30*"/>
+                                                    <ColumnDefinition Width="70*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Image Grid.Row="0"
+                                                       Grid.Column="0"
+                                                       Grid.RowSpan="2"
+                                                       Source="{Binding profile_url}"/>
+                                                <Label Grid.Row="0"
+                                                       Grid.Column="1"
+                                                       HorizontalTextAlignment="Center"
+                                                       FontSize="Large"
+                                                       Style="{StaticResource Label}"
+                                                       Text="{Binding name}"/>
+                                                <Label Grid.Row="1"
+                                                       Grid.Column="1"
+                                                       HorizontalTextAlignment="Center"
+                                                       FontSize="Medium"
+                                                       Style="{StaticResource Label}"
+                                                       Text="{Binding job}"/>
+                                            </Grid>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CarouselView.ItemTemplate>
+                            </CarouselView>
+                            <IndicatorView x:Name="Indicator_Crew"
+                                           Style="{StaticResource IndicatorView}"
+                                           HorizontalOptions="CenterAndExpand"/>
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
