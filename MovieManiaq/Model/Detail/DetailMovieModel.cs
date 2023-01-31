@@ -5,6 +5,7 @@ using static MovieManiaq.Model.Response.Movie.CreditsModel;
 using static MovieManiaq.Model.Response.Movie.DetailModel;
 using static MovieManiaq.Model.Response.Movie.ImagesModel;
 using static MovieManiaq.Model.Response.Movie.KeywordModel;
+using static MovieManiaq.Model.Response.Movie.VideoModel;
 
 namespace MovieManiaq.Model.Detail
 {
@@ -111,6 +112,22 @@ namespace MovieManiaq.Model.Detail
                 return listkeyword;
             }
             set { listkeyword = value; }
+        }
+
+        private IList<VideoRoot> listvideo { get; set; }
+
+        public IList<VideoRoot> ListVideo
+        {
+            get
+            {
+                if (listvideo == null)
+                {
+                    listvideo = new ObservableCollection<VideoRoot>();
+                }
+
+                return listvideo;
+            }
+            set { listvideo = value; }
         }
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")

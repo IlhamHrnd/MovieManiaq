@@ -44,6 +44,10 @@ namespace MovieManiaq.ViewModel.Detail
                 var images = await ImagesClass.GetImagesAsync(MovieID);
                 ListImages.Clear();
                 ListImages.Add(images);
+
+                var video = await VideoClass.GetVideoAsync(MovieID);
+                ListVideo.Clear();
+                ListVideo.Add(video);
             }
 
             IsBusy = false;

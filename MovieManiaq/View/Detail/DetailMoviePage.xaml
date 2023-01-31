@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="MovieManiaq.View.Detail.DetailMoviePage"
              xmlns:Model="clr-namespace:MovieManiaq.Model.Detail"
              Title="{Binding Title}">
@@ -36,7 +37,7 @@
                                 <Image Grid.Row="0"
                                        Grid.Column="0"
                                        Source="{Binding background_url}"
-                                       Aspect="AspectFit"/>
+                                       Aspect="Fill"/>
                                 <Frame Grid.Row="1"
                                        Grid.Column="0"
                                        Style="{StaticResource Frame}"
@@ -706,6 +707,74 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            <Label Style="{StaticResource Label}"
+                   Text="Video"
+                   FontSize="Large"
+                   HorizontalTextAlignment="Start"
+                   Margin="3"/>
+            <CollectionView ItemsSource="{Binding ListVideo}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <CarouselView Style="{StaticResource CarouselView}"
+                                          ItemsSource="{Binding results}"
+                                          IndicatorView="{x:Reference Indicator_Video}">
+                                <CarouselView.ItemsLayout>
+                                    <LinearItemsLayout Orientation="Horizontal"
+                                                       ItemSpacing="5"/>
+                                </CarouselView.ItemsLayout>
+                                <CarouselView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Frame Style="{StaticResource Frame}">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="100"/>
+                                                    <RowDefinition Height="20*"/>
+                                                    <RowDefinition Height="20*"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="50*"/>
+                                                    <ColumnDefinition Width="50*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <toolkit:MediaElement Grid.Row="0"
+                                                                      Grid.Column="0"
+                                                                      Grid.ColumnSpan="2"
+                                                                      Style="{StaticResource MediaElement}"
+                                                                      Source="{Binding key_url}"/>
+                                                <Label Grid.Row="1"
+                                                       Grid.Column="0"
+                                                       Grid.ColumnSpan="2"
+                                                       HorizontalTextAlignment="Center"
+                                                       FontSize="Large"
+                                                       Style="{StaticResource Label}"
+                                                       Text="{Binding name}"/>
+                                                <Label Grid.Row="2"
+                                                       Grid.Column="0"
+                                                       HorizontalTextAlignment="Center"
+                                                       Style="{StaticResource Label}"
+                                                       Text="{Binding site}"/>
+
+                                                <Label Grid.Row="2"
+                                                       Grid.Column="1"
+                                                       HorizontalTextAlignment="Center"
+                                                       Style="{StaticResource Label}"
+                                                       Text="{Binding type}"/>
+                                            </Grid>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CarouselView.ItemTemplate>
+                            </CarouselView>
+                            <IndicatorView x:Name="Indicator_Video"
+                                           Style="{StaticResource IndicatorView}"
+                                           HorizontalOptions="CenterAndExpand"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <!--<toolkit:MediaElement Style="{StaticResource MediaElement}"
+                                  Source="https://assets.mixkit.co/videos/preview/mixkit-mother-and-daughter-preparing-a-pumpkin-for-halloween-44539-large.mp4"
+                                  WidthRequest="200"
+                                  HeightRequest="200"/>-->
         </StackLayout>
     </ScrollView>
 </ContentPage>
