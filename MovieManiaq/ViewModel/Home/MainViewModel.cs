@@ -34,6 +34,10 @@ namespace MovieManiaq.ViewModel.Home
 
             if (valid_connect)
             {
+                var nowshowing = await NowShowingClass.GetNowShowingAsync();
+                ListNowShowing.Clear();
+                ListNowShowing.Add(nowshowing);
+
                 var trending = await TrendingClass.GetTrendingAsync();
                 ListTrending.Clear();
                 ListTrending.Add(trending);
@@ -41,10 +45,6 @@ namespace MovieManiaq.ViewModel.Home
                 var upcoming = await UpComingClass.GetUpComingAsync();
                 ListUpComing.Clear();
                 ListUpComing.Add(upcoming);
-
-                var nowshowing = await NowShowingClass.GetNowShowingAsync();
-                ListNowShowing.Clear();
-                ListNowShowing.Add(nowshowing);
 
                 var toprated = await TopRatedClass.GetTopRatedAsync();
                 ListTopRated.Clear();

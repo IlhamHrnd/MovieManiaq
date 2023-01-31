@@ -18,8 +18,7 @@
                    FontSize="Large"
                    HorizontalTextAlignment="Center"
                    Margin="3"/>
-            <CollectionView ItemsSource="{Binding ListNowShowing}"
-                            HeightRequest="250">
+            <CollectionView ItemsSource="{Binding ListNowShowing}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <CarouselView Style="{StaticResource CarouselView}"
@@ -32,14 +31,11 @@
                             </CarouselView.ItemsLayout>
                             <CarouselView.ItemTemplate>
                                 <DataTemplate>
-                                    <Frame Style="{StaticResource Frame}"
-                                           HeightRequest="250"
-                                           WidthRequest="450">
+                                    <Frame Style="{StaticResource Frame}">
                                         <Grid>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="10*"/>
                                                 <RowDefinition Height="80*"/>
-                                                <RowDefinition Height="10*"/>
                                                 <RowDefinition Height="10*"/>
                                             </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
@@ -48,7 +44,7 @@
                                             </Grid.ColumnDefinitions>
                                             <Image Grid.Row="0"
                                                    Grid.Column="0"
-                                                   Grid.RowSpan="3"
+                                                   Grid.RowSpan="2"
                                                    Source="{Binding poster_url}"
                                                    Margin="5"/>
                                             <Label Grid.Row="0"
@@ -66,7 +62,7 @@
                                                    HorizontalTextAlignment="Center"
                                                    Style="{StaticResource Label}"
                                                    Text="{Binding release_date}"/>
-                                            <Label Grid.Row="3"
+                                            <Label Grid.Row="2"
                                                    Grid.Column="0"
                                                    HorizontalTextAlignment="Center"
                                                    Style="{StaticResource Label}"
@@ -91,8 +87,7 @@
                    FontSize="Large"
                    HorizontalTextAlignment="Center"
                    Margin="3"/>
-            <CollectionView ItemsSource="{Binding ListTrending}"
-                            HeightRequest="250">
+            <CollectionView ItemsSource="{Binding ListTrending}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <CarouselView Style="{StaticResource CarouselView}"
@@ -101,18 +96,15 @@
                                       CurrentItemChanged="Trending_CurrentItemChanged">
                             <CarouselView.ItemsLayout>
                                 <LinearItemsLayout Orientation="Horizontal"
-                                                   ItemSpacing="20"/>
+                                                   ItemSpacing="5"/>
                             </CarouselView.ItemsLayout>
                             <CarouselView.ItemTemplate>
                                 <DataTemplate>
-                                    <Frame Style="{StaticResource Frame}"
-                                           HeightRequest="250"
-                                           WidthRequest="450">
+                                    <Frame Style="{StaticResource Frame}">
                                         <Grid>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="10*"/>
                                                 <RowDefinition Height="80*"/>
-                                                <RowDefinition Height="10*"/>
                                                 <RowDefinition Height="10*"/>
                                             </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
@@ -121,7 +113,7 @@
                                             </Grid.ColumnDefinitions>
                                             <Image Grid.Row="0"
                                                    Grid.Column="0"
-                                                   Grid.RowSpan="3"
+                                                   Grid.RowSpan="2"
                                                    Source="{Binding poster_url}"
                                                    Margin="5"/>
                                             <Label Grid.Row="0"
@@ -132,7 +124,6 @@
                                             <Label Grid.Row="1"
                                                    Grid.Column="1"
                                                    HorizontalTextAlignment="Start"
-                                                   VerticalTextAlignment="Start"
                                                    Style="{StaticResource Label}"
                                                    Text="{Binding overview}"/>
                                             <Label Grid.Row="2"
@@ -140,7 +131,7 @@
                                                    HorizontalTextAlignment="Center"
                                                    Style="{StaticResource Label}"
                                                    Text="{Binding release_date}"/>
-                                            <Label Grid.Row="3"
+                                            <Label Grid.Row="2"
                                                    Grid.Column="0"
                                                    HorizontalTextAlignment="Center"
                                                    Style="{StaticResource Label}"
@@ -165,8 +156,7 @@
                    FontSize="Large"
                    HorizontalTextAlignment="Center"
                    Margin="3"/>
-            <CollectionView ItemsSource="{Binding ListUpComing}"
-                            HeightRequest="250">
+            <CollectionView ItemsSource="{Binding ListUpComing}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <CarouselView Style="{StaticResource CarouselView}"
@@ -175,18 +165,15 @@
                                       CurrentItemChanged="UpComing_CurrentItemChanged">
                             <CarouselView.ItemsLayout>
                                 <LinearItemsLayout Orientation="Horizontal"
-                                                   ItemSpacing="20"/>
+                                                   ItemSpacing="5"/>
                             </CarouselView.ItemsLayout>
                             <CarouselView.ItemTemplate>
                                 <DataTemplate>
-                                    <Frame Style="{StaticResource Frame}"
-                                           HeightRequest="250"
-                                           WidthRequest="450">
+                                    <Frame Style="{StaticResource Frame}">
                                         <Grid>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="10*"/>
                                                 <RowDefinition Height="80*"/>
-                                                <RowDefinition Height="10*"/>
                                                 <RowDefinition Height="10*"/>
                                             </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
@@ -195,7 +182,7 @@
                                             </Grid.ColumnDefinitions>
                                             <Image Grid.Row="0"
                                                    Grid.Column="0"
-                                                   Grid.RowSpan="3"
+                                                   Grid.RowSpan="2"
                                                    Source="{Binding poster_url}"
                                                    Margin="5"/>
                                             <Label Grid.Row="0"
@@ -206,7 +193,6 @@
                                             <Label Grid.Row="1"
                                                    Grid.Column="1"
                                                    HorizontalTextAlignment="Start"
-                                                   VerticalTextAlignment="Start"
                                                    Style="{StaticResource Label}"
                                                    Text="{Binding overview}"/>
                                             <Label Grid.Row="2"
@@ -214,7 +200,7 @@
                                                    HorizontalTextAlignment="Center"
                                                    Style="{StaticResource Label}"
                                                    Text="{Binding release_date}"/>
-                                            <Label Grid.Row="3"
+                                            <Label Grid.Row="2"
                                                    Grid.Column="0"
                                                    HorizontalTextAlignment="Center"
                                                    Style="{StaticResource Label}"
@@ -239,8 +225,7 @@
                    FontSize="Large"
                    HorizontalTextAlignment="Center"
                    Margin="3"/>
-            <CollectionView ItemsSource="{Binding ListTopRated}"
-                            HeightRequest="250">
+            <CollectionView ItemsSource="{Binding ListTopRated}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <CarouselView Style="{StaticResource CarouselView}"
@@ -249,18 +234,15 @@
                                       CurrentItemChanged="TopRated_CurrentItemChanged">
                             <CarouselView.ItemsLayout>
                                 <LinearItemsLayout Orientation="Horizontal"
-                                                   ItemSpacing="20"/>
+                                                   ItemSpacing="5"/>
                             </CarouselView.ItemsLayout>
                             <CarouselView.ItemTemplate>
                                 <DataTemplate>
-                                    <Frame Style="{StaticResource Frame}"
-                                           HeightRequest="250"
-                                           WidthRequest="450">
+                                    <Frame Style="{StaticResource Frame}">
                                         <Grid>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="10*"/>
                                                 <RowDefinition Height="80*"/>
-                                                <RowDefinition Height="10*"/>
                                                 <RowDefinition Height="10*"/>
                                             </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
@@ -269,7 +251,7 @@
                                             </Grid.ColumnDefinitions>
                                             <Image Grid.Row="0"
                                                    Grid.Column="0"
-                                                   Grid.RowSpan="3"
+                                                   Grid.RowSpan="2"
                                                    Source="{Binding poster_url}"
                                                    Margin="5"/>
                                             <Label Grid.Row="0"
@@ -280,7 +262,6 @@
                                             <Label Grid.Row="1"
                                                    Grid.Column="1"
                                                    HorizontalTextAlignment="Start"
-                                                   VerticalTextAlignment="Start"
                                                    Style="{StaticResource Label}"
                                                    Text="{Binding overview}"/>
                                             <Label Grid.Row="2"
@@ -288,7 +269,7 @@
                                                    HorizontalTextAlignment="Center"
                                                    Style="{StaticResource Label}"
                                                    Text="{Binding release_date}"/>
-                                            <Label Grid.Row="3"
+                                            <Label Grid.Row="2"
                                                    Grid.Column="0"
                                                    HorizontalTextAlignment="Center"
                                                    Style="{StaticResource Label}"
@@ -313,8 +294,7 @@
                    FontSize="Large"
                    HorizontalTextAlignment="Center"
                    Margin="3"/>
-            <CollectionView ItemsSource="{Binding ListPopular}"
-                            HeightRequest="250">
+            <CollectionView ItemsSource="{Binding ListPopular}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <CarouselView Style="{StaticResource CarouselView}"
@@ -323,18 +303,15 @@
                                       CurrentItemChanged="Popular_CurrentItemChanged">
                             <CarouselView.ItemsLayout>
                                 <LinearItemsLayout Orientation="Horizontal"
-                                                   ItemSpacing="20"/>
+                                                   ItemSpacing="5"/>
                             </CarouselView.ItemsLayout>
                             <CarouselView.ItemTemplate>
                                 <DataTemplate>
-                                    <Frame Style="{StaticResource Frame}"
-                                           HeightRequest="250"
-                                           WidthRequest="450">
+                                    <Frame Style="{StaticResource Frame}">
                                         <Grid>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="10*"/>
                                                 <RowDefinition Height="80*"/>
-                                                <RowDefinition Height="10*"/>
                                                 <RowDefinition Height="10*"/>
                                             </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
@@ -343,7 +320,7 @@
                                             </Grid.ColumnDefinitions>
                                             <Image Grid.Row="0"
                                                    Grid.Column="0"
-                                                   Grid.RowSpan="3"
+                                                   Grid.RowSpan="2"
                                                    Source="{Binding poster_url}"
                                                    Margin="5"/>
                                             <Label Grid.Row="0"
@@ -354,7 +331,6 @@
                                             <Label Grid.Row="1"
                                                    Grid.Column="1"
                                                    HorizontalTextAlignment="Start"
-                                                   VerticalTextAlignment="Start"
                                                    Style="{StaticResource Label}"
                                                    Text="{Binding overview}"/>
                                             <Label Grid.Row="2"
@@ -362,7 +338,7 @@
                                                    HorizontalTextAlignment="Center"
                                                    Style="{StaticResource Label}"
                                                    Text="{Binding release_date}"/>
-                                            <Label Grid.Row="3"
+                                            <Label Grid.Row="2"
                                                    Grid.Column="0"
                                                    HorizontalTextAlignment="Center"
                                                    Style="{StaticResource Label}"

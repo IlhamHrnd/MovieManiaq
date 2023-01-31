@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MovieManiaq.View.Detail.DetailMoviePage"
              xmlns:Model="clr-namespace:MovieManiaq.Model.Detail"
-             Title="Detail Movie">
+             Title="{Binding Title}">
     <ContentPage.BindingContext>
         <Model:DetailMovieModel/>
     </ContentPage.BindingContext>
@@ -309,6 +309,37 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
             <Label Style="{StaticResource Label}"
+                   Text="Keyword"
+                   FontSize="Large"
+                   HorizontalTextAlignment="Start"
+                   Margin="3"/>
+            <CollectionView ItemsSource="{Binding ListKeyword}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <CarouselView Style="{StaticResource CarouselView}"
+                                          ItemsSource="{Binding keywords}"
+                                          IndicatorView="{x:Reference Indicator_Keyword}">
+                                <CarouselView.ItemsLayout>
+                                    <LinearItemsLayout Orientation="Horizontal"
+                                                       ItemSpacing="10"/>
+                                </CarouselView.ItemsLayout>
+                                <CarouselView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Button Style="{StaticResource Button}"
+                                                Text="{Binding name}"
+                                                IsEnabled="False"/>
+                                    </DataTemplate>
+                                </CarouselView.ItemTemplate>
+                            </CarouselView>
+                            <IndicatorView x:Name="Indicator_Keyword"
+                                           Style="{StaticResource IndicatorView}"
+                                           HorizontalOptions="CenterAndExpand"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Label Style="{StaticResource Label}"
                    Text="Credits"
                    FontSize="Large"
                    HorizontalTextAlignment="Start"
@@ -425,6 +456,250 @@
                                 </CarouselView.ItemTemplate>
                             </CarouselView>
                             <IndicatorView x:Name="Indicator_Crew"
+                                           Style="{StaticResource IndicatorView}"
+                                           HorizontalOptions="CenterAndExpand"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Label Style="{StaticResource Label}"
+                   Text="Images"
+                   FontSize="Large"
+                   HorizontalTextAlignment="Start"
+                   Margin="3"/>
+            <CollectionView ItemsSource="{Binding ListImages}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Label Style="{StaticResource Label}"
+                                   FontSize="Medium"
+                                   HorizontalTextAlignment="Center"
+                                   Margin="3">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Backdrop "/>
+                                        <Span Text="{Binding backdrops.Count}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <CarouselView Style="{StaticResource CarouselView}"
+                                          ItemsSource="{Binding backdrops}"
+                                          IndicatorView="{x:Reference Indicator_Backdrop}"
+                                          HeightRequest="250">
+                                <CarouselView.ItemsLayout>
+                                    <LinearItemsLayout Orientation="Horizontal"
+                                                       ItemSpacing="5"/>
+                                </CarouselView.ItemsLayout>
+                                <CarouselView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Frame Style="{StaticResource Frame}">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="100"/>
+                                                    <RowDefinition Height="20*"/>
+                                                    <RowDefinition Height="20*"/>
+                                                    <RowDefinition Height="20*"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="50*"/>
+                                                    <ColumnDefinition Width="50*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Image Grid.Row="0"
+                                                       Grid.Column="0"
+                                                       Grid.ColumnSpan="2"
+                                                       Source="{Binding file_url}"
+                                                       Aspect="AspectFit"/>
+                                                <Label Grid.Row="1"
+                                                       Grid.Column="0"
+                                                       Grid.ColumnSpan="2"
+                                                       HorizontalTextAlignment="Center"
+                                                       FontSize="Large"
+                                                       Style="{StaticResource Label}"
+                                                       Text="Vote"/>
+                                                <Label Grid.Row="2"
+                                                       Grid.Column="0"
+                                                       HorizontalTextAlignment="Center"
+                                                       FontSize="Medium"
+                                                       Style="{StaticResource Label}"
+                                                       Text="Average"/>
+                                                <Label Grid.Row="2"
+                                                       Grid.Column="1"
+                                                       HorizontalTextAlignment="Center"
+                                                       FontSize="Medium"
+                                                       Style="{StaticResource Label}"
+                                                       Text="Count"/>
+                                                <Label Grid.Row="3"
+                                                       Grid.Column="0"
+                                                       HorizontalTextAlignment="Center"
+                                                       FontSize="Medium"
+                                                       Style="{StaticResource Label}"
+                                                       Text="{Binding vote_average}"/>
+                                                <Label Grid.Row="3"
+                                                       Grid.Column="1"
+                                                       HorizontalTextAlignment="Center"
+                                                       FontSize="Medium"
+                                                       Style="{StaticResource Label}"
+                                                       Text="{Binding vote_count}"/>
+                                            </Grid>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CarouselView.ItemTemplate>
+                            </CarouselView>
+                            <IndicatorView x:Name="Indicator_Backdrop"
+                                           Style="{StaticResource IndicatorView}"
+                                           HorizontalOptions="CenterAndExpand"/>
+                            <Label Style="{StaticResource Label}"
+                                   FontSize="Medium"
+                                   HorizontalTextAlignment="Center"
+                                   Margin="3">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Poster "/>
+                                        <Span Text="{Binding posters.Count}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <CarouselView Style="{StaticResource CarouselView}"
+                                          ItemsSource="{Binding posters}"
+                                          IndicatorView="{x:Reference Indicator_Poster}"
+                                          HeightRequest="250">
+                                <CarouselView.ItemsLayout>
+                                    <LinearItemsLayout Orientation="Horizontal"
+                                                       ItemSpacing="5"/>
+                                </CarouselView.ItemsLayout>
+                                <CarouselView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Frame Style="{StaticResource Frame}">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="40*"/>
+                                                    <RowDefinition Height="30*"/>
+                                                    <RowDefinition Height="30*"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="60*"/>
+                                                    <ColumnDefinition Width="20*"/>
+                                                    <ColumnDefinition Width="20*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Image Grid.Row="0"
+                                                       Grid.Column="0"
+                                                       Grid.RowSpan="3"
+                                                       Source="{Binding file_url}"
+                                                       Aspect="AspectFit"/>
+                                                <Label Grid.Row="0"
+                                                       Grid.Column="1"
+                                                       Grid.ColumnSpan="2"
+                                                       HorizontalTextAlignment="Center"
+                                                       FontSize="Large"
+                                                       Style="{StaticResource Label}"
+                                                       Text="Vote"/>
+                                                <Label Grid.Row="1"
+                                                       Grid.Column="1"
+                                                       HorizontalTextAlignment="Center"
+                                                       FontSize="Medium"
+                                                       Style="{StaticResource Label}"
+                                                       Text="Average"/>
+                                                <Label Grid.Row="1"
+                                                       Grid.Column="3"
+                                                       HorizontalTextAlignment="Center"
+                                                       FontSize="Medium"
+                                                       Style="{StaticResource Label}"
+                                                       Text="Count"/>
+                                                <Label Grid.Row="2"
+                                                       Grid.Column="1"
+                                                       HorizontalTextAlignment="Center"
+                                                       FontSize="Medium"
+                                                       Style="{StaticResource Label}"
+                                                       Text="{Binding vote_average}"/>
+                                                <Label Grid.Row="3"
+                                                       Grid.Column="2"
+                                                       HorizontalTextAlignment="Center"
+                                                       FontSize="Medium"
+                                                       Style="{StaticResource Label}"
+                                                       Text="{Binding vote_count}"/>
+                                            </Grid>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CarouselView.ItemTemplate>
+                            </CarouselView>
+                            <IndicatorView x:Name="Indicator_Poster"
+                                           Style="{StaticResource IndicatorView}"
+                                           HorizontalOptions="CenterAndExpand"/>
+                            <Label Style="{StaticResource Label}"
+                                   FontSize="Medium"
+                                   HorizontalTextAlignment="Center"
+                                   Margin="3">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Logo "/>
+                                        <Span Text="{Binding logos.Count}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <CarouselView Style="{StaticResource CarouselView}"
+                                          ItemsSource="{Binding logos}"
+                                          IndicatorView="{x:Reference Indicator_Logo}"
+                                          HeightRequest="250">
+                                <CarouselView.ItemsLayout>
+                                    <LinearItemsLayout Orientation="Horizontal"
+                                                       ItemSpacing="5"/>
+                                </CarouselView.ItemsLayout>
+                                <CarouselView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Frame Style="{StaticResource Frame}">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="100"/>
+                                                    <RowDefinition Height="20*"/>
+                                                    <RowDefinition Height="20*"/>
+                                                    <RowDefinition Height="20*"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="50*"/>
+                                                    <ColumnDefinition Width="50*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Image Grid.Row="0"
+                                                       Grid.Column="0"
+                                                       Grid.ColumnSpan="2"
+                                                       Source="{Binding file_url}"
+                                                       Aspect="AspectFit"/>
+                                                <Label Grid.Row="1"
+                                                       Grid.Column="0"
+                                                       Grid.ColumnSpan="2"
+                                                       HorizontalTextAlignment="Center"
+                                                       FontSize="Large"
+                                                       Style="{StaticResource Label}"
+                                                       Text="Vote"/>
+                                                <Label Grid.Row="2"
+                                                       Grid.Column="0"
+                                                       HorizontalTextAlignment="Center"
+                                                       FontSize="Medium"
+                                                       Style="{StaticResource Label}"
+                                                       Text="Average"/>
+                                                <Label Grid.Row="2"
+                                                       Grid.Column="1"
+                                                       HorizontalTextAlignment="Center"
+                                                       FontSize="Medium"
+                                                       Style="{StaticResource Label}"
+                                                       Text="Count"/>
+                                                <Label Grid.Row="3"
+                                                       Grid.Column="0"
+                                                       HorizontalTextAlignment="Center"
+                                                       FontSize="Medium"
+                                                       Style="{StaticResource Label}"
+                                                       Text="{Binding vote_average}"/>
+                                                <Label Grid.Row="3"
+                                                       Grid.Column="1"
+                                                       HorizontalTextAlignment="Center"
+                                                       FontSize="Medium"
+                                                       Style="{StaticResource Label}"
+                                                       Text="{Binding vote_count}"/>
+                                            </Grid>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CarouselView.ItemTemplate>
+                            </CarouselView>
+                            <IndicatorView x:Name="Indicator_Logo"
                                            Style="{StaticResource IndicatorView}"
                                            HorizontalOptions="CenterAndExpand"/>
                         </StackLayout>

@@ -3,6 +3,8 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using static MovieManiaq.Model.Response.Movie.CreditsModel;
 using static MovieManiaq.Model.Response.Movie.DetailModel;
+using static MovieManiaq.Model.Response.Movie.ImagesModel;
+using static MovieManiaq.Model.Response.Movie.KeywordModel;
 
 namespace MovieManiaq.Model.Detail
 {
@@ -77,6 +79,38 @@ namespace MovieManiaq.Model.Detail
                 return listcredits;
             }
             set { listcredits = value; }
+        }
+
+        private IList<ImagesRoot> listimages { get; set; }
+
+        public IList<ImagesRoot> ListImages
+        {
+            get
+            {
+                if (listimages == null)
+                {
+                    listimages = new ObservableCollection<ImagesRoot>();
+                }
+
+                return listimages;
+            }
+            set { listimages = value; }
+        }
+
+        private IList<KeywordRoot> listkeyword { get; set; }
+
+        public IList<KeywordRoot> ListKeyword
+        {
+            get
+            {
+                if (listkeyword == null)
+                {
+                    listkeyword = new ObservableCollection<KeywordRoot>();
+                }
+
+                return listkeyword;
+            }
+            set { listkeyword = value; }
         }
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")

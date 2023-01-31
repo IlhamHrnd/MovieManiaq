@@ -31,9 +31,19 @@ namespace MovieManiaq.ViewModel.Detail
                 ListDetail.Clear();
                 ListDetail.Add(detail);
 
+                Title = detail.title;
+
                 var credits = await CreditsClass.GetCreditsAsync(MovieID);
                 ListCredits.Clear();
                 ListCredits.Add(credits);
+
+                var keyword = await KeywordClass.GetKeywordAsync(MovieID);
+                ListKeyword.Clear();
+                ListKeyword.Add(keyword);
+
+                var images = await ImagesClass.GetImagesAsync(MovieID);
+                ListImages.Clear();
+                ListImages.Add(images);
             }
 
             IsBusy = false;
