@@ -48,7 +48,7 @@ namespace MovieManiaq.Model.Response.Movie
             {
                 get
                 {
-                    return budget.ToString("C", CultureInfo.CurrentCulture);
+                    return budget.ToString("C", CultureInfo.CreateSpecificCulture("en-US"));
                 }
             }
             public List<Genre> genres { get; set; }
@@ -75,7 +75,7 @@ namespace MovieManiaq.Model.Response.Movie
             {
                 get
                 {
-                    return revenue.ToString("C", CultureInfo.CurrentCulture);
+                    return budget.ToString("C", CultureInfo.CreateSpecificCulture("en-US"));
                 }
             }
             public int runtime { get; set; }
