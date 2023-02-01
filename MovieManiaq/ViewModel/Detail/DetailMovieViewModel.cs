@@ -1,4 +1,6 @@
-﻿using MovieManiaq.Model.Detail;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
+using MovieManiaq.Model.Detail;
 using MovieManiaq.Model.Root;
 using MovieManiaq.ViewModel.RestAPI.Movie;
 
@@ -14,6 +16,8 @@ namespace MovieManiaq.ViewModel.Detail
         {
             _navigation = navigation;
             MovieID = movieID;
+
+            Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
 
             LoadData();
         }
@@ -50,8 +54,25 @@ namespace MovieManiaq.ViewModel.Detail
                 ListVideo.Add(video);
             }
 
+            else
+            {
+                var toast = Toast.Make("You're Offline", ToastDuration.Long, 30);
+                await toast.Show();
+            }
+
             IsBusy = false;
             IsVisible = false;
+        }
+
+        private async void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+        {
+            bool valid_connect = network.CekJaringan;
+
+            if (!valid_connect)
+            {
+                var toast = Toast.Make("You're Offline", ToastDuration.Long);
+                await toast.Show();
+            }
         }
     }
 }

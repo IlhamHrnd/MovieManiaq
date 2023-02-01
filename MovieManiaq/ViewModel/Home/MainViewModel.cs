@@ -1,4 +1,6 @@
-﻿using MovieManiaq.Model.Home;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
+using MovieManiaq.Model.Home;
 using MovieManiaq.Model.Response;
 using MovieManiaq.Model.Root;
 using MovieManiaq.View.Detail;
@@ -21,6 +23,8 @@ namespace MovieManiaq.ViewModel.Home
         public MainViewModel(INavigation navigation)
         {
             _navigation = navigation;
+
+            Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
 
             LoadData();
         }
@@ -53,6 +57,12 @@ namespace MovieManiaq.ViewModel.Home
                 var popular = await PopularClass.GetPopularAsync();
                 ListPopular.Clear();
                 ListPopular.Add(popular);
+            }
+
+            else
+            {
+                var toast = Toast.Make("You're Offline", ToastDuration.Long, 30);
+                await toast.Show();
             }
 
             IsBusy = false;
@@ -142,6 +152,17 @@ namespace MovieManiaq.ViewModel.Home
         public async void PopularCommand()
         {
             await _navigation.PushAsync(new DetailMoviePage(PopularID));
+        }
+
+        private async void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+        {
+            bool valid_connect = network.CekJaringan;
+
+            if (!valid_connect)
+            {
+                var toast = Toast.Make("You're Offline", ToastDuration.Long);
+                await toast.Show();
+            }
         }
     }
 }

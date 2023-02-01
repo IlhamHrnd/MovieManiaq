@@ -707,15 +707,21 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <Label Style="{StaticResource Label}"
-                   Text="Video"
-                   FontSize="Large"
-                   HorizontalTextAlignment="Start"
-                   Margin="3"/>
             <CollectionView ItemsSource="{Binding ListVideo}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout>
+                            <Label Style="{StaticResource Label}"
+                                   FontSize="Large"
+                                   HorizontalTextAlignment="Start"
+                                   Margin="3">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Video "/>
+                                        <Span Text="{Binding results.Count}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
                             <CarouselView Style="{StaticResource CarouselView}"
                                           ItemsSource="{Binding results}"
                                           IndicatorView="{x:Reference Indicator_Video}">

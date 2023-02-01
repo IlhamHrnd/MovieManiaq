@@ -1,6 +1,5 @@
-﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿using MovieManiaq.Model.Root;
+using System.Collections.ObjectModel;
 using static MovieManiaq.Model.Response.Movie.CreditsModel;
 using static MovieManiaq.Model.Response.Movie.DetailModel;
 using static MovieManiaq.Model.Response.Movie.ImagesModel;
@@ -9,9 +8,8 @@ using static MovieManiaq.Model.Response.Movie.VideoModel;
 
 namespace MovieManiaq.Model.Detail
 {
-    public class DetailMovieModel : INotifyPropertyChanged
+    public class DetailMovieModel : BaseModel
     {
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public DetailMovieModel()
         {
@@ -128,32 +126,6 @@ namespace MovieManiaq.Model.Detail
                 return listvideo;
             }
             set { listvideo = value; }
-        }
-
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            var changed = PropertyChanged;
-
-            if (changed == null)
-            {
-                return;
-            }
-
-            changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        protected bool SetProperty<T>(ref T backingStore, T value, [CallerMemberName] string propertyName = "")
-        {
-            if (EqualityComparer<T>.Default.Equals(backingStore, value))
-            {
-                return false;
-            }
-            else
-            {
-                backingStore = value;
-                OnPropertyChanged(propertyName);
-                return true;
-            }
         }
     }
 }
