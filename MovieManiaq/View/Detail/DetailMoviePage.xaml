@@ -777,10 +777,130 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <!--<toolkit:MediaElement Style="{StaticResource MediaElement}"
-                                  Source="https://assets.mixkit.co/videos/preview/mixkit-mother-and-daughter-preparing-a-pumpkin-for-halloween-44539-large.mp4"
-                                  WidthRequest="200"
-                                  HeightRequest="200"/>-->
+            <Label Style="{StaticResource Label}"
+                   FontSize="Large"
+                   HorizontalTextAlignment="Start"
+                   Margin="3">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Recommended By "/>
+                        <Span Text="{Binding Title}"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <CollectionView ItemsSource="{Binding ListRecommendations}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <CarouselView Style="{StaticResource CarouselView}"
+                                          ItemsSource="{Binding results}"
+                                          IndicatorView="{x:Reference Indicator_Recommendations}">
+                                <CarouselView.ItemsLayout>
+                                    <LinearItemsLayout Orientation="Horizontal"
+                                                       ItemSpacing="5"/>
+                                </CarouselView.ItemsLayout>
+                                <CarouselView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Frame Style="{StaticResource Frame}"
+                                               HeightRequest="350">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="20*"/>
+                                                    <RowDefinition Height="80*"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="30*"/>
+                                                    <ColumnDefinition Width="70*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Image Grid.Row="0"
+                                                       Grid.Column="0"
+                                                       Grid.RowSpan="2"
+                                                       Source="{Binding poster_url}"
+                                                       Aspect="AspectFit"/>
+                                                <Label Grid.Row="0"
+                                                       Grid.Column="1"
+                                                       HorizontalTextAlignment="Center"
+                                                       Style="{StaticResource Label}"
+                                                       FontSize="Large"
+                                                       Text="{Binding title}"/>
+                                                <Label Grid.Row="1"
+                                                       Grid.Column="1"
+                                                       Style="{StaticResource Label}"
+                                                       Text="{Binding overview}"/>
+                                            </Grid>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CarouselView.ItemTemplate>
+                            </CarouselView>
+                            <IndicatorView x:Name="Indicator_Recommendations"
+                                           Style="{StaticResource IndicatorView}"
+                                           HorizontalOptions="CenterAndExpand"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Label Style="{StaticResource Label}"
+                   FontSize="Large"
+                   HorizontalTextAlignment="Start"
+                   Margin="3">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Similiar Like "/>
+                        <Span Text="{Binding Title}"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <CollectionView ItemsSource="{Binding ListSimiliar}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <CarouselView Style="{StaticResource CarouselView}"
+                                          ItemsSource="{Binding results}"
+                                          IndicatorView="{x:Reference Indicator_Recommendations}">
+                                <CarouselView.ItemsLayout>
+                                    <LinearItemsLayout Orientation="Horizontal"
+                                                       ItemSpacing="5"/>
+                                </CarouselView.ItemsLayout>
+                                <CarouselView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Frame Style="{StaticResource Frame}"
+                                               HeightRequest="350">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="20*"/>
+                                                    <RowDefinition Height="80*"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="30*"/>
+                                                    <ColumnDefinition Width="70*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Image Grid.Row="0"
+                                                       Grid.Column="0"
+                                                       Grid.RowSpan="2"
+                                                       Source="{Binding poster_url}"
+                                                       Aspect="AspectFit"/>
+                                                <Label Grid.Row="0"
+                                                       Grid.Column="1"
+                                                       HorizontalTextAlignment="Center"
+                                                       Style="{StaticResource Label}"
+                                                       FontSize="Large"
+                                                       Text="{Binding title}"/>
+                                                <Label Grid.Row="1"
+                                                       Grid.Column="1"
+                                                       Style="{StaticResource Label}"
+                                                       Text="{Binding overview}"/>
+                                            </Grid>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CarouselView.ItemTemplate>
+                            </CarouselView>
+                            <IndicatorView x:Name="Indicator_Recommendations"
+                                           Style="{StaticResource IndicatorView}"
+                                           HorizontalOptions="CenterAndExpand"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </StackLayout>
     </ScrollView>
 </ContentPage>

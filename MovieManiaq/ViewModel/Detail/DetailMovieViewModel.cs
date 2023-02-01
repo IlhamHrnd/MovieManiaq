@@ -52,6 +52,14 @@ namespace MovieManiaq.ViewModel.Detail
                 var video = await VideoClass.GetVideoAsync(MovieID);
                 ListVideo.Clear();
                 ListVideo.Add(video);
+
+                var recommendations = await RecommendationsClass.GetRecommendationsAsync(MovieID);
+                ListRecommendations.Clear();
+                ListRecommendations.Add(recommendations);
+
+                var similiar = await SimiliarClass.GetSimiliarAsync(MovieID);
+                ListSimiliar.Clear();
+                ListSimiliar.Add(similiar);
             }
 
             else
