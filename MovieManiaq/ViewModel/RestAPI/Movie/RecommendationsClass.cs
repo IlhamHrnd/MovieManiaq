@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using MovieManiaq.Model.Root;
 using static MovieManiaq.Model.Response.Movie.RecommendationsModel;
 
 namespace MovieManiaq.ViewModel.RestAPI.Movie
@@ -10,13 +11,13 @@ namespace MovieManiaq.ViewModel.RestAPI.Movie
 
         }
 
-        private const string RecommendationsQuery = "https://api.themoviedb.org/3/movie/{0}/recommendations?api_key=a173a42ac2309ccc70dc04a4fa1188cc&page=1";
+        private const string RecommendationsQuery = "https://api.themoviedb.org/3/movie/{0}/recommendations?api_key={1}&page=1";
 
         public static async Task<RecommendationsRoot> GetRecommendationsAsync(int movieid)
         {
             RecommendationsRoot root = new RecommendationsRoot();
             HttpClient client = new HttpClient();
-            string url = string.Format(RecommendationsQuery, movieid);
+            string url = string.Format(RecommendationsQuery, movieid, ApiRoot.TheMovieDB);
             var response = await client.GetAsync(url);
 
             try

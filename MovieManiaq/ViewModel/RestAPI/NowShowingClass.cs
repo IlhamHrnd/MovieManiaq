@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using MovieManiaq.Model.Root;
 using static MovieManiaq.Model.Response.NowShowingModel;
 
 namespace MovieManiaq.ViewModel.RestAPI
@@ -10,13 +11,13 @@ namespace MovieManiaq.ViewModel.RestAPI
 
         }
 
-        private const string NowShowingQuery = "https://api.themoviedb.org/3/movie/now_playing?api_key=a173a42ac2309ccc70dc04a4fa1188cc&page=1";
+        private const string NowShowingQuery = "https://api.themoviedb.org/3/movie/now_playing?api_key={0}&page=1";
 
         public static async Task<NowShowingRoot> GetNowShowingAsync()
         {
             NowShowingRoot root = new NowShowingRoot();
             HttpClient client = new HttpClient();
-            string url = string.Format(NowShowingQuery);
+            string url = string.Format(NowShowingQuery, ApiRoot.TheMovieDB);
             var response = await client.GetAsync(url);
 
             try

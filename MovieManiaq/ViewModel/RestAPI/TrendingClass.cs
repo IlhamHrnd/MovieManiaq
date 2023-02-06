@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using MovieManiaq.Model.Root;
 using static MovieManiaq.Model.Response.TrendingModel;
 
 namespace MovieManiaq.ViewModel.RestAPI
@@ -10,13 +11,13 @@ namespace MovieManiaq.ViewModel.RestAPI
 
         }
 
-        private const string TrendingQuery = "https://api.themoviedb.org/3/trending/movie/week?api_key=a173a42ac2309ccc70dc04a4fa1188cc&page=1";
+        private const string TrendingQuery = "https://api.themoviedb.org/3/trending/movie/week?api_key={0}&page=1";
 
         public static async Task<TrendingRoot> GetTrendingAsync()
         {
             TrendingRoot root = new TrendingRoot();
             HttpClient client = new HttpClient();
-            string url = string.Format(TrendingQuery);
+            string url = string.Format(TrendingQuery, ApiRoot.TheMovieDB);
             var response = await client.GetAsync(url);
 
             try

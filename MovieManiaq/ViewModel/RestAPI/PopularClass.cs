@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using MovieManiaq.Model.Root;
 using static MovieManiaq.Model.Response.PopularModel;
 
 namespace MovieManiaq.ViewModel.RestAPI
@@ -10,13 +11,13 @@ namespace MovieManiaq.ViewModel.RestAPI
 
         }
 
-        private const string PopularQuery = "https://api.themoviedb.org/3/movie/popular?api_key=a173a42ac2309ccc70dc04a4fa1188cc&page=1";
+        private const string PopularQuery = "https://api.themoviedb.org/3/movie/popular?api_key={0}&page=1";
 
         public static async Task<PopularRoot> GetPopularAsync()
         {
             PopularRoot root = new PopularRoot();
             HttpClient client = new HttpClient();
-            string url = string.Format(PopularQuery);
+            string url = string.Format(PopularQuery, ApiRoot.TheMovieDB);
             var response = await client.GetAsync(url);
 
             try

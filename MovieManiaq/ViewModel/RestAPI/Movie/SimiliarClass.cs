@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MovieManiaq.Model.Root;
 using static MovieManiaq.Model.Response.Movie.SimiliarModel;
 
 namespace MovieManiaq.ViewModel.RestAPI.Movie
@@ -15,13 +16,13 @@ namespace MovieManiaq.ViewModel.RestAPI.Movie
 
         }
 
-        private const string SimiliarQuery = "https://api.themoviedb.org/3/movie/{0}/similar?api_key=a173a42ac2309ccc70dc04a4fa1188cc&page=1";
+        private const string SimiliarQuery = "https://api.themoviedb.org/3/movie/{0}/similar?api_key={1}&page=1";
 
         public static async Task<SimiliarRoot> GetSimiliarAsync(int movieid)
         {
             SimiliarRoot root = new SimiliarRoot();
             HttpClient client = new HttpClient();
-            string url = string.Format(SimiliarQuery, movieid);
+            string url = string.Format(SimiliarQuery, movieid, ApiRoot.TheMovieDB);
             var response = await client.GetAsync(url);
 
             try

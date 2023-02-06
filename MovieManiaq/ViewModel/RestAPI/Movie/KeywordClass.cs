@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using MovieManiaq.Model.Root;
 using static MovieManiaq.Model.Response.Movie.KeywordModel;
 
 namespace MovieManiaq.ViewModel.RestAPI.Movie
@@ -10,13 +11,13 @@ namespace MovieManiaq.ViewModel.RestAPI.Movie
 
         }
 
-        private const string KeywordQuery = "https://api.themoviedb.org/3/movie/{0}/keywords?api_key=a173a42ac2309ccc70dc04a4fa1188cc";
+        private const string KeywordQuery = "https://api.themoviedb.org/3/movie/{0}/keywords?api_key={1}";
 
         public static async Task<KeywordRoot> GetKeywordAsync(int movieid)
         {
             KeywordRoot root = new KeywordRoot();
             HttpClient client = new HttpClient();
-            string url = string.Format(KeywordQuery, movieid);
+            string url = string.Format(KeywordQuery, movieid, ApiRoot.TheMovieDB);
             var response = await client.GetAsync(url);
 
             try

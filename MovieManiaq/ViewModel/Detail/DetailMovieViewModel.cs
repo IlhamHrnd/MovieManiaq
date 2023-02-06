@@ -81,6 +81,14 @@ namespace MovieManiaq.ViewModel.Detail
                 var toast = Toast.Make("You're Offline", ToastDuration.Long);
                 await toast.Show();
             }
+
+            else if (valid_connect)
+            {
+                var toast = Toast.Make("Back Online", ToastDuration.Long);
+                await toast.Show();
+
+                LoadData();
+            }
         }
     }
 }
