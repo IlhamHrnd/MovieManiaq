@@ -901,6 +901,71 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            <CollectionView ItemsSource="{Binding ListReview}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Label Style="{StaticResource Label}"
+                                   FontSize="Large"
+                                   HorizontalTextAlignment="Start"
+                                   Margin="3">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Review "/>
+                                        <Span Text="{Binding total_results}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <CollectionView ItemsSource="{Binding results}">
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout Orientation="Horizontal"
+                                                     Span="2"
+                                                     HorizontalItemSpacing="5"
+                                                     VerticalItemSpacing="10"/>
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Frame Style="{StaticResource Frame}">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="35" />
+                                                    <RowDefinition Height="35" />
+                                                    <RowDefinition Height="75" />
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="70" />
+                                                    <ColumnDefinition Width="140" />
+                                                </Grid.ColumnDefinitions>
+                                                <Image Grid.Row="0"
+                                                       Grid.Column="0"
+                                                       Grid.RowSpan="2"
+                                                       Source="{Binding author_details.avatar_url}"
+                                                       Aspect="AspectFit"/>
+                                                <Label Grid.Row="0"
+                                                       Grid.Column="1"
+                                                       HorizontalTextAlignment="Center"
+                                                       Style="{StaticResource Label}"
+                                                       Text="{Binding author_details.username}"/>
+                                                <Label Grid.Row="1"
+                                                       Grid.Column="1"
+                                                       HorizontalTextAlignment="Center"
+                                                       Style="{StaticResource Label}"
+                                                       Text="{Binding created_at}"/>
+                                                <Label Grid.Row="2"
+                                                       Grid.Column="0"
+                                                       Grid.ColumnSpan="2"
+                                                       HorizontalTextAlignment="Center"
+                                                       Style="{StaticResource Label}"
+                                                       Text="{Binding content}"/>
+                                            </Grid>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </StackLayout>
     </ScrollView>
 </ContentPage>

@@ -5,6 +5,7 @@ using static MovieManiaq.Model.Response.Movie.DetailModel;
 using static MovieManiaq.Model.Response.Movie.ImagesModel;
 using static MovieManiaq.Model.Response.Movie.KeywordModel;
 using static MovieManiaq.Model.Response.Movie.RecommendationsModel;
+using static MovieManiaq.Model.Response.Movie.ReviewModel;
 using static MovieManiaq.Model.Response.Movie.SimiliarModel;
 using static MovieManiaq.Model.Response.Movie.VideoModel;
 
@@ -160,6 +161,22 @@ namespace MovieManiaq.Model.Detail
                 return listsimiliar;
             }
             set { listsimiliar = value; }
+        }
+
+        private IList<ReviewRoot> listreview { get; set; }
+
+        public IList<ReviewRoot> ListReview
+        {
+            get
+            {
+                if (listreview == null)
+                {
+                    listreview = new ObservableCollection<ReviewRoot>();
+                }
+
+                return listreview;
+            }
+            set { listreview = value; }
         }
     }
 }

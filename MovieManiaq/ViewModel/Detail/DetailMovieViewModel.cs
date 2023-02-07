@@ -60,6 +60,10 @@ namespace MovieManiaq.ViewModel.Detail
                 var similiar = await SimiliarClass.GetSimiliarAsync(MovieID);
                 ListSimiliar.Clear();
                 ListSimiliar.Add(similiar);
+
+                var review = await ReviewClass.GetReviewAsync(MovieID);
+                ListReview.Clear();
+                ListReview.Add(review);
             }
 
             else
