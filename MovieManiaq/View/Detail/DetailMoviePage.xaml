@@ -17,294 +17,192 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout>
-                            <Grid>
+                            <Image Source="{Binding background_url}"
+                                   Aspect="AspectFit"/>
+                            <Label Style="{StaticResource Label}"
+                                   FontSize="Title"
+                                   HorizontalTextAlignment="Center"
+                                   Text="{Binding title}"/>
+                            <Label Style="{StaticResource Label}"
+                                   FontSize="Subtitle"
+                                   HorizontalTextAlignment="Center">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding release_date}"/>
+                                        <Span Text=" • "/>
+                                        <Span Text="{Binding runtime_hours}"/>
+                                        <Span Text=" Hours"/>
+                                        <Span Text=" • "/>
+                                        <Span Text="{Binding original_language}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <CollectionView ItemsSource="{Binding genres}"
+                                            HorizontalOptions="CenterAndExpand">
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout Orientation="Horizontal"
+                                                     Span="1"
+                                                     HorizontalItemSpacing="5"
+                                                     VerticalItemSpacing="10"/>
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Label Style="{StaticResource Label}"
+                                               FontSize="Subtitle"
+                                               HorizontalTextAlignment="Center">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{Binding name}"/>
+                                                    <Span Text=" • "/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                            <Label Style="{StaticResource Label}"
+                                   FontSize="Title"
+                                   Text="Overview"/>
+                            <Grid ColumnSpacing="10">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="30*"/>
-                                    <RowDefinition Height="150"/>
-                                    <RowDefinition Height="150"/>
-                                    <RowDefinition Height="300"/>
-                                    <RowDefinition Height="300"/>
-                                    <RowDefinition Height="10*"/>
-                                    <RowDefinition Height="100"/>
-                                    <RowDefinition Height="10*"/>
-                                    <RowDefinition Height="10*"/>
-                                    <RowDefinition Height="50"/>
-                                    <RowDefinition Height="10*"/>
+                                    <RowDefinition Height="250"/>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="50*"/>
+                                    <ColumnDefinition Width="50*"/>
                                 </Grid.ColumnDefinitions>
                                 <Image Grid.Row="0"
                                        Grid.Column="0"
-                                       Source="{Binding background_url}"
-                                       Aspect="Fill"/>
-                                <Frame Grid.Row="1"
-                                       Grid.Column="0"
-                                       Style="{StaticResource Frame}"
-                                       Margin="10">
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="50*"/>
-                                            <RowDefinition Height="25*"/>
-                                            <RowDefinition Height="25*"/>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Label Grid.Row="0"
-                                               Grid.Column="0"
-                                               Grid.ColumnSpan="3"
-                                               HorizontalTextAlignment="Center"
-                                               Style="{StaticResource Label}"
-                                               FontSize="Body"
-                                               Text="{Binding title}"/>
-                                        <Label Grid.Row="1"
-                                               Grid.Column="0"
-                                               HorizontalTextAlignment="Center"
-                                               Style="{StaticResource Label}"
-                                               Text="Duration"/>
-                                        <Label Grid.Row="2"
-                                               Grid.Column="0"
-                                               HorizontalTextAlignment="Center"
-                                               Style="{StaticResource Label}"
-                                               Text="{Binding runtime_hours}"/>
-                                        <Label Grid.Row="1"
-                                               Grid.Column="1"
-                                               HorizontalTextAlignment="Center"
-                                               Style="{StaticResource Label}"
-                                               Text="Language"/>
-                                        <Label Grid.Row="2"
-                                               Grid.Column="1"
-                                               HorizontalTextAlignment="Center"
-                                               Style="{StaticResource Label}"
-                                               Text="{Binding original_language}"/>
-                                        <Label Grid.Row="1"
-                                               Grid.Column="2"
-                                               HorizontalTextAlignment="Center"
-                                               Style="{StaticResource Label}"
-                                               Text="Relase"/>
-                                        <Label Grid.Row="2"
-                                               Grid.Column="2"
-                                               HorizontalTextAlignment="Center"
-                                               Style="{StaticResource Label}"
-                                               Text="{Binding release_date}"/>
-                                    </Grid>
-                                </Frame>
-                                <Frame Grid.Row="2"
-                                       Grid.Column="0"
-                                       Style="{StaticResource Frame}"
-                                       Margin="10">
-                                    <StackLayout>
-                                        <Label Style="{StaticResource Label}"
-                                               Text="Genre"
-                                               FontSize="Large"
-                                               HorizontalTextAlignment="Center"
-                                               Margin="3"/>
-                                        <CarouselView Style="{StaticResource CarouselView}"
-                                                      ItemsSource="{Binding genres}"
-                                                      IndicatorView="{x:Reference Indicator_Genre}">
-                                            <CarouselView.ItemsLayout>
-                                                <LinearItemsLayout Orientation="Horizontal"
-                                                                   ItemSpacing="10"/>
-                                            </CarouselView.ItemsLayout>
-                                            <CarouselView.ItemTemplate>
-                                                <DataTemplate>
-                                                    <Button Style="{StaticResource Button}"
-                                                            Text="{Binding name}"
-                                                            IsEnabled="False"/>
-                                                </DataTemplate>
-                                            </CarouselView.ItemTemplate>
-                                        </CarouselView>
-                                        <IndicatorView x:Name="Indicator_Genre"
-                                                       Style="{StaticResource IndicatorView}"
-                                                       HorizontalOptions="CenterAndExpand"/>
-                                    </StackLayout>
-                                </Frame>
-                                <Frame Grid.Row="3"
-                                       Grid.Column="0"
-                                       Style="{StaticResource Frame}"
-                                       Margin="10">
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="20*"/>
-                                            <RowDefinition Height="80*"/>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="30*"/>
-                                            <ColumnDefinition Width="70*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Image Grid.Row="0"
-                                               Grid.Column="0"
-                                               Grid.RowSpan="2"
-                                               Source="{Binding poster_url}"
-                                               Aspect="AspectFit"/>
-                                        <Label Grid.Row="0"
-                                               Grid.Column="1"
-                                               HorizontalTextAlignment="Center"
-                                               Style="{StaticResource Label}"
-                                               FontSize="Large"
-                                               Text="Overview"/>
-                                        <Label Grid.Row="1"
-                                               Grid.Column="1"
-                                               Style="{StaticResource Label}"
-                                               Text="{Binding overview}"/>
-                                    </Grid>
-                                </Frame>
-                                <Frame Grid.Row="4"
-                                       Grid.Column="0"
-                                       Style="{StaticResource Frame}"
-                                       Margin="10">
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="20*"/>
-                                            <RowDefinition Height="20*"/>
-                                            <RowDefinition Height="20*"/>
-                                            <RowDefinition Height="20*"/>
-                                            <RowDefinition Height="20*"/>
-                                            <RowDefinition Height="20*"/>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="20*"/>
-                                            <ColumnDefinition Width="80*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Label Grid.Row="0"
-                                               Grid.Column="0"
-                                               Style="{StaticResource Label}"
-                                               Text="Home Page"/>
-                                        <Label Grid.Row="0"
-                                               Grid.Column="1"
-                                               HorizontalTextAlignment="Center"
-                                               Style="{StaticResource Label}"
-                                               Text="{Binding homepage}"/>
-                                        <Label Grid.Row="1"
-                                               Grid.Column="0"
-                                               Style="{StaticResource Label}"
-                                               Text="Popularity"/>
-                                        <Label Grid.Row="1"
-                                               Grid.Column="1"
-                                               HorizontalTextAlignment="Center"
-                                               Style="{StaticResource Label}"
-                                               Text="{Binding popularity}"/>
-                                        <Label Grid.Row="2"
-                                               Grid.Column="0"
-                                               Style="{StaticResource Label}"
-                                               Text="Budget"/>
-                                        <Label Grid.Row="2"
-                                               Grid.Column="1"
-                                               HorizontalTextAlignment="Center"
-                                               Style="{StaticResource Label}"
-                                               Text="{Binding budget_currency}"/>
-                                        <Label Grid.Row="3"
-                                               Grid.Column="0"
-                                               Style="{StaticResource Label}"
-                                               Text="Revenue"/>
-                                        <Label Grid.Row="3"
-                                               Grid.Column="1"
-                                               HorizontalTextAlignment="Center"
-                                               Style="{StaticResource Label}"
-                                               Text="{Binding revenue_currency}"/>
-                                        <Label Grid.Row="4"
-                                               Grid.Column="0"
-                                               Style="{StaticResource Label}"
-                                               Text="Status"/>
-                                        <Label Grid.Row="4"
-                                               Grid.Column="1"
-                                               HorizontalTextAlignment="Center"
-                                               Style="{StaticResource Label}"
-                                               Text="{Binding status}"/>
-                                        <Label Grid.Row="5"
-                                               Grid.Column="0"
-                                               Style="{StaticResource Label}"
-                                               Text="Tagline"/>
-                                        <Label Grid.Row="5"
-                                               Grid.Column="1"
-                                               HorizontalTextAlignment="Center"
-                                               Style="{StaticResource Label}"
-                                               Text="{Binding tagline}"/>
-                                    </Grid>
-                                </Frame>
-                                <Label Grid.Row="5"
-                                       Grid.Column="0"
+                                       Source="{Binding poster_url}"
+                                       Aspect="AspectFit"/>
+                                <Label Grid.Row="0"
+                                       Grid.Column="1"
                                        Style="{StaticResource Label}"
-                                       Text="Production"
-                                       FontSize="Medium"
-                                       HorizontalTextAlignment="Center"/>
-                                <CarouselView Grid.Row="6"
-                                              Grid.Column="0"
-                                              Style="{StaticResource CarouselView}"
-                                              ItemsSource="{Binding production_companies}"
-                                              IndicatorView="{x:Reference Indicator_Production}">
-                                    <CarouselView.ItemsLayout>
-                                        <LinearItemsLayout Orientation="Horizontal"
-                                                           ItemSpacing="10"/>
-                                    </CarouselView.ItemsLayout>
-                                    <CarouselView.ItemTemplate>
-                                        <DataTemplate>
-                                            <Frame Style="{StaticResource Frame}">
-                                                <Grid>
-                                                    <Grid.RowDefinitions>
-                                                        <RowDefinition Height="50*"/>
-                                                        <RowDefinition Height="50*"/>
-                                                    </Grid.RowDefinitions>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="30*"/>
-                                                        <ColumnDefinition Width="70*"/>
-                                                    </Grid.ColumnDefinitions>
-                                                    <Image Grid.Row="0"
-                                                           Grid.Column="0"
-                                                           Grid.RowSpan="2"
-                                                           Source="{Binding logo_url}"/>
-                                                    <Label Grid.Row="0"
-                                                           Grid.Column="1"
-                                                           HorizontalTextAlignment="Center"
-                                                           Style="{StaticResource Label}"
-                                                           Text="{Binding name}"/>
-                                                    <Label Grid.Row="1"
-                                                           Grid.Column="1"
-                                                           HorizontalTextAlignment="Center"
-                                                           Style="{StaticResource Label}"
-                                                           Text="{Binding origin_country}"/>
-                                                </Grid>
-                                            </Frame>
-                                        </DataTemplate>
-                                    </CarouselView.ItemTemplate>
-                                </CarouselView>
-                                <IndicatorView Grid.Row="7"
-                                               Grid.Column="0"
-                                               x:Name="Indicator_Production"
-                                               Style="{StaticResource IndicatorView}"
-                                               HorizontalOptions="CenterAndExpand"/>
-                                <Label Grid.Row="8"
-                                       Grid.Column="0"
-                                       Style="{StaticResource Label}"
-                                       Text="Country"
-                                       FontSize="Medium"
-                                       HorizontalTextAlignment="Center"/>
-                                <CarouselView Grid.Row="9"
-                                              Grid.Column="0"
-                                              Style="{StaticResource CarouselView}"
-                                              ItemsSource="{Binding production_countries}"
-                                              IndicatorView="{x:Reference Indicator_Country}">
-                                    <CarouselView.ItemsLayout>
-                                        <LinearItemsLayout Orientation="Horizontal"
-                                                           ItemSpacing="10"/>
-                                    </CarouselView.ItemsLayout>
-                                    <CarouselView.ItemTemplate>
-                                        <DataTemplate>
-                                            <Button Style="{StaticResource Button}"
-                                                    Text="{Binding name}"
-                                                    IsEnabled="False"/>
-                                        </DataTemplate>
-                                    </CarouselView.ItemTemplate>
-                                </CarouselView>
-                                <IndicatorView Grid.Row="10"
-                                               Grid.Column="0"
-                                               x:Name="Indicator_Country"
-                                               Style="{StaticResource IndicatorView}"
-                                               HorizontalOptions="CenterAndExpand"/>
+                                       Text="{Binding overview}"
+                                       VerticalTextAlignment="Center"/>
                             </Grid>
+                            <Frame Style="{StaticResource Frame}"
+                                   Margin="5">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="40"/>
+                                        <RowDefinition Height="40"/>
+                                        <RowDefinition Height="40"/>
+                                        <RowDefinition Height="40"/>
+                                        <RowDefinition Height="40"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50*"/>
+                                        <ColumnDefinition Width="50*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Row="0"
+                                           Grid.Column="0"
+                                           Style="{StaticResource Label}"
+                                           Text="Home Page"/>
+                                    <Label Grid.Row="0"
+                                           Grid.Column="1"
+                                           Style="{StaticResource Label}"
+                                        Text="{Binding homepage}"/>
+                                    <Label Grid.Row="1"
+                                           Grid.Column="0"
+                                           Style="{StaticResource Label}"
+                                           Text="Popularity"/>
+                                    <Label Grid.Row="1"
+                                           Grid.Column="1"
+                                           Style="{StaticResource Label}"
+                                           Text="{Binding popularity}"/>
+                                    <Label Grid.Row="2"
+                                           Grid.Column="0"
+                                           Style="{StaticResource Label}"
+                                           Text="Budget"/>
+                                    <Label Grid.Row="2"
+                                           Grid.Column="1"
+                                           Style="{StaticResource Label}"
+                                           Text="{Binding budget_currency}"/>
+                                    <Label Grid.Row="3"
+                                           Grid.Column="0"
+                                           Style="{StaticResource Label}"
+                                           Text="Revenue"/>
+                                    <Label Grid.Row="3"
+                                           Grid.Column="1"
+                                           Style="{StaticResource Label}"
+                                           Text="{Binding revenue_currency}"/>
+                                    <Label Grid.Row="4"
+                                           Grid.Column="0"
+                                           Style="{StaticResource Label}"
+                                           Text="Status"/>
+                                    <Label Grid.Row="4"
+                                           Grid.Column="1"
+                                           Style="{StaticResource Label}"
+                                           Text="{Binding status}"/>
+                                </Grid>
+                            </Frame>
+                            <Label Style="{StaticResource Label}"
+                                   FontSize="Title"
+                                   Text="Production"/>
+                            <Label Style="{StaticResource Label}"
+                                   Text="Production House"
+                                   FontSize="Medium"
+                                   HorizontalTextAlignment="Center"/>
+                            <CollectionView ItemsSource="{Binding production_companies}">
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout Orientation="Horizontal"
+                                                     Span="1"
+                                                     HorizontalItemSpacing="5"
+                                                     VerticalItemSpacing="10"/>
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Frame Style="{StaticResource Frame}">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="50"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="30*"/>
+                                                    <ColumnDefinition Width="70*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Image Grid.Row="0"
+                                                       Grid.Column="0"
+                                                       Source="{Binding logo_url}"
+                                                       Aspect="AspectFit"/>
+                                                <Label Grid.Row="0"
+                                                       Grid.Column="1"
+                                                       Style="{StaticResource Label}"
+                                                       Text="{Binding name}"
+                                                       VerticalTextAlignment="Center"/>
+                                            </Grid>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                            <Label Style="{StaticResource Label}"
+                                   Text="Country"
+                                   FontSize="Medium"
+                                   HorizontalTextAlignment="Center"/>
+                            <CollectionView ItemsSource="{Binding production_countries}">
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout Orientation="Horizontal"
+                                                     Span="1"
+                                                     HorizontalItemSpacing="5"
+                                                     VerticalItemSpacing="10"/>
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Frame Style="{StaticResource Frame}">
+                                            <Label Style="{StaticResource Label}"
+                                                   Text="{Binding name}"/>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                            <Frame Style="{StaticResource Frame}"
+                                   Margin="10">
+                                <Label Style="{StaticResource Label}"
+                                       FontSize="Subtitle"
+                                       HorizontalTextAlignment="Center"
+                                       Text="{Binding tagline}"/>
+                            </Frame>
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
@@ -317,26 +215,22 @@
             <CollectionView ItemsSource="{Binding ListKeyword}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout>
-                            <CarouselView Style="{StaticResource CarouselView}"
-                                          ItemsSource="{Binding keywords}"
-                                          IndicatorView="{x:Reference Indicator_Keyword}">
-                                <CarouselView.ItemsLayout>
-                                    <LinearItemsLayout Orientation="Horizontal"
-                                                       ItemSpacing="10"/>
-                                </CarouselView.ItemsLayout>
-                                <CarouselView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Button Style="{StaticResource Button}"
-                                                Text="{Binding name}"
-                                                IsEnabled="False"/>
-                                    </DataTemplate>
-                                </CarouselView.ItemTemplate>
-                            </CarouselView>
-                            <IndicatorView x:Name="Indicator_Keyword"
-                                           Style="{StaticResource IndicatorView}"
-                                           HorizontalOptions="CenterAndExpand"/>
-                        </StackLayout>
+                        <CollectionView ItemsSource="{Binding keywords}">
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Orientation="Horizontal"
+                                                 Span="1"
+                                                 HorizontalItemSpacing="5"
+                                                 VerticalItemSpacing="10"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame Style="{StaticResource Frame}">
+                                        <Label Style="{StaticResource Label}"
+                                               Text="{Binding name}"/>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
@@ -464,10 +358,16 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
             <Label Style="{StaticResource Label}"
-                   Text="Images"
                    FontSize="Large"
                    HorizontalTextAlignment="Start"
-                   Margin="3"/>
+                   Margin="3">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Image "/>
+                        <Span Text="{Binding Title}"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
             <CollectionView ItemsSource="{Binding ListImages}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
@@ -483,27 +383,25 @@
                                     </FormattedString>
                                 </Label.FormattedText>
                             </Label>
-                            <CarouselView Style="{StaticResource CarouselView}"
-                                          ItemsSource="{Binding backdrops}"
-                                          IndicatorView="{x:Reference Indicator_Backdrop}"
-                                          HeightRequest="250">
-                                <CarouselView.ItemsLayout>
-                                    <LinearItemsLayout Orientation="Horizontal"
-                                                       ItemSpacing="5"/>
-                                </CarouselView.ItemsLayout>
-                                <CarouselView.ItemTemplate>
+                            <CollectionView ItemsSource="{Binding backdrops}">
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout Orientation="Horizontal"
+                                                     Span="1"
+                                                     HorizontalItemSpacing="5"
+                                                     VerticalItemSpacing="10"/>
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
                                     <DataTemplate>
                                         <Frame Style="{StaticResource Frame}">
                                             <Grid>
                                                 <Grid.RowDefinitions>
-                                                    <RowDefinition Height="100"/>
-                                                    <RowDefinition Height="20*"/>
-                                                    <RowDefinition Height="20*"/>
-                                                    <RowDefinition Height="20*"/>
+                                                    <RowDefinition Height="150" />
+                                                    <RowDefinition Height="25" />
+                                                    <RowDefinition Height="25" />
                                                 </Grid.RowDefinitions>
                                                 <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="50*"/>
-                                                    <ColumnDefinition Width="50*"/>
+                                                    <ColumnDefinition Width="100" />
+                                                    <ColumnDefinition Width="100" />
                                                 </Grid.ColumnDefinitions>
                                                 <Image Grid.Row="0"
                                                        Grid.Column="0"
@@ -512,43 +410,29 @@
                                                        Aspect="AspectFit"/>
                                                 <Label Grid.Row="1"
                                                        Grid.Column="0"
-                                                       Grid.ColumnSpan="2"
                                                        HorizontalTextAlignment="Center"
-                                                       FontSize="Large"
                                                        Style="{StaticResource Label}"
                                                        Text="Vote"/>
-                                                <Label Grid.Row="2"
-                                                       Grid.Column="0"
+                                                <Label Grid.Row="1"
+                                                       Grid.Column="1"
                                                        HorizontalTextAlignment="Center"
-                                                       FontSize="Medium"
                                                        Style="{StaticResource Label}"
                                                        Text="Average"/>
                                                 <Label Grid.Row="2"
-                                                       Grid.Column="1"
-                                                       HorizontalTextAlignment="Center"
-                                                       FontSize="Medium"
-                                                       Style="{StaticResource Label}"
-                                                       Text="Count"/>
-                                                <Label Grid.Row="3"
                                                        Grid.Column="0"
                                                        HorizontalTextAlignment="Center"
-                                                       FontSize="Medium"
-                                                       Style="{StaticResource Label}"
-                                                       Text="{Binding vote_average}"/>
-                                                <Label Grid.Row="3"
-                                                       Grid.Column="1"
-                                                       HorizontalTextAlignment="Center"
-                                                       FontSize="Medium"
                                                        Style="{StaticResource Label}"
                                                        Text="{Binding vote_count}"/>
+                                                <Label Grid.Row="2"
+                                                       Grid.Column="1"
+                                                       HorizontalTextAlignment="Center"
+                                                       Style="{StaticResource Label}"
+                                                       Text="{Binding vote_average}"/>
                                             </Grid>
                                         </Frame>
                                     </DataTemplate>
-                                </CarouselView.ItemTemplate>
-                            </CarouselView>
-                            <IndicatorView x:Name="Indicator_Backdrop"
-                                           Style="{StaticResource IndicatorView}"
-                                           HorizontalOptions="CenterAndExpand"/>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
                             <Label Style="{StaticResource Label}"
                                    FontSize="Medium"
                                    HorizontalTextAlignment="Center"
@@ -560,72 +444,56 @@
                                     </FormattedString>
                                 </Label.FormattedText>
                             </Label>
-                            <CarouselView Style="{StaticResource CarouselView}"
-                                          ItemsSource="{Binding posters}"
-                                          IndicatorView="{x:Reference Indicator_Poster}"
-                                          HeightRequest="250">
-                                <CarouselView.ItemsLayout>
-                                    <LinearItemsLayout Orientation="Horizontal"
-                                                       ItemSpacing="5"/>
-                                </CarouselView.ItemsLayout>
-                                <CarouselView.ItemTemplate>
+                            <CollectionView ItemsSource="{Binding posters}">
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout Orientation="Horizontal"
+                                                     Span="1"
+                                                     HorizontalItemSpacing="5"
+                                                     VerticalItemSpacing="10"/>
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
                                     <DataTemplate>
                                         <Frame Style="{StaticResource Frame}">
                                             <Grid>
                                                 <Grid.RowDefinitions>
-                                                    <RowDefinition Height="40*"/>
-                                                    <RowDefinition Height="30*"/>
-                                                    <RowDefinition Height="30*"/>
+                                                    <RowDefinition Height="150" />
+                                                    <RowDefinition Height="25" />
+                                                    <RowDefinition Height="25" />
                                                 </Grid.RowDefinitions>
                                                 <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="60*"/>
-                                                    <ColumnDefinition Width="20*"/>
-                                                    <ColumnDefinition Width="20*"/>
+                                                    <ColumnDefinition Width="100" />
+                                                    <ColumnDefinition Width="100" />
                                                 </Grid.ColumnDefinitions>
                                                 <Image Grid.Row="0"
                                                        Grid.Column="0"
-                                                       Grid.RowSpan="3"
+                                                       Grid.ColumnSpan="2"
                                                        Source="{Binding file_url}"
                                                        Aspect="AspectFit"/>
-                                                <Label Grid.Row="0"
-                                                       Grid.Column="1"
-                                                       Grid.ColumnSpan="2"
+                                                <Label Grid.Row="1"
+                                                       Grid.Column="0"
                                                        HorizontalTextAlignment="Center"
-                                                       FontSize="Large"
                                                        Style="{StaticResource Label}"
                                                        Text="Vote"/>
                                                 <Label Grid.Row="1"
                                                        Grid.Column="1"
                                                        HorizontalTextAlignment="Center"
-                                                       FontSize="Medium"
                                                        Style="{StaticResource Label}"
                                                        Text="Average"/>
-                                                <Label Grid.Row="1"
-                                                       Grid.Column="3"
+                                                <Label Grid.Row="2"
+                                                       Grid.Column="0"
                                                        HorizontalTextAlignment="Center"
-                                                       FontSize="Medium"
                                                        Style="{StaticResource Label}"
-                                                       Text="Count"/>
+                                                       Text="{Binding vote_count}"/>
                                                 <Label Grid.Row="2"
                                                        Grid.Column="1"
                                                        HorizontalTextAlignment="Center"
-                                                       FontSize="Medium"
                                                        Style="{StaticResource Label}"
                                                        Text="{Binding vote_average}"/>
-                                                <Label Grid.Row="3"
-                                                       Grid.Column="2"
-                                                       HorizontalTextAlignment="Center"
-                                                       FontSize="Medium"
-                                                       Style="{StaticResource Label}"
-                                                       Text="{Binding vote_count}"/>
                                             </Grid>
                                         </Frame>
                                     </DataTemplate>
-                                </CarouselView.ItemTemplate>
-                            </CarouselView>
-                            <IndicatorView x:Name="Indicator_Poster"
-                                           Style="{StaticResource IndicatorView}"
-                                           HorizontalOptions="CenterAndExpand"/>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
                             <Label Style="{StaticResource Label}"
                                    FontSize="Medium"
                                    HorizontalTextAlignment="Center"
@@ -637,7 +505,57 @@
                                     </FormattedString>
                                 </Label.FormattedText>
                             </Label>
-                            <CarouselView Style="{StaticResource CarouselView}"
+                            <CollectionView ItemsSource="{Binding logos}">
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout Orientation="Horizontal"
+                                                     Span="1"
+                                                     HorizontalItemSpacing="5"
+                                                     VerticalItemSpacing="10"/>
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Frame Style="{StaticResource Frame}">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="150" />
+                                                    <RowDefinition Height="25" />
+                                                    <RowDefinition Height="25" />
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="100" />
+                                                    <ColumnDefinition Width="100" />
+                                                </Grid.ColumnDefinitions>
+                                                <Image Grid.Row="0"
+                                                       Grid.Column="0"
+                                                       Grid.ColumnSpan="2"
+                                                       Source="{Binding file_url}"
+                                                       Aspect="AspectFit"/>
+                                                <Label Grid.Row="1"
+                                                       Grid.Column="0"
+                                                       HorizontalTextAlignment="Center"
+                                                       Style="{StaticResource Label}"
+                                                       Text="Vote"/>
+                                                <Label Grid.Row="1"
+                                                       Grid.Column="1"
+                                                       HorizontalTextAlignment="Center"
+                                                       Style="{StaticResource Label}"
+                                                       Text="Average"/>
+                                                <Label Grid.Row="2"
+                                                       Grid.Column="0"
+                                                       HorizontalTextAlignment="Center"
+                                                       Style="{StaticResource Label}"
+                                                       Text="{Binding vote_count}"/>
+                                                <Label Grid.Row="2"
+                                                       Grid.Column="1"
+                                                       HorizontalTextAlignment="Center"
+                                                       Style="{StaticResource Label}"
+                                                       Text="{Binding vote_average}"/>
+                                            </Grid>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                            <!--<CarouselView Style="{StaticResource CarouselView}"
                                           ItemsSource="{Binding logos}"
                                           IndicatorView="{x:Reference Indicator_Logo}"
                                           HeightRequest="250">
@@ -702,78 +620,72 @@
                             </CarouselView>
                             <IndicatorView x:Name="Indicator_Logo"
                                            Style="{StaticResource IndicatorView}"
-                                           HorizontalOptions="CenterAndExpand"/>
+                                           HorizontalOptions="CenterAndExpand"/>-->
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            <Label Style="{StaticResource Label}"
+                   FontSize="Large"
+                   HorizontalTextAlignment="Start"
+                   Margin="3">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Video "/>
+                        <Span Text="{Binding Title}"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
             <CollectionView ItemsSource="{Binding ListVideo}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout>
-                            <Label Style="{StaticResource Label}"
-                                   FontSize="Large"
-                                   HorizontalTextAlignment="Start"
-                                   Margin="3">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="Video "/>
-                                        <Span Text="{Binding results.Count}"/>
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
-                            <CarouselView Style="{StaticResource CarouselView}"
-                                          ItemsSource="{Binding results}"
-                                          IndicatorView="{x:Reference Indicator_Video}">
-                                <CarouselView.ItemsLayout>
-                                    <LinearItemsLayout Orientation="Horizontal"
-                                                       ItemSpacing="5"/>
-                                </CarouselView.ItemsLayout>
-                                <CarouselView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Frame Style="{StaticResource Frame}">
-                                            <Grid>
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="100"/>
-                                                    <RowDefinition Height="20*"/>
-                                                    <RowDefinition Height="20*"/>
-                                                </Grid.RowDefinitions>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="50*"/>
-                                                    <ColumnDefinition Width="50*"/>
-                                                </Grid.ColumnDefinitions>
-                                                <toolkit:MediaElement Grid.Row="0"
-                                                                      Grid.Column="0"
-                                                                      Grid.ColumnSpan="2"
-                                                                      Style="{StaticResource MediaElement}"
-                                                                      Source="{Binding key_url}"/>
-                                                <Label Grid.Row="1"
-                                                       Grid.Column="0"
-                                                       Grid.ColumnSpan="2"
-                                                       HorizontalTextAlignment="Center"
-                                                       FontSize="Large"
-                                                       Style="{StaticResource Label}"
-                                                       Text="{Binding name}"/>
-                                                <Label Grid.Row="2"
-                                                       Grid.Column="0"
-                                                       HorizontalTextAlignment="Center"
-                                                       Style="{StaticResource Label}"
-                                                       Text="{Binding site}"/>
-
-                                                <Label Grid.Row="2"
-                                                       Grid.Column="1"
-                                                       HorizontalTextAlignment="Center"
-                                                       Style="{StaticResource Label}"
-                                                       Text="{Binding type}"/>
-                                            </Grid>
-                                        </Frame>
-                                    </DataTemplate>
-                                </CarouselView.ItemTemplate>
-                            </CarouselView>
-                            <IndicatorView x:Name="Indicator_Video"
-                                           Style="{StaticResource IndicatorView}"
-                                           HorizontalOptions="CenterAndExpand"/>
-                        </StackLayout>
+                        <CollectionView ItemsSource="{Binding results}">
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Orientation="Horizontal"
+                                                 Span="1"
+                                                 HorizontalItemSpacing="5"
+                                                 VerticalItemSpacing="10"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame Style="{StaticResource Frame}">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="150" />
+                                                <RowDefinition Height="80" />
+                                                <RowDefinition Height="25" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="70" />
+                                                <ColumnDefinition Width="140" />
+                                            </Grid.ColumnDefinitions>
+                                            <toolkit:MediaElement Grid.Row="0"
+                                                                  Grid.Column="0"
+                                                                  Grid.ColumnSpan="2"
+                                                                  Style="{StaticResource MediaElement}"
+                                                                  Source="{Binding key_url}"/>
+                                            <Label Grid.Row="1"
+                                                   Grid.Column="0"
+                                                   Grid.ColumnSpan="2"
+                                                   HorizontalTextAlignment="Center"
+                                                   Style="{StaticResource Label}"
+                                                   Text="{Binding name}"/>
+                                            <Label Grid.Row="2"
+                                                   Grid.Column="1"
+                                                   HorizontalTextAlignment="End"
+                                                   Style="{StaticResource Label}">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="Source : "/>
+                                                        <Span Text="{Binding site}"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </Grid>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
@@ -791,51 +703,43 @@
             <CollectionView ItemsSource="{Binding ListRecommendations}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout>
-                            <CarouselView Style="{StaticResource CarouselView}"
-                                          ItemsSource="{Binding results}"
-                                          IndicatorView="{x:Reference Indicator_Recommendations}">
-                                <CarouselView.ItemsLayout>
-                                    <LinearItemsLayout Orientation="Horizontal"
-                                                       ItemSpacing="5"/>
-                                </CarouselView.ItemsLayout>
-                                <CarouselView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Frame Style="{StaticResource Frame}"
-                                               HeightRequest="350">
-                                            <Grid>
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="20*"/>
-                                                    <RowDefinition Height="80*"/>
-                                                </Grid.RowDefinitions>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="30*"/>
-                                                    <ColumnDefinition Width="70*"/>
-                                                </Grid.ColumnDefinitions>
-                                                <Image Grid.Row="0"
-                                                       Grid.Column="0"
-                                                       Grid.RowSpan="2"
-                                                       Source="{Binding poster_url}"
-                                                       Aspect="AspectFit"/>
-                                                <Label Grid.Row="0"
-                                                       Grid.Column="1"
-                                                       HorizontalTextAlignment="Center"
-                                                       Style="{StaticResource Label}"
-                                                       FontSize="Large"
-                                                       Text="{Binding title}"/>
-                                                <Label Grid.Row="1"
-                                                       Grid.Column="1"
-                                                       Style="{StaticResource Label}"
-                                                       Text="{Binding overview}"/>
-                                            </Grid>
-                                        </Frame>
-                                    </DataTemplate>
-                                </CarouselView.ItemTemplate>
-                            </CarouselView>
-                            <IndicatorView x:Name="Indicator_Recommendations"
-                                           Style="{StaticResource IndicatorView}"
-                                           HorizontalOptions="CenterAndExpand"/>
-                        </StackLayout>
+                        <CollectionView ItemsSource="{Binding results}">
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Orientation="Horizontal"
+                                                 Span="1"
+                                                 HorizontalItemSpacing="5"
+                                                 VerticalItemSpacing="10"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame Style="{StaticResource Frame}">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="35" />
+                                                <RowDefinition Height="100" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="70" />
+                                                <ColumnDefinition Width="140" />
+                                            </Grid.ColumnDefinitions>
+                                            <Label Grid.Row="0"
+                                                   Grid.Column="0"
+                                                   Grid.ColumnSpan="2"
+                                                   HorizontalTextAlignment="Center"
+                                                   Style="{StaticResource Label}"
+                                                   Text="{Binding title}"/>
+                                            <Image Grid.Row="1"
+                                                   Grid.Column="0"
+                                                   Source="{Binding poster_url}"/>
+                                            <Label Grid.Row="1"
+                                                   Grid.Column="1"
+                                                   Style="{StaticResource Label}"
+                                                   Text="{Binding overview}"/>
+                                        </Grid>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
@@ -853,51 +757,43 @@
             <CollectionView ItemsSource="{Binding ListSimiliar}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout>
-                            <CarouselView Style="{StaticResource CarouselView}"
-                                          ItemsSource="{Binding results}"
-                                          IndicatorView="{x:Reference Indicator_Recommendations}">
-                                <CarouselView.ItemsLayout>
-                                    <LinearItemsLayout Orientation="Horizontal"
-                                                       ItemSpacing="5"/>
-                                </CarouselView.ItemsLayout>
-                                <CarouselView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Frame Style="{StaticResource Frame}"
-                                               HeightRequest="350">
-                                            <Grid>
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="20*"/>
-                                                    <RowDefinition Height="80*"/>
-                                                </Grid.RowDefinitions>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="30*"/>
-                                                    <ColumnDefinition Width="70*"/>
-                                                </Grid.ColumnDefinitions>
-                                                <Image Grid.Row="0"
-                                                       Grid.Column="0"
-                                                       Grid.RowSpan="2"
-                                                       Source="{Binding poster_url}"
-                                                       Aspect="AspectFit"/>
-                                                <Label Grid.Row="0"
-                                                       Grid.Column="1"
-                                                       HorizontalTextAlignment="Center"
-                                                       Style="{StaticResource Label}"
-                                                       FontSize="Large"
-                                                       Text="{Binding title}"/>
-                                                <Label Grid.Row="1"
-                                                       Grid.Column="1"
-                                                       Style="{StaticResource Label}"
-                                                       Text="{Binding overview}"/>
-                                            </Grid>
-                                        </Frame>
-                                    </DataTemplate>
-                                </CarouselView.ItemTemplate>
-                            </CarouselView>
-                            <IndicatorView x:Name="Indicator_Recommendations"
-                                           Style="{StaticResource IndicatorView}"
-                                           HorizontalOptions="CenterAndExpand"/>
-                        </StackLayout>
+                        <CollectionView ItemsSource="{Binding results}">
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Orientation="Horizontal"
+                                                 Span="1"
+                                                 HorizontalItemSpacing="5"
+                                                 VerticalItemSpacing="10"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame Style="{StaticResource Frame}">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="35" />
+                                                <RowDefinition Height="100" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="70" />
+                                                <ColumnDefinition Width="140" />
+                                            </Grid.ColumnDefinitions>
+                                            <Label Grid.Row="0"
+                                                   Grid.Column="0"
+                                                   Grid.ColumnSpan="2"
+                                                   HorizontalTextAlignment="Center"
+                                                   Style="{StaticResource Label}"
+                                                   Text="{Binding title}"/>
+                                            <Image Grid.Row="1"
+                                                   Grid.Column="0"
+                                                   Source="{Binding poster_url}"/>
+                                            <Label Grid.Row="1"
+                                                   Grid.Column="1"
+                                                   Style="{StaticResource Label}"
+                                                   Text="{Binding overview}"/>
+                                        </Grid>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
