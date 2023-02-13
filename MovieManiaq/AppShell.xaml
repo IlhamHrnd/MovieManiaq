@@ -4,11 +4,18 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:Home="clr-namespace:MovieManiaq.View.Home"
+    xmlns:Search="clr-namespace:MovieManiaq.View.Search"
     Style="{StaticResource Shell}">
     <TabBar>
-        <Tab Title="Home">
+        <Tab Title="Home"
+             Icon="homepage.svg">
             <ShellContent ContentTemplate="{DataTemplate Home:MainPage}"
                           Route="MainPage" />
+        </Tab>
+        <Tab Title="Search"
+             Icon="search.svg">
+            <ShellContent ContentTemplate="{DataTemplate Search:SearchMoviePage}"
+                          Route="SearchMoviePage"/>
         </Tab>
     </TabBar>
 </Shell>

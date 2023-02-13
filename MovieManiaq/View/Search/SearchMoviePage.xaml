@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovieManiaq.View.Search.SearchMoviePage"
+             xmlns:Model="clr-namespace:MovieManiaq.Model.Search"
+             Title="Search Movie">
+    <ContentPage.BindingContext>
+        <Model:SearchMovieModel/>
+    </ContentPage.BindingContext>
+    <StackLayout Style="{StaticResource StackLayout}">
+        <SearchBar Style="{StaticResource SearchBar}"
+                   SearchButtonPressed="SearchBar_SearchButtonPressed"/>
+        <ActivityIndicator Style="{StaticResource ActivityIndicator}"
+                           IsRunning="{Binding IsBusy}"
+                           IsVisible="{Binding IsVisible}"/>
+        <ScrollView Style="{StaticResource ScrollView}">
+            <StackLayout Margin="3">
+                <CollectionView ItemsSource="{Binding ListSearch}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <Label Style="{StaticResource Label}">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Search Result "/>
+                                            <Span Text="{Binding total_results}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <CollectionView ItemsSource="{Binding results}">
+                                    <CollectionView.ItemsLayout>
+                                        <GridItemsLayout Orientation="Horizontal"
+                                                         Span="1"
+                                                         HorizontalItemSpacing="5"
+                                                         VerticalItemSpacing="10"/>
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Frame Style="{StaticResource Frame}">
+                                                <Grid ColumnSpacing="5">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="70" />
+                                                        <RowDefinition Height="80" />
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="100" />
+                                                        <ColumnDefinition Width="250" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Image Grid.Row="0"
+                                                           Grid.Column="0"
+                                                           Grid.RowSpan="2"
+                                                           Source="{Binding poster_url, TargetNullValue='no_image.svg'}"/>
+                                                    <Label Grid.Row="0"
+                                                           Grid.Column="1"
+                                                           Style="{StaticResource Label}"
+                                                           Text="{Binding title}"
+                                                           FontSize="Title"
+                                                           HorizontalTextAlignment="Center"/>
+                                                    <Label Grid.Row="1"
+                                                           Grid.Column="1"
+                                                           Style="{StaticResource Label}"
+                                                           Text="{Binding release_date}"
+                                                           FontSize="Subtitle"
+                                                           HorizontalTextAlignment="Center"/>
+                                                </Grid>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <Label Text="Detail Movie"/>
+            </StackLayout>
+        </ScrollView>
+    </StackLayout>
+</ContentPage>

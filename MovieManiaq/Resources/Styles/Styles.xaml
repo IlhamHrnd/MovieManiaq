@@ -415,7 +415,7 @@
         <Setter Property="VerticalOptions" Value="FillAndExpand"/>
     </Style>
 
-    <Style TargetType="ScrollView" x:Key="BaseScrollView">
+    <Style TargetType="ScrollView" x:Key="ScrollView">
         <Setter Property="HorizontalScrollBarVisibility" Value="Default"/>
         <Setter Property="VerticalScrollBarVisibility" Value="Default"/>
         <Setter Property="Orientation" Value="Vertical"/>
@@ -432,5 +432,4 @@
         <Setter Property="ShouldAutoPlay" Value="False" />
         <Setter Property="ShouldKeepScreenOn" Value="True" />
     </Style>
-
 </ResourceDictionary>
