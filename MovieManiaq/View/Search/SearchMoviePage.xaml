@@ -7,13 +7,13 @@
     <ContentPage.BindingContext>
         <Model:SearchMovieModel/>
     </ContentPage.BindingContext>
-    <StackLayout Style="{StaticResource StackLayout}">
-        <SearchBar Style="{StaticResource SearchBar}"
-                   SearchButtonPressed="SearchBar_SearchButtonPressed"/>
-        <ActivityIndicator Style="{StaticResource ActivityIndicator}"
-                           IsRunning="{Binding IsBusy}"
-                           IsVisible="{Binding IsVisible}"/>
-        <ScrollView Style="{StaticResource ScrollView}">
+    <ScrollView Style="{StaticResource ScrollView}">
+        <StackLayout Style="{StaticResource StackLayout}">
+            <SearchBar Style="{StaticResource SearchBar}"
+                       SearchButtonPressed="SearchBar_SearchButtonPressed"/>
+            <ActivityIndicator Style="{StaticResource ActivityIndicator}"
+                               IsRunning="{Binding IsBusy}"
+                               IsVisible="{Binding IsVisible}"/>
             <StackLayout Margin="3">
                 <CollectionView ItemsSource="{Binding ListSearch}">
                     <CollectionView.ItemTemplate>
@@ -27,7 +27,182 @@
                                         </FormattedString>
                                     </Label.FormattedText>
                                 </Label>
-                                <CollectionView ItemsSource="{Binding results}">
+                                <CollectionView ItemsSource="{Binding results}"
+                                                SelectionMode="Single"
+                                                SelectionChanged="CollectionView_SelectionChanged">
+                                    <CollectionView.ItemsLayout>
+                                        <GridItemsLayout Orientation="Horizontal"
+                                                         Span="1"
+                                                         HorizontalItemSpacing="5"
+                                                         VerticalItemSpacing="10"/>
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="70" />
+                                                    <RowDefinition Height="80" />
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="100" />
+                                                    <ColumnDefinition Width="250" />
+                                                </Grid.ColumnDefinitions>
+                                                <Image Grid.Row="0"
+                                                       Grid.Column="0"
+                                                       Grid.RowSpan="2"
+                                                       Source="{Binding poster_url, TargetNullValue='no_image.svg'}"/>
+                                                <Label Grid.Row="0"
+                                                       Grid.Column="1"
+                                                       Style="{StaticResource Label}"
+                                                       Text="{Binding title}"
+                                                       FontSize="Title"
+                                                       HorizontalTextAlignment="Center"/>
+                                                <Label Grid.Row="1"
+                                                       Grid.Column="1"
+                                                       Style="{StaticResource Label}"
+                                                       Text="{Binding release_date}"
+                                                       FontSize="Subtitle"
+                                                       HorizontalTextAlignment="Center"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <CollectionView ItemsSource="{Binding ListDetail}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <Label Style="{StaticResource Label}"
+                                       FontSize="Title"
+                                       HorizontalTextAlignment="Center"
+                                       Text="{Binding title}"/>
+                                <Image Source="{Binding background_url}"
+                                       Aspect="AspectFit"/>
+                                <Label Style="{StaticResource Label}"
+                                       FontSize="Subtitle"
+                                       HorizontalTextAlignment="Center">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding release_date}"/>
+                                            <Span Text=" • "/>
+                                            <Span Text="{Binding runtime_hours}"/>
+                                            <Span Text=" Hours"/>
+                                            <Span Text=" • "/>
+                                            <Span Text="{Binding original_language}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <CollectionView ItemsSource="{Binding genres}"
+                                                HorizontalOptions="CenterAndExpand">
+                                    <CollectionView.ItemsLayout>
+                                        <GridItemsLayout Orientation="Horizontal"
+                                                         Span="1"
+                                                         HorizontalItemSpacing="5"
+                                                         VerticalItemSpacing="10"/>
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Label Style="{StaticResource Label}"
+                                                   FontSize="Subtitle"
+                                                   HorizontalTextAlignment="Center">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding name}"/>
+                                                        <Span Text=" • "/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                                <Label Style="{StaticResource Label}"
+                                       FontSize="Title"
+                                       Text="Overview"/>
+                                <Grid ColumnSpacing="10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="250"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50*"/>
+                                        <ColumnDefinition Width="50*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Grid.Row="0"
+                                           Grid.Column="0"
+                                           Source="{Binding poster_url}"
+                                           Aspect="AspectFit"/>
+                                    <Label Grid.Row="0"
+                                           Grid.Column="1"
+                                           Style="{StaticResource Label}"
+                                           Text="{Binding overview}"
+                                           VerticalTextAlignment="Center"/>
+                                </Grid>
+                                <Frame Style="{StaticResource Frame}"
+                                       Margin="5">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="40"/>
+                                            <RowDefinition Height="40"/>
+                                            <RowDefinition Height="40"/>
+                                            <RowDefinition Height="40"/>
+                                            <RowDefinition Height="40"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="50*"/>
+                                            <ColumnDefinition Width="50*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label Grid.Row="0"
+                                               Grid.Column="0"
+                                               Style="{StaticResource Label}"
+                                               Text="Home Page"/>
+                                        <Label Grid.Row="0"
+                                               Grid.Column="1"
+                                               Style="{StaticResource Label}"
+                                               Text="{Binding homepage}"/>
+                                        <Label Grid.Row="1"
+                                               Grid.Column="0"
+                                               Style="{StaticResource Label}"
+                                               Text="Popularity"/>
+                                        <Label Grid.Row="1"
+                                               Grid.Column="1"
+                                               Style="{StaticResource Label}"
+                                               Text="{Binding popularity}"/>
+                                        <Label Grid.Row="2"
+                                               Grid.Column="0"
+                                               Style="{StaticResource Label}"
+                                               Text="Budget"/>
+                                        <Label Grid.Row="2"
+                                               Grid.Column="1"
+                                               Style="{StaticResource Label}"
+                                               Text="{Binding budget_currency}"/>
+                                        <Label Grid.Row="3"
+                                               Grid.Column="0"
+                                               Style="{StaticResource Label}"
+                                               Text="Revenue"/>
+                                        <Label Grid.Row="3"
+                                               Grid.Column="1"
+                                               Style="{StaticResource Label}"
+                                               Text="{Binding revenue_currency}"/>
+                                        <Label Grid.Row="4"
+                                               Grid.Column="0"
+                                               Style="{StaticResource Label}"
+                                               Text="Status"/>
+                                        <Label Grid.Row="4"
+                                               Grid.Column="1"
+                                               Style="{StaticResource Label}"
+                                               Text="{Binding status}"/>
+                                    </Grid>
+                                </Frame>
+                                <Label Style="{StaticResource Label}"
+                                       FontSize="Title"
+                                       Text="Production"/>
+                                <Label Style="{StaticResource Label}"
+                                       Text="Production House"
+                                       FontSize="Medium"
+                                       HorizontalTextAlignment="Center"/>
+                                <CollectionView ItemsSource="{Binding production_companies}">
                                     <CollectionView.ItemsLayout>
                                         <GridItemsLayout Orientation="Horizontal"
                                                          Span="1"
@@ -37,42 +212,60 @@
                                     <CollectionView.ItemTemplate>
                                         <DataTemplate>
                                             <Frame Style="{StaticResource Frame}">
-                                                <Grid ColumnSpacing="5">
+                                                <Grid>
                                                     <Grid.RowDefinitions>
-                                                        <RowDefinition Height="70" />
-                                                        <RowDefinition Height="80" />
+                                                        <RowDefinition Height="50"/>
                                                     </Grid.RowDefinitions>
                                                     <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="100" />
-                                                        <ColumnDefinition Width="250" />
+                                                        <ColumnDefinition Width="50"/>
+                                                        <ColumnDefinition Width="150"/>
                                                     </Grid.ColumnDefinitions>
                                                     <Image Grid.Row="0"
                                                            Grid.Column="0"
-                                                           Grid.RowSpan="2"
-                                                           Source="{Binding poster_url, TargetNullValue='no_image.svg'}"/>
+                                                           Source="{Binding logo_url}"
+                                                           Aspect="AspectFit"/>
                                                     <Label Grid.Row="0"
                                                            Grid.Column="1"
                                                            Style="{StaticResource Label}"
-                                                           Text="{Binding title}"
-                                                           FontSize="Title"
-                                                           HorizontalTextAlignment="Center"/>
-                                                    <Label Grid.Row="1"
-                                                           Grid.Column="1"
-                                                           Style="{StaticResource Label}"
-                                                           Text="{Binding release_date}"
-                                                           FontSize="Subtitle"
-                                                           HorizontalTextAlignment="Center"/>
+                                                           Text="{Binding name}"
+                                                           VerticalTextAlignment="Center"/>
                                                 </Grid>
                                             </Frame>
                                         </DataTemplate>
                                     </CollectionView.ItemTemplate>
                                 </CollectionView>
+                                <Label Style="{StaticResource Label}"
+                                       Text="Country"
+                                       FontSize="Medium"
+                                       HorizontalTextAlignment="Center"/>
+                                <CollectionView ItemsSource="{Binding production_countries}">
+                                    <CollectionView.ItemsLayout>
+                                        <GridItemsLayout Orientation="Horizontal"
+                                                         Span="1"
+                                                         HorizontalItemSpacing="5"
+                                                         VerticalItemSpacing="10"/>
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Frame Style="{StaticResource Frame}">
+                                                <Label Style="{StaticResource Label}"
+                                                       Text="{Binding name}"/>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                                <Frame Style="{StaticResource Frame}"
+                                       Margin="10">
+                                    <Label Style="{StaticResource Label}"
+                                           FontSize="Subtitle"
+                                           HorizontalTextAlignment="Center"
+                                           Text="{Binding tagline}"/>
+                                </Frame>
                             </StackLayout>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-                <Label Text="Detail Movie"/>
             </StackLayout>
-        </ScrollView>
-    </StackLayout>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

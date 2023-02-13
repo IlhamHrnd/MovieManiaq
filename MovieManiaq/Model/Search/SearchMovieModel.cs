@@ -1,5 +1,6 @@
 ﻿using MovieManiaq.Model.Root;
 using System.Collections.ObjectModel;
+using static MovieManiaq.Model.Response.Movie.DetailModel;
 using static MovieManiaq.Model.Response.Movie.SearchModel;
 
 namespace MovieManiaq.Model.Search
@@ -57,6 +58,22 @@ namespace MovieManiaq.Model.Search
                 return listsearch;
             }
             set { listsearch = value; }
+        }
+
+        private IList<DetailRoot> listdetail { get; set; }
+
+        public IList<DetailRoot> ListDetail
+        {
+            get
+            {
+                if (listdetail == null)
+                {
+                    listdetail = new ObservableCollection<DetailRoot>();
+                }
+
+                return listdetail;
+            }
+            set { listdetail = value; }
         }
     }
 }

@@ -19,4 +19,9 @@ public partial class SearchMoviePage : ContentPage
     {
 		_searchViewModel.MovieSearch(sender);
     }
+
+    private void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+		_searchViewModel.MovieSelection(e);
+    }
 }

@@ -3,6 +3,7 @@ using CommunityToolkit.Maui.Core;
 using MovieManiaq.Model.Root;
 using MovieManiaq.Model.Search;
 using MovieManiaq.ViewModel.RestAPI.Movie;
+using static MovieManiaq.Model.Response.Movie.SearchModel;
 
 namespace MovieManiaq.ViewModel.Search
 {
@@ -33,6 +34,35 @@ namespace MovieManiaq.ViewModel.Search
                     var search = await SearchClass.GetSearchAsync(press.Text);
                     ListSearch.Clear();
                     ListSearch.Add(search);
+                }
+            }
+
+            else
+            {
+                var toast = Toast.Make("You're Offline", ToastDuration.Long, 30);
+                await toast.Show();
+            }
+
+            IsBusy = false;
+            IsVisible = false;
+        }
+
+        public async void MovieSelection(SelectionChangedEventArgs e)
+        {
+            bool valid_connect = network.CekJaringan;
+
+            IsVisible = true;
+            IsBusy = true;
+
+            if (valid_connect)
+            {
+                var movieID = e.CurrentSelection[0] as Result;
+
+                if (movieID != null)
+                {
+                    var detail = await DetailClass.GetDetailMovieAsync((int)movieID.id);
+                    ListDetail.Clear();
+                    ListDetail.Add(detail);
                 }
             }
 

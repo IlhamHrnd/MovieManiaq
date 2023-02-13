@@ -7,7 +7,7 @@
     <ContentPage.BindingContext>
         <Model:MainModel/>
     </ContentPage.BindingContext>
-    <ScrollView Style="{StaticResource BaseScrollView}">
+    <ScrollView Style="{StaticResource ScrollView}">
         <StackLayout Style="{StaticResource StackLayout}">
             <ActivityIndicator Style="{StaticResource ActivityIndicator}"
                                IsRunning="{Binding IsBusy}"
