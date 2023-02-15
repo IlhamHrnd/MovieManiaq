@@ -63,6 +63,22 @@ namespace MovieManiaq.ViewModel.Search
                     var detail = await DetailClass.GetDetailMovieAsync((int)movieID.id);
                     ListDetail.Clear();
                     ListDetail.Add(detail);
+
+                    var credits = await CreditsClass.GetCreditsAsync((int)movieID.id);
+                    ListCredits.Clear();
+                    ListCredits.Add(credits);
+
+                    var keyword = await KeywordClass.GetKeywordAsync((int)movieID.id);
+                    ListKeyword.Clear();
+                    ListKeyword.Add(keyword);
+
+                    var images = await ImagesClass.GetImagesAsync((int)movieID.id);
+                    ListImages.Clear();
+                    ListImages.Add(images);
+
+                    var video = await VideoClass.GetVideoAsync((int)movieID.id);
+                    ListVideo.Clear();
+                    ListVideo.Add(video);
                 }
             }
 

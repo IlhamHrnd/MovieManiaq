@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="MovieManiaq.View.Search.SearchMoviePage"
              xmlns:Model="clr-namespace:MovieManiaq.Model.Search"
              Title="Search Movie">
@@ -49,8 +50,13 @@
                                                 </Grid.ColumnDefinitions>
                                                 <Image Grid.Row="0"
                                                        Grid.Column="0"
-                                                       Grid.RowSpan="2"
-                                                       Source="{Binding poster_url, TargetNullValue='no_image.svg'}"/>
+                                                       Grid.RowSpan="2">
+                                                    <Image.Source>
+                                                        <UriImageSource Uri="{Binding poster_url}"
+                                                                        CachingEnabled="True"
+                                                                        CacheValidity="1"/>
+                                                    </Image.Source>
+                                                </Image>
                                                 <Label Grid.Row="0"
                                                        Grid.Column="1"
                                                        Style="{StaticResource Label}"
@@ -123,16 +129,21 @@
                                        Text="Overview"/>
                                 <Grid ColumnSpacing="10">
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="250"/>
+                                        <RowDefinition Height="400"/>
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="50*"/>
-                                        <ColumnDefinition Width="50*"/>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="250"/>
                                     </Grid.ColumnDefinitions>
                                     <Image Grid.Row="0"
                                            Grid.Column="0"
-                                           Source="{Binding poster_url}"
-                                           Aspect="AspectFit"/>
+                                           Aspect="AspectFit">
+                                        <Image.Source>
+                                            <UriImageSource Uri="{Binding poster_url}"
+                                                            CachingEnabled="True"
+                                                            CacheValidity="1"/>
+                                        </Image.Source>
+                                    </Image>
                                     <Label Grid.Row="0"
                                            Grid.Column="1"
                                            Style="{StaticResource Label}"
@@ -222,8 +233,13 @@
                                                     </Grid.ColumnDefinitions>
                                                     <Image Grid.Row="0"
                                                            Grid.Column="0"
-                                                           Source="{Binding logo_url}"
-                                                           Aspect="AspectFit"/>
+                                                           Aspect="AspectFit">
+                                                        <Image.Source>
+                                                            <UriImageSource Uri="{Binding logo_url}"
+                                                                            CachingEnabled="True"
+                                                                            CacheValidity="1"/>
+                                                        </Image.Source>
+                                                    </Image>
                                                     <Label Grid.Row="0"
                                                            Grid.Column="1"
                                                            Style="{StaticResource Label}"
@@ -262,6 +278,433 @@
                                            Text="{Binding tagline}"/>
                                 </Frame>
                             </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <CollectionView ItemsSource="{Binding ListKeyword}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <Label Style="{StaticResource Label}"
+                                       Text="Keyword"
+                                       FontSize="Large"
+                                       HorizontalTextAlignment="Start"
+                                       Margin="3"/>
+                                <CollectionView ItemsSource="{Binding keywords}">
+                                    <CollectionView.ItemsLayout>
+                                        <GridItemsLayout Orientation="Horizontal"
+                                                         Span="1"
+                                                         HorizontalItemSpacing="5"
+                                                         VerticalItemSpacing="10"/>
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Frame Style="{StaticResource Frame}">
+                                                <Label Style="{StaticResource Label}"
+                                                       Text="{Binding name}"/>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <CollectionView ItemsSource="{Binding ListCredits}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <Label Style="{StaticResource Label}"
+                                       Text="Credits"
+                                       FontSize="Large"
+                                       HorizontalTextAlignment="Start"
+                                       Margin="3"/>
+                                <Label Style="{StaticResource Label}"
+                                       FontSize="Medium"
+                                       HorizontalTextAlignment="Center"
+                                       Margin="3">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Cast "/>
+                                            <Span Text="{Binding cast.Count}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <CollectionView ItemsSource="{Binding cast}">
+                                    <CollectionView.ItemsLayout>
+                                        <GridItemsLayout Orientation="Horizontal"
+                                                         Span="2"
+                                                         HorizontalItemSpacing="5"
+                                                         VerticalItemSpacing="10"/>
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Frame Style="{StaticResource Frame}">
+                                                <Grid ColumnSpacing="10">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="50" />
+                                                        <RowDefinition Height="50" />
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="50" />
+                                                        <ColumnDefinition Width="100" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Image Grid.Row="0"
+                                                           Grid.Column="0"
+                                                           Grid.RowSpan="2"
+                                                           Aspect="AspectFit">
+                                                        <Image.Source>
+                                                            <UriImageSource Uri="{Binding profile_url}"
+                                                                            CachingEnabled="True"
+                                                                            CacheValidity="1"/>
+                                                        </Image.Source>
+                                                    </Image>
+                                                    <Label Grid.Row="0"
+                                                           Grid.Column="1"
+                                                           Style="{StaticResource Label}"
+                                                           Text="{Binding name}"
+                                                           VerticalTextAlignment="Center"
+                                                           HorizontalTextAlignment="Center"/>
+                                                    <Label Grid.Row="1"
+                                                           Grid.Column="1"
+                                                           Style="{StaticResource Label}"
+                                                           Text="{Binding character}"
+                                                           VerticalTextAlignment="Start"
+                                                           HorizontalTextAlignment="Center"/>
+                                                </Grid>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                                <Label Style="{StaticResource Label}"
+                                       FontSize="Medium"
+                                       HorizontalTextAlignment="Center"
+                                       Margin="3">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Crew "/>
+                                            <Span Text="{Binding crew.Count}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <CollectionView ItemsSource="{Binding crew}">
+                                    <CollectionView.ItemsLayout>
+                                        <GridItemsLayout Orientation="Horizontal"
+                                                         Span="2"
+                                                         HorizontalItemSpacing="5"
+                                                         VerticalItemSpacing="10"/>
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Frame Style="{StaticResource Frame}">
+                                                <Grid ColumnSpacing="10">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="50" />
+                                                        <RowDefinition Height="50" />
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="50" />
+                                                        <ColumnDefinition Width="100" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Image Grid.Row="0"
+                                                           Grid.Column="0"
+                                                           Grid.RowSpan="2"
+                                                           Aspect="AspectFit">
+                                                        <Image.Source>
+                                                            <UriImageSource Uri="{Binding profile_url}"
+                                                                            CachingEnabled="True"
+                                                                            CacheValidity="1"/>
+                                                        </Image.Source>
+                                                    </Image>
+                                                    <Label Grid.Row="0"
+                                                           Grid.Column="1"
+                                                           Style="{StaticResource Label}"
+                                                           Text="{Binding name}"
+                                                           VerticalTextAlignment="Center"
+                                                           HorizontalTextAlignment="Center"/>
+                                                    <Label Grid.Row="1"
+                                                           Grid.Column="1"
+                                                           Style="{StaticResource Label}"
+                                                           Text="{Binding department}"
+                                                           VerticalTextAlignment="Start"
+                                                           HorizontalTextAlignment="Center"/>
+                                                </Grid>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <CollectionView ItemsSource="{Binding ListImages}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <Label Style="{StaticResource Label}"
+                                       Text="Images"
+                                       FontSize="Large"
+                                       HorizontalTextAlignment="Start"
+                                       Margin="3"/>
+                                <Label Style="{StaticResource Label}"
+                                       FontSize="Medium"
+                                       HorizontalTextAlignment="Center"
+                                       Margin="3">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Backdrop "/>
+                                            <Span Text="{Binding backdrops.Count}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <CollectionView ItemsSource="{Binding backdrops}">
+                                    <CollectionView.ItemsLayout>
+                                        <GridItemsLayout Orientation="Horizontal"
+                                                         Span="1"
+                                                         HorizontalItemSpacing="5"
+                                                         VerticalItemSpacing="10"/>
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Frame Style="{StaticResource Frame}">
+                                                <Grid>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="150" />
+                                                        <RowDefinition Height="25" />
+                                                        <RowDefinition Height="25" />
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="100" />
+                                                        <ColumnDefinition Width="100" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Image Grid.Row="0"
+                                                           Grid.Column="0"
+                                                           Grid.ColumnSpan="2"
+                                                           Aspect="AspectFit">
+                                                        <Image.Source>
+                                                            <UriImageSource Uri="{Binding file_url}"
+                                                                            CachingEnabled="True"
+                                                                            CacheValidity="1"/>
+                                                        </Image.Source>
+                                                    </Image>
+                                                    <Label Grid.Row="1"
+                                                           Grid.Column="0"
+                                                           HorizontalTextAlignment="Center"
+                                                           Style="{StaticResource Label}"
+                                                           Text="Vote"/>
+                                                    <Label Grid.Row="1"
+                                                           Grid.Column="1"
+                                                           HorizontalTextAlignment="Center"
+                                                           Style="{StaticResource Label}"
+                                                           Text="Average"/>
+                                                    <Label Grid.Row="2"
+                                                           Grid.Column="0"
+                                                           HorizontalTextAlignment="Center"
+                                                           Style="{StaticResource Label}"
+                                                           Text="{Binding vote_count}"/>
+                                                    <Label Grid.Row="2"
+                                                           Grid.Column="1"
+                                                           HorizontalTextAlignment="Center"
+                                                           Style="{StaticResource Label}"
+                                                           Text="{Binding vote_average}"/>
+                                                </Grid>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                                <Label Style="{StaticResource Label}"
+                                       FontSize="Medium"
+                                       HorizontalTextAlignment="Center"
+                                       Margin="3">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Poster "/>
+                                            <Span Text="{Binding posters.Count}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <CollectionView ItemsSource="{Binding posters}">
+                                    <CollectionView.ItemsLayout>
+                                        <GridItemsLayout Orientation="Horizontal"
+                                                         Span="1"
+                                                         HorizontalItemSpacing="5"
+                                                         VerticalItemSpacing="10"/>
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Frame Style="{StaticResource Frame}">
+                                                <Grid>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="150" />
+                                                        <RowDefinition Height="25" />
+                                                        <RowDefinition Height="25" />
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="100" />
+                                                        <ColumnDefinition Width="100" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Image Grid.Row="0"
+                                                           Grid.Column="0"
+                                                           Grid.ColumnSpan="2"
+                                                           Aspect="AspectFit">
+                                                        <Image.Source>
+                                                            <UriImageSource Uri="{Binding file_url}"
+                                                                            CachingEnabled="True"
+                                                                            CacheValidity="1"/>
+                                                        </Image.Source>
+                                                    </Image>
+                                                    <Label Grid.Row="1"
+                                                           Grid.Column="0"
+                                                           HorizontalTextAlignment="Center"
+                                                           Style="{StaticResource Label}"
+                                                           Text="Vote"/>
+                                                    <Label Grid.Row="1"
+                                                           Grid.Column="1"
+                                                           HorizontalTextAlignment="Center"
+                                                           Style="{StaticResource Label}"
+                                                           Text="Average"/>
+                                                    <Label Grid.Row="2"
+                                                           Grid.Column="0"
+                                                           HorizontalTextAlignment="Center"
+                                                           Style="{StaticResource Label}"
+                                                           Text="{Binding vote_count}"/>
+                                                    <Label Grid.Row="2"
+                                                           Grid.Column="1"
+                                                           HorizontalTextAlignment="Center"
+                                                           Style="{StaticResource Label}"
+                                                           Text="{Binding vote_average}"/>
+                                                </Grid>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                                <Label Style="{StaticResource Label}"
+                                       FontSize="Medium"
+                                       HorizontalTextAlignment="Center"
+                                       Margin="3">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Logo "/>
+                                            <Span Text="{Binding logos.Count}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <CollectionView ItemsSource="{Binding logos}">
+                                    <CollectionView.ItemsLayout>
+                                        <GridItemsLayout Orientation="Horizontal"
+                                                         Span="1"
+                                                         HorizontalItemSpacing="5"
+                                                         VerticalItemSpacing="10"/>
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Frame Style="{StaticResource Frame}">
+                                                <Grid>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="150" />
+                                                        <RowDefinition Height="25" />
+                                                        <RowDefinition Height="25" />
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="100" />
+                                                        <ColumnDefinition Width="100" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Image Grid.Row="0"
+                                                           Grid.Column="0"
+                                                           Grid.ColumnSpan="2"
+                                                           Aspect="AspectFit">
+                                                        <Image.Source>
+                                                            <UriImageSource Uri="{Binding file_url}"
+                                                                            CachingEnabled="True"
+                                                                            CacheValidity="1"/>
+                                                        </Image.Source>
+                                                    </Image>
+                                                    <Label Grid.Row="1"
+                                                           Grid.Column="0"
+                                                           HorizontalTextAlignment="Center"
+                                                           Style="{StaticResource Label}"
+                                                           Text="Vote"/>
+                                                    <Label Grid.Row="1"
+                                                           Grid.Column="1"
+                                                           HorizontalTextAlignment="Center"
+                                                           Style="{StaticResource Label}"
+                                                           Text="Average"/>
+                                                    <Label Grid.Row="2"
+                                                           Grid.Column="0"
+                                                           HorizontalTextAlignment="Center"
+                                                           Style="{StaticResource Label}"
+                                                           Text="{Binding vote_count}"/>
+                                                    <Label Grid.Row="2"
+                                                           Grid.Column="1"
+                                                           HorizontalTextAlignment="Center"
+                                                           Style="{StaticResource Label}"
+                                                           Text="{Binding vote_average}"/>
+                                                </Grid>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <CollectionView ItemsSource="{Binding ListVideo}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <CollectionView ItemsSource="{Binding results}">
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout Orientation="Horizontal"
+                                                 Span="1"
+                                                 HorizontalItemSpacing="5"
+                                                 VerticalItemSpacing="10"/>
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackLayout>
+                                            <Label Style="{StaticResource Label}"
+                                                   Text="Videos"
+                                                   FontSize="Large"
+                                                   HorizontalTextAlignment="Start"
+                                                   Margin="3"/>
+                                            <Frame Style="{StaticResource Frame}">
+                                                <Grid>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="150" />
+                                                        <RowDefinition Height="80" />
+                                                        <RowDefinition Height="25" />
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="70" />
+                                                        <ColumnDefinition Width="140" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <toolkit:MediaElement Grid.Row="0"
+                                                                          Grid.Column="0"
+                                                                          Grid.ColumnSpan="2"
+                                                                          Style="{StaticResource MediaElement}"
+                                                                          Source="{Binding key_url}"/>
+                                                    <Label Grid.Row="1"
+                                                           Grid.Column="0"
+                                                           Grid.ColumnSpan="2"
+                                                           HorizontalTextAlignment="Center"
+                                                           Style="{StaticResource Label}"
+                                                           Text="{Binding name}"/>
+                                                    <Label Grid.Row="2"
+                                                           Grid.Column="1"
+                                                           HorizontalTextAlignment="End"
+                                                           Style="{StaticResource Label}">
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <Span Text="Source : "/>
+                                                                <Span Text="{Binding site}"/>
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                    </Label>
+                                                </Grid>
+                                            </Frame>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>

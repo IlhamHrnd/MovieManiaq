@@ -1,7 +1,11 @@
 ﻿using MovieManiaq.Model.Root;
 using System.Collections.ObjectModel;
+using static MovieManiaq.Model.Response.Movie.CreditsModel;
 using static MovieManiaq.Model.Response.Movie.DetailModel;
+using static MovieManiaq.Model.Response.Movie.ImagesModel;
+using static MovieManiaq.Model.Response.Movie.KeywordModel;
 using static MovieManiaq.Model.Response.Movie.SearchModel;
+using static MovieManiaq.Model.Response.Movie.VideoModel;
 
 namespace MovieManiaq.Model.Search
 {
@@ -10,14 +14,6 @@ namespace MovieManiaq.Model.Search
         public SearchMovieModel()
         {
 
-        }
-
-        private string title = string.Empty;
-
-        public string Title
-        {
-            get { return title; }
-            set { SetProperty(ref title, value); }
         }
 
         private int movieid = 0;
@@ -74,6 +70,70 @@ namespace MovieManiaq.Model.Search
                 return listdetail;
             }
             set { listdetail = value; }
+        }
+
+        private IList<CreditsRoot> listcredits { get; set; }
+
+        public IList<CreditsRoot> ListCredits
+        {
+            get
+            {
+                if (listcredits == null)
+                {
+                    listcredits = new ObservableCollection<CreditsRoot>();
+                }
+
+                return listcredits;
+            }
+            set { listcredits = value; }
+        }
+
+        private IList<ImagesRoot> listimages { get; set; }
+
+        public IList<ImagesRoot> ListImages
+        {
+            get
+            {
+                if (listimages == null)
+                {
+                    listimages = new ObservableCollection<ImagesRoot>();
+                }
+
+                return listimages;
+            }
+            set { listimages = value; }
+        }
+
+        private IList<KeywordRoot> listkeyword { get; set; }
+
+        public IList<KeywordRoot> ListKeyword
+        {
+            get
+            {
+                if (listkeyword == null)
+                {
+                    listkeyword = new ObservableCollection<KeywordRoot>();
+                }
+
+                return listkeyword;
+            }
+            set { listkeyword = value; }
+        }
+
+        private IList<VideoRoot> listvideo { get; set; }
+
+        public IList<VideoRoot> ListVideo
+        {
+            get
+            {
+                if (listvideo == null)
+                {
+                    listvideo = new ObservableCollection<VideoRoot>();
+                }
+
+                return listvideo;
+            }
+            set { listvideo = value; }
         }
     }
 }
