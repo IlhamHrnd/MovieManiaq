@@ -11,13 +11,13 @@ namespace MovieManiaq.ViewModel.RestAPI.Movie
 
         }
 
-        private const string SearchQuery = "https://api.themoviedb.org/3/search/movie?api_key={0}&query={1}&page=1&include_adult=false";
+        private const string SearchQuery = "https://api.themoviedb.org/3/search/movie?api_key={0}&query={1}&page={2}&include_adult=false";
 
-        public static async Task<SearchRoot> GetSearchAsync(string query)
+        public static async Task<SearchRoot> GetSearchAsync(string query, int page)
         {
             SearchRoot root = new SearchRoot();
             HttpClient client = new HttpClient();
-            string url = string.Format(SearchQuery, ApiRoot.TheMovieDB, query);
+            string url = string.Format(SearchQuery, ApiRoot.TheMovieDB, query, page);
             var response = await client.GetAsync(url);
 
             try

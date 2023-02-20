@@ -20,8 +20,13 @@ public partial class SearchMoviePage : ContentPage
 		_searchViewModel.MovieSearch(sender);
     }
 
-    private void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void MovieResult_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
 		_searchViewModel.MovieSelection(e);
+    }
+
+    private void NextPage_Pressed(object sender, EventArgs e)
+    {
+        _searchViewModel.NextPage();
     }
 }

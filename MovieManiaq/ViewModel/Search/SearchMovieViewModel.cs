@@ -2,6 +2,7 @@
 using CommunityToolkit.Maui.Core;
 using MovieManiaq.Model.Root;
 using MovieManiaq.Model.Search;
+using MovieManiaq.View.Detail;
 using MovieManiaq.ViewModel.RestAPI.Movie;
 using static MovieManiaq.Model.Response.Movie.SearchModel;
 
@@ -11,11 +12,15 @@ namespace MovieManiaq.ViewModel.Search
     {
         private readonly NetworkModel network = new NetworkModel();
 
+        string MovieTitle;
+
         private readonly INavigation _navigation;
 
         public SearchMovieViewModel(INavigation navigation)
         {
             _navigation = navigation;
+
+            Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
         }
 
         public async void MovieSearch(object obj)
@@ -31,7 +36,9 @@ namespace MovieManiaq.ViewModel.Search
                 
                 if (!string.IsNullOrEmpty(press.Text))
                 {
-                    var search = await SearchClass.GetSearchAsync(press.Text);
+                    var search = await SearchClass.GetSearchAsync(press.Text, Page);
+                    MovieTitle = press.Text;
+                    Page = (int)search.page;
                     ListSearch.Clear();
                     ListSearch.Add(search);
                 }
@@ -49,47 +56,48 @@ namespace MovieManiaq.ViewModel.Search
 
         public async void MovieSelection(SelectionChangedEventArgs e)
         {
-            bool valid_connect = network.CekJaringan;
+            var movieID = e.CurrentSelection[0] as Result;
 
-            IsVisible = true;
-            IsBusy = true;
-
-            if (valid_connect)
+            if (movieID != null)
             {
-                var movieID = e.CurrentSelection[0] as Result;
+                await _navigation.PushAsync(new DetailMoviePage((int)movieID.id));
+            }
+        }
 
-                if (movieID != null)
-                {
-                    var detail = await DetailClass.GetDetailMovieAsync((int)movieID.id);
-                    ListDetail.Clear();
-                    ListDetail.Add(detail);
+        //Masih error, page stuck di value 2
+        public async void NextPage()
+        {
+            var page = Page + 1;
+            var maxPage = ListSearch[0].total_pages;
 
-                    var credits = await CreditsClass.GetCreditsAsync((int)movieID.id);
-                    ListCredits.Clear();
-                    ListCredits.Add(credits);
-
-                    var keyword = await KeywordClass.GetKeywordAsync((int)movieID.id);
-                    ListKeyword.Clear();
-                    ListKeyword.Add(keyword);
-
-                    var images = await ImagesClass.GetImagesAsync((int)movieID.id);
-                    ListImages.Clear();
-                    ListImages.Add(images);
-
-                    var video = await VideoClass.GetVideoAsync((int)movieID.id);
-                    ListVideo.Clear();
-                    ListVideo.Add(video);
-                }
+            if (page >= maxPage)
+            {
+                await Application.Current.MainPage.DisplayAlert("Latest Page", string.Format("Page = {0} Max Page = {1}", page, maxPage), "OK");
             }
 
             else
             {
-                var toast = Toast.Make("You're Offline", ToastDuration.Long, 30);
-                await toast.Show();
-            }
+                bool valid_connect = network.CekJaringan;
 
-            IsBusy = false;
-            IsVisible = false;
+                IsVisible = true;
+                IsBusy = true;
+
+                if (valid_connect)
+                {
+                    var nextpage = await SearchClass.GetSearchAsync(MovieTitle, page);
+                    ListSearch.Clear();
+                    ListSearch.Add(nextpage);
+                }
+
+                else
+                {
+                    var toast = Toast.Make("You're Offline", ToastDuration.Long, 30);
+                    await toast.Show();
+                }
+
+                IsBusy = false;
+                IsVisible = false;
+            }
         }
 
         private async void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
