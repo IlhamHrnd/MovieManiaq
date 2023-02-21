@@ -44,8 +44,7 @@ namespace MovieManiaq.ViewModel.Search
 
             else
             {
-                var toast = Toast.Make("You're Offline", ToastDuration.Long, 30);
-                await toast.Show();
+                NetworkModel.NoConnection();
             }
 
             IsBusy = false;
@@ -90,8 +89,7 @@ namespace MovieManiaq.ViewModel.Search
 
                 else
                 {
-                    var toast = Toast.Make("You're Offline", ToastDuration.Long, 30);
-                    await toast.Show();
+                    NetworkModel.NoConnection();
                 }
 
                 IsBusy = false;
@@ -125,8 +123,7 @@ namespace MovieManiaq.ViewModel.Search
 
                 else
                 {
-                    var toast = Toast.Make("You're Offline", ToastDuration.Long, 30);
-                    await toast.Show();
+                    NetworkModel.NoConnection();
                 }
 
                 IsBusy = false;
@@ -140,8 +137,7 @@ namespace MovieManiaq.ViewModel.Search
 
             if (!valid_connect)
             {
-                var toast = Toast.Make("You're Offline", ToastDuration.Long);
-                await toast.Show();
+                NetworkModel.NoConnection();
             }
 
             else if (valid_connect)

@@ -643,26 +643,21 @@
                                     <Frame Style="{StaticResource Frame}">
                                         <Grid>
                                             <Grid.RowDefinitions>
-                                                <RowDefinition Height="35" />
-                                                <RowDefinition Height="100" />
+                                                <RowDefinition Height="250" />
+                                                <RowDefinition Height="Auto" />
                                             </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="70" />
-                                                <ColumnDefinition Width="140" />
+                                                <ColumnDefinition Width="180" />
                                             </Grid.ColumnDefinitions>
-                                            <Label Grid.Row="0"
-                                                   Grid.Column="0"
-                                                   Grid.ColumnSpan="2"
-                                                   HorizontalTextAlignment="Center"
-                                                   Style="{StaticResource Label}"
-                                                   Text="{Binding title}"/>
-                                            <Image Grid.Row="1"
+                                            <Image Grid.Row="0"
                                                    Grid.Column="0"
                                                    Source="{Binding poster_url}"/>
                                             <Label Grid.Row="1"
-                                                   Grid.Column="1"
+                                                   Grid.Column="0"
+                                                   FontSize="Subtitle"
+                                                   HorizontalTextAlignment="Center"
                                                    Style="{StaticResource Label}"
-                                                   Text="{Binding overview}"/>
+                                                   Text="{Binding title}"/>
                                         </Grid>
                                     </Frame>
                                 </DataTemplate>
@@ -697,26 +692,21 @@
                                     <Frame Style="{StaticResource Frame}">
                                         <Grid>
                                             <Grid.RowDefinitions>
-                                                <RowDefinition Height="35" />
-                                                <RowDefinition Height="100" />
+                                                <RowDefinition Height="250" />
+                                                <RowDefinition Height="Auto" />
                                             </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="70" />
-                                                <ColumnDefinition Width="140" />
+                                                <ColumnDefinition Width="180" />
                                             </Grid.ColumnDefinitions>
-                                            <Label Grid.Row="0"
-                                                   Grid.Column="0"
-                                                   Grid.ColumnSpan="2"
-                                                   HorizontalTextAlignment="Center"
-                                                   Style="{StaticResource Label}"
-                                                   Text="{Binding title}"/>
-                                            <Image Grid.Row="1"
+                                            <Image Grid.Row="0"
                                                    Grid.Column="0"
                                                    Source="{Binding poster_url}"/>
                                             <Label Grid.Row="1"
-                                                   Grid.Column="1"
+                                                   Grid.Column="0"
+                                                   FontSize="Subtitle"
+                                                   HorizontalTextAlignment="Center"
                                                    Style="{StaticResource Label}"
-                                                   Text="{Binding overview}"/>
+                                                   Text="{Binding title}"/>
                                         </Grid>
                                     </Frame>
                                 </DataTemplate>
