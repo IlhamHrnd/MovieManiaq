@@ -29,4 +29,9 @@ public partial class SearchMoviePage : ContentPage
     {
         _searchViewModel.NextPage();
     }
+
+    private void PreviousPage_Pressed(object sender, EventArgs e)
+    {
+        _searchViewModel.PreviousPage();
+    }
 }

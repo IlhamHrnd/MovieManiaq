@@ -12,8 +12,6 @@ namespace MovieManiaq.ViewModel.Search
     {
         private readonly NetworkModel network = new NetworkModel();
 
-        string MovieTitle;
-
         private readonly INavigation _navigation;
 
         public SearchMovieViewModel(INavigation navigation)
@@ -37,10 +35,10 @@ namespace MovieManiaq.ViewModel.Search
                 if (!string.IsNullOrEmpty(press.Text))
                 {
                     var search = await SearchClass.GetSearchAsync(press.Text, Page);
-                    MovieTitle = press.Text;
-                    Page = (int)search.page;
                     ListSearch.Clear();
                     ListSearch.Add(search);
+                    MovieTitle = press.Text;
+                    Page = (int)search.page;
                 }
             }
 
@@ -64,15 +62,13 @@ namespace MovieManiaq.ViewModel.Search
             }
         }
 
-        //Masih error, page stuck di value 2
         public async void NextPage()
         {
-            var page = Page + 1;
             var maxPage = ListSearch[0].total_pages;
 
-            if (page >= maxPage)
+            if (Page >= maxPage)
             {
-                await Application.Current.MainPage.DisplayAlert("Latest Page", string.Format("Page = {0} Max Page = {1}", page, maxPage), "OK");
+                await Application.Current.MainPage.DisplayAlert("Latest Page", "This Is The Latest Page", "OK");
             }
 
             else
@@ -84,9 +80,47 @@ namespace MovieManiaq.ViewModel.Search
 
                 if (valid_connect)
                 {
-                    var nextpage = await SearchClass.GetSearchAsync(MovieTitle, page);
+                    var nextPage = ListSearch[0].page + 1;
+
+                    var next = await SearchClass.GetSearchAsync(MovieTitle, (int)nextPage);
                     ListSearch.Clear();
-                    ListSearch.Add(nextpage);
+                    ListSearch.Add(next);
+                    Page = (int)next.page;
+                }
+
+                else
+                {
+                    var toast = Toast.Make("You're Offline", ToastDuration.Long, 30);
+                    await toast.Show();
+                }
+
+                IsBusy = false;
+                IsVisible = false;
+            }
+        }
+
+        public async void PreviousPage()
+        {
+            if (Page <= 1)
+            {
+                await Application.Current.MainPage.DisplayAlert("First Page", "This Is The First Page", "OK");
+            }
+
+            else
+            {
+                bool valid_connect = network.CekJaringan;
+
+                IsVisible = true;
+                IsBusy = true;
+
+                if (valid_connect)
+                {
+                    var previousPage = ListSearch[0].page - 1;
+
+                    var previous = await SearchClass.GetSearchAsync(MovieTitle, (int)previousPage);
+                    ListSearch.Clear();
+                    ListSearch.Add(previous);
+                    Page = (int)previous.page;
                 }
 
                 else

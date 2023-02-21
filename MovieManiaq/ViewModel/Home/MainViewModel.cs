@@ -12,12 +12,6 @@ namespace MovieManiaq.ViewModel.Home
     {
         private readonly NetworkModel network = new NetworkModel();
 
-        int TrendingID;
-        int NowPlayingID;
-        int UpComingID;
-        int TopRatedID;
-        int PopularID;
-
         private readonly INavigation _navigation;
 
         public MainViewModel(INavigation navigation)

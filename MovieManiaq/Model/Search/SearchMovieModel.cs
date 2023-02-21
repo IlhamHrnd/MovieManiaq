@@ -19,6 +19,14 @@ namespace MovieManiaq.Model.Search
             set { SetProperty(ref page, value); }
         }
 
+        private string movietitle = string.Empty;
+
+        public string MovieTitle
+        {
+            get { return movietitle; }
+            set { SetProperty(ref movietitle, value); }
+        }
+
         private int movieid = 0;
 
         public int MovieID

@@ -1,7 +1,5 @@
 ﻿using MovieManiaq.Model.Root;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using static MovieManiaq.Model.Response.NowShowingModel;
 using static MovieManiaq.Model.Response.PopularModel;
 using static MovieManiaq.Model.Response.TopRatedModel;
@@ -39,6 +37,46 @@ namespace MovieManiaq.Model.Home
         {
             get { return isvisible; }
             set { SetProperty(ref isvisible, value); }
+        }
+
+        private int trendingid = 0;
+
+        public int TrendingID
+        {
+            get { return trendingid; }
+            set { SetProperty(ref trendingid, value); }
+        }
+
+        private int nowplayingid = 0;
+
+        public int NowPlayingID
+        {
+            get { return nowplayingid; }
+            set { SetProperty(ref nowplayingid, value); }
+        }
+
+        private int upcomingid = 0;
+
+        public int UpComingID
+        {
+            get { return upcomingid; }
+            set { SetProperty(ref upcomingid, value); }
+        }
+
+        private int topratedid = 0;
+
+        public int TopRatedID
+        {
+            get { return topratedid; }
+            set { SetProperty(ref topratedid, value); }
+        }
+
+        private int popularid = 0;
+
+        public int PopularID
+        {
+            get { return popularid; }
+            set { SetProperty(ref popularid, value); }
         }
 
         private IList<TrendingRoot> listtrending { get; set; }

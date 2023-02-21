@@ -41,7 +41,7 @@
                                     <DataTemplate>
                                         <Grid>
                                             <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="300" />
                                                 <RowDefinition Height="Auto" />
                                                 <RowDefinition Height="25" />
                                             </Grid.RowDefinitions>
@@ -81,7 +81,8 @@
                                 <Button Grid.Row="0"
                                         Grid.Column="0"
                                         Style="{StaticResource Button}"
-                                        Text="Previous Page"/>
+                                        Text="Previous Page"
+                                        Pressed="PreviousPage_Pressed"/>
                                 <Button Grid.Row="0"
                                         Grid.Column="1"
                                         Style="{StaticResource Button}"
