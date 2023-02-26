@@ -1,23 +1,23 @@
 ﻿using Newtonsoft.Json;
 using MovieManiaq.Model.Root;
-using static MovieManiaq.Model.Response.TrendingModel;
+using static MovieManiaq.Model.Response.Movie.Index.PopularModel;
 
-namespace MovieManiaq.ViewModel.RestAPI
+namespace MovieManiaq.ViewModel.RestAPI.Movie.Index
 {
-    public class TrendingClass
+    public class PopularClass
     {
-        public TrendingClass()
+        public PopularClass()
         {
 
         }
 
-        private const string TrendingQuery = "https://api.themoviedb.org/3/trending/movie/week?api_key={0}&page=1";
+        private const string PopularQuery = "https://api.themoviedb.org/3/movie/popular?api_key={0}&page=1";
 
-        public static async Task<TrendingRoot> GetTrendingAsync()
+        public static async Task<PopularRoot> GetPopularAsync()
         {
-            TrendingRoot root = new TrendingRoot();
+            PopularRoot root = new PopularRoot();
             HttpClient client = new HttpClient();
-            string url = string.Format(TrendingQuery, ApiRoot.TheMovieDB);
+            string url = string.Format(PopularQuery, ApiRoot.TheMovieDB);
             var response = await client.GetAsync(url);
 
             try
@@ -25,7 +25,7 @@ namespace MovieManiaq.ViewModel.RestAPI
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
-                    var post = JsonConvert.DeserializeObject<TrendingRoot>(content);
+                    var post = JsonConvert.DeserializeObject<PopularRoot>(content);
                     root = post;
                 }
                 else

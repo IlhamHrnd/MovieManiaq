@@ -1,16 +1,23 @@
-﻿namespace MovieManiaq.Model.Response
+﻿namespace MovieManiaq.Model.Response.Movie.Index
 {
-    public class TrendingModel
+    public class NowShowingModel
     {
+        public class Dates
+        {
+            public string maximum { get; set; }
+            public string minimum { get; set; }
+        }
+
         public class Result
         {
             public bool adult { get; set; }
             public string backdrop_path { get; set; }
+            public List<int> genre_ids { get; set; }
             public int id { get; set; }
-            public string name { get; set; }
             public string original_language { get; set; }
-            public string original_name { get; set; }
+            public string original_title { get; set; }
             public string overview { get; set; }
+            public double popularity { get; set; }
             public string poster_path { get; set; }
             public string poster_url
             {
@@ -19,21 +26,16 @@
                     return string.Format("{0}{1}", "https://image.tmdb.org/t/p/w500", poster_path);
                 }
             }
-            public string media_type { get; set; }
-            public List<int> genre_ids { get; set; }
-            public double popularity { get; set; }
-            public string first_air_date { get; set; }
+            public string release_date { get; set; }
+            public string title { get; set; }
+            public bool video { get; set; }
             public double vote_average { get; set; }
             public int vote_count { get; set; }
-            public List<string> origin_country { get; set; }
-            public string title { get; set; }
-            public string original_title { get; set; }
-            public string release_date { get; set; }
-            public bool? video { get; set; }
         }
 
-        public class TrendingRoot
+        public class NowShowingRoot
         {
+            public Dates dates { get; set; }
             public int page { get; set; }
             public List<Result> results { get; set; }
             public int total_pages { get; set; }

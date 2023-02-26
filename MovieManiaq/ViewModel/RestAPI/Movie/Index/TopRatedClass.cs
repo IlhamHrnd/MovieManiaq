@@ -1,23 +1,23 @@
 ﻿using Newtonsoft.Json;
 using MovieManiaq.Model.Root;
-using static MovieManiaq.Model.Response.UpComingModel;
+using static MovieManiaq.Model.Response.Movie.Index.TopRatedModel;
 
-namespace MovieManiaq.ViewModel.RestAPI
+namespace MovieManiaq.ViewModel.RestAPI.Movie.Index
 {
-    public class UpComingClass
+    public class TopRatedClass
     {
-        public UpComingClass()
+        public TopRatedClass()
         {
 
         }
 
-        private const string UpComingQuery = "https://api.themoviedb.org/3/movie/upcoming?api_key={0}&page=1";
+        private const string TopRatedQuery = "https://api.themoviedb.org/3/movie/top_rated?api_key={0}&page=1";
 
-        public static async Task<UpComingRoot> GetUpComingAsync()
+        public static async Task<TopRatedRoot> GetTopRatedAsync()
         {
-            UpComingRoot root = new UpComingRoot();
+            TopRatedRoot root = new TopRatedRoot();
             HttpClient client = new HttpClient();
-            string url = string.Format(UpComingQuery, ApiRoot.TheMovieDB);
+            string url = string.Format(TopRatedQuery, ApiRoot.TheMovieDB);
             var response = await client.GetAsync(url);
 
             try
@@ -25,7 +25,7 @@ namespace MovieManiaq.ViewModel.RestAPI
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
-                    var post = JsonConvert.DeserializeObject<UpComingRoot>(content);
+                    var post = JsonConvert.DeserializeObject<TopRatedRoot>(content);
                     root = post;
                 }
                 else

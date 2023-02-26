@@ -1,10 +1,10 @@
 ﻿using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
 using MovieManiaq.Model.Home;
-using MovieManiaq.Model.Response;
+using MovieManiaq.Model.Response.Movie.Index;
 using MovieManiaq.Model.Root;
 using MovieManiaq.View.Detail;
-using MovieManiaq.ViewModel.RestAPI;
+using MovieManiaq.ViewModel.RestAPI.Movie.Index;
 
 namespace MovieManiaq.ViewModel.Home
 {

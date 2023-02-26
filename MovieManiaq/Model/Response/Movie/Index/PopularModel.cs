@@ -1,4 +1,4 @@
-﻿namespace MovieManiaq.Model.Response
+﻿namespace MovieManiaq.Model.Response.Movie.Index
 {
     public class PopularModel
     {

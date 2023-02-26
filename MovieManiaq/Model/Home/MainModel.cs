@@ -1,10 +1,10 @@
 ﻿using MovieManiaq.Model.Root;
 using System.Collections.ObjectModel;
-using static MovieManiaq.Model.Response.NowShowingModel;
-using static MovieManiaq.Model.Response.PopularModel;
-using static MovieManiaq.Model.Response.TopRatedModel;
-using static MovieManiaq.Model.Response.TrendingModel;
-using static MovieManiaq.Model.Response.UpComingModel;
+using static MovieManiaq.Model.Response.Movie.Index.NowShowingModel;
+using static MovieManiaq.Model.Response.Movie.Index.PopularModel;
+using static MovieManiaq.Model.Response.Movie.Index.TopRatedModel;
+using static MovieManiaq.Model.Response.Movie.Index.TrendingModel;
+using static MovieManiaq.Model.Response.Movie.Index.UpComingModel;
 
 namespace MovieManiaq.Model.Home
 {

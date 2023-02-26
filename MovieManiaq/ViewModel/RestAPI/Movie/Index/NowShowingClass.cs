@@ -1,23 +1,23 @@
 ﻿using Newtonsoft.Json;
 using MovieManiaq.Model.Root;
-using static MovieManiaq.Model.Response.PopularModel;
+using static MovieManiaq.Model.Response.Movie.Index.NowShowingModel;
 
-namespace MovieManiaq.ViewModel.RestAPI
+namespace MovieManiaq.ViewModel.RestAPI.Movie.Index
 {
-    public class PopularClass
+    public class NowShowingClass
     {
-        public PopularClass()
+        public NowShowingClass()
         {
 
         }
 
-        private const string PopularQuery = "https://api.themoviedb.org/3/movie/popular?api_key={0}&page=1";
+        private const string NowShowingQuery = "https://api.themoviedb.org/3/movie/now_playing?api_key={0}&page=1";
 
-        public static async Task<PopularRoot> GetPopularAsync()
+        public static async Task<NowShowingRoot> GetNowShowingAsync()
         {
-            PopularRoot root = new PopularRoot();
+            NowShowingRoot root = new NowShowingRoot();
             HttpClient client = new HttpClient();
-            string url = string.Format(PopularQuery, ApiRoot.TheMovieDB);
+            string url = string.Format(NowShowingQuery, ApiRoot.TheMovieDB);
             var response = await client.GetAsync(url);
 
             try
@@ -25,7 +25,7 @@ namespace MovieManiaq.ViewModel.RestAPI
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
-                    var post = JsonConvert.DeserializeObject<PopularRoot>(content);
+                    var post = JsonConvert.DeserializeObject<NowShowingRoot>(content);
                     root = post;
                 }
                 else
