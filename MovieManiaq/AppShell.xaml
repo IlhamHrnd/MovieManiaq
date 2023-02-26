@@ -5,8 +5,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:Home="clr-namespace:MovieManiaq.View.Home"
     xmlns:Search="clr-namespace:MovieManiaq.View.Search"
+    xmlns:About="clr-namespace:MovieManiaq.View.About"
     Style="{StaticResource Shell}">
-    <TabBar>
+    <FlyoutItem Title="Movie"
+                Icon="homepage.svg">
         <Tab Title="Home"
              Icon="homepage.svg">
             <ShellContent ContentTemplate="{DataTemplate Home:MainPage}"
@@ -17,5 +19,13 @@
             <ShellContent ContentTemplate="{DataTemplate Search:SearchMoviePage}"
                           Route="SearchMoviePage"/>
         </Tab>
-    </TabBar>
+    </FlyoutItem>
+    <FlyoutItem Title="About"
+                Icon="about.svg">
+        <Tab Title="About"
+             Icon="about.svg">
+            <ShellContent ContentTemplate="{DataTemplate About:AboutPage}"
+                          Route="AboutPage" />
+        </Tab>
+    </FlyoutItem>
 </Shell>
