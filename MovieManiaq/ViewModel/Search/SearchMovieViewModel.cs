@@ -30,7 +30,7 @@ namespace MovieManiaq.ViewModel.Search
 
             if (valid_connect)
             {
-                var press = (SearchBar)obj;
+                var press = obj as SearchBar;
                 
                 if (!string.IsNullOrEmpty(press.Text))
                 {

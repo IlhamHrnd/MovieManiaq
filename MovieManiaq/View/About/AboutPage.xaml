@@ -7,10 +7,120 @@
     <ContentPage.BindingContext>
         <Model:AboutModel/>
     </ContentPage.BindingContext>
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ScrollView Style="{StaticResource ScrollView}">
+        <StackLayout Style="{StaticResource StackLayout}">
+            <Grid RowSpacing="10"
+                  ColumnSpacing="10"
+                  Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="150"/>
+                    <RowDefinition Height="150"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="50*"/>
+                </Grid.ColumnDefinitions>
+                <Frame Grid.Row="0"
+                       Grid.Column="0"
+                       Style="{StaticResource Frame}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="70"/>
+                            <RowDefinition Height="30"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0"
+                               Grid.Column="0"
+                               HorizontalTextAlignment="Center"
+                               FontSize="Title"
+                               Style="{StaticResource Label}"
+                               Text="{Binding Name}"/>
+                        <Label Grid.Row="1"
+                               Grid.Column="0"
+                               HorizontalTextAlignment="Center"
+                               FontSize="Subtitle"
+                               Style="{StaticResource Label}"
+                               Text="Application Name"/>
+                    </Grid>
+                </Frame>
+                <Frame Grid.Row="0"
+                       Grid.Column="1"
+                       Style="{StaticResource Frame}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="70"/>
+                            <RowDefinition Height="30"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0"
+                               Grid.Column="0"
+                               HorizontalTextAlignment="Center"
+                               FontSize="Title"
+                               Style="{StaticResource Label}"
+                               Text="{Binding Name}"/>
+                        <Label Grid.Row="1"
+                               Grid.Column="0"
+                               HorizontalTextAlignment="Center"
+                               FontSize="Subtitle"
+                               Style="{StaticResource Label}"
+                               Text="Application Name"/>
+                    </Grid>
+                </Frame>
+                <Frame Grid.Row="1"
+                       Grid.Column="0"
+                       Style="{StaticResource Frame}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="70"/>
+                            <RowDefinition Height="30"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0"
+                               Grid.Column="0"
+                               HorizontalTextAlignment="Center"
+                               FontSize="Title"
+                               Style="{StaticResource Label}"
+                               Text="{Binding Version}"/>
+                        <Label Grid.Row="1"
+                               Grid.Column="0"
+                               HorizontalTextAlignment="Center"
+                               FontSize="Subtitle"
+                               Style="{StaticResource Label}"
+                               Text="Version"/>
+                    </Grid>
+                </Frame>
+                <Frame Grid.Row="1"
+                       Grid.Column="1"
+                       Style="{StaticResource Frame}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="70"/>
+                            <RowDefinition Height="30"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0"
+                               Grid.Column="0"
+                               HorizontalTextAlignment="Center"
+                               FontSize="Title"
+                               Style="{StaticResource Label}"
+                               Text="{Binding Build}"/>
+                        <Label Grid.Row="1"
+                               Grid.Column="0"
+                               HorizontalTextAlignment="Center"
+                               FontSize="Subtitle"
+                               Style="{StaticResource Label}"
+                               Text="Build"/>
+                    </Grid>
+                </Frame>
+            </Grid>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>
