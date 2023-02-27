@@ -39,32 +39,34 @@
                                 </CollectionView.ItemsLayout>
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="300" />
-                                                <RowDefinition Height="Auto" />
-                                                <RowDefinition Height="25" />
-                                            </Grid.RowDefinitions>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
-                                            <Image Grid.Row="0"
-                                                   Grid.Column="0"
-                                                   Source="{Binding poster_url}"
-                                                   Aspect="AspectFit"/>
-                                            <Label Grid.Row="1"
-                                                   Grid.Column="0"
-                                                   FontSize="Title"
-                                                   HorizontalTextAlignment="Center"
-                                                   Style="{StaticResource Label}"
-                                                   Text="{Binding title}"/>
-                                            <Label Grid.Row="2"
-                                                   Grid.Column="0"
-                                                   FontSize="Subtitle"
-                                                   HorizontalTextAlignment="Center"
-                                                   Style="{StaticResource Label}"
-                                                   Text="{Binding release_date}"/>
-                                        </Grid>
+                                        <Border Style="{StaticResource Border}">
+                                            <Grid Margin="10,0">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="300" />
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="25" />
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Image Grid.Row="0"
+                                                       Grid.Column="0"
+                                                       Source="{Binding poster_url}"
+                                                       Aspect="AspectFit"/>
+                                                <Label Grid.Row="1"
+                                                       Grid.Column="0"
+                                                       FontSize="Title"
+                                                       HorizontalTextAlignment="Center"
+                                                       Style="{StaticResource Label}"
+                                                       Text="{Binding title}"/>
+                                                <Label Grid.Row="2"
+                                                       Grid.Column="0"
+                                                       FontSize="Subtitle"
+                                                       HorizontalTextAlignment="Center"
+                                                       Style="{StaticResource Label}"
+                                                       Text="{Binding release_date}"/>
+                                            </Grid>
+                                        </Border>
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>
                             </CollectionView>

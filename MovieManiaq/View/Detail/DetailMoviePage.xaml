@@ -631,7 +631,9 @@
             <CollectionView ItemsSource="{Binding ListRecommendations}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <CollectionView ItemsSource="{Binding results}">
+                        <CollectionView ItemsSource="{Binding results}"
+                                        SelectionMode="Single"
+                                        SelectionChanged="Recommendations_SelectionChanged">
                             <CollectionView.ItemsLayout>
                                 <GridItemsLayout Orientation="Horizontal"
                                                  Span="1"
@@ -640,8 +642,8 @@
                             </CollectionView.ItemsLayout>
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
-                                    <Frame Style="{StaticResource Frame}">
-                                        <Grid>
+                                    <Border Style="{StaticResource Border}">
+                                        <Grid Margin="10">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="250" />
                                                 <RowDefinition Height="Auto" />
@@ -659,7 +661,7 @@
                                                    Style="{StaticResource Label}"
                                                    Text="{Binding title}"/>
                                         </Grid>
-                                    </Frame>
+                                    </Border>
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                         </CollectionView>
@@ -680,7 +682,9 @@
             <CollectionView ItemsSource="{Binding ListSimiliar}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <CollectionView ItemsSource="{Binding results}">
+                        <CollectionView ItemsSource="{Binding results}"
+                                        SelectionMode="Single"
+                                        SelectionChanged="Similiar_SelectionChanged">
                             <CollectionView.ItemsLayout>
                                 <GridItemsLayout Orientation="Horizontal"
                                                  Span="1"
@@ -689,8 +693,8 @@
                             </CollectionView.ItemsLayout>
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
-                                    <Frame Style="{StaticResource Frame}">
-                                        <Grid>
+                                    <Border Style="{StaticResource Border}">
+                                        <Grid Margin="10">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="250" />
                                                 <RowDefinition Height="Auto" />
@@ -708,7 +712,7 @@
                                                    Style="{StaticResource Label}"
                                                    Text="{Binding title}"/>
                                         </Grid>
-                                    </Frame>
+                                    </Border>
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                         </CollectionView>

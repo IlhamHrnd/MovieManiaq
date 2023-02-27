@@ -1,7 +1,9 @@
 ﻿using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
 using MovieManiaq.Model.Detail;
+using MovieManiaq.Model.Response.Movie;
 using MovieManiaq.Model.Root;
+using MovieManiaq.View.Detail;
 using MovieManiaq.ViewModel.RestAPI.Movie;
 
 namespace MovieManiaq.ViewModel.Detail
@@ -73,6 +75,26 @@ namespace MovieManiaq.ViewModel.Detail
 
             IsBusy = false;
             IsVisible = false;
+        }
+
+        public async void RecommendationsSelection(SelectionChangedEventArgs e)
+        {
+            var movieID = e.CurrentSelection[0] as RecommendationsModel.Result;
+
+            if (movieID != null)
+            {
+                await _navigation.PushAsync(new DetailMoviePage(movieID.id));
+            }
+        }
+
+        public async void SimiliarSelection(SelectionChangedEventArgs e)
+        {
+            var movieID = e.CurrentSelection[0] as SimiliarModel.Result;
+
+            if (movieID != null)
+            {
+                await _navigation.PushAsync(new DetailMoviePage(movieID.id));
+            }
         }
 
         private async void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
