@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovieManiaq.View.Search.SearchPeoplePage"
+             xmlns:Model="clr-namespace:MovieManiaq.Model.Search"
+             Title="Search People">
+    <ContentPage.BindingContext>
+        <Model:SearchPeopleModel/>
+    </ContentPage.BindingContext>
+    <ScrollView Style="{StaticResource ScrollView}">
+        <StackLayout Style="{StaticResource StackLayout}">
+            <SearchBar Style="{StaticResource SearchBar}"
+                       SearchButtonPressed="SearchBar_SearchButtonPressed"/>
+            <ActivityIndicator Style="{StaticResource ActivityIndicator}"
+                               IsVisible="{Binding IsVisible}"
+                               IsRunning="{Binding IsBusy}"/>
+            <CollectionView ItemsSource="{Binding ListSearch}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Label Style="{StaticResource Label}"
+                                   FontSize="Title">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Result "/>
+                                        <Span Text="{Binding total_results}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <CollectionView ItemsSource="{Binding results}"
+                                            SelectionMode="Single"
+                                            SelectionChanged="PeopleResult_SelectionChanged">
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout Orientation="Vertical"
+                                                     Span="2"
+                                                     HorizontalItemSpacing="10"
+                                                     VerticalItemSpacing="10"/>
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Style="{StaticResource Border}">
+                                            <Grid Margin="5, 10">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="250" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Image Grid.Row="0"
+                                                       Grid.Column="0"
+                                                       Source="{Binding profile_url}"
+                                                       Aspect="AspectFit"/>
+                                                <Label Grid.Row="1"
+                                                       Grid.Column="0"
+                                                       FontSize="Title"
+                                                       HorizontalTextAlignment="Center"
+                                                       Style="{StaticResource Label}"
+                                                       Text="{Binding name}"/>
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                            <Grid Margin="5, 10"
+                                  ColumnSpacing="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="35*" />
+                                    <ColumnDefinition Width="25*" />
+                                    <ColumnDefinition Width="35*" />
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Row="0"
+                                        Grid.Column="0"
+                                        Style="{StaticResource Button}"
+                                        Text="Previous Page"
+                                        Pressed="PreviousPage_Pressed"/>
+                                <Button Grid.Row="0"
+                                        Grid.Column="1"
+                                        Style="{StaticResource Button}"
+                                        Text="{Binding page}"/>
+                                <Button Grid.Row="0"
+                                        Grid.Column="2"
+                                        Style="{StaticResource Button}"
+                                        Text="Next Page"
+                                        Pressed="NextPage_Pressed"/>
+                            </Grid>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

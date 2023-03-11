@@ -27,6 +27,11 @@
             <ShellContent ContentTemplate="{DataTemplate Home:PeoplePage}"
                           Route="PeoplePage"/>
         </Tab>
+        <Tab Title="Search"
+             Icon="search.svg">
+            <ShellContent ContentTemplate="{DataTemplate Search:SearchPeoplePage}"
+                          Route="SearchPeoplePage"/>
+        </Tab>
     </FlyoutItem>
     <FlyoutItem Title="About"
                 Icon="about.svg">

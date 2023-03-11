@@ -1,28 +1,26 @@
 ﻿using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
-using MovieManiaq.Model.Home;
 using MovieManiaq.Model.Root;
-using MovieManiaq.ViewModel.RestAPI.People.Index;
-using static MovieManiaq.Model.Response.People.Index.TrendingModel;
+using MovieManiaq.Model.Search;
+using MovieManiaq.ViewModel.RestAPI.People;
+using static MovieManiaq.Model.Response.People.SearchModel;
 
-namespace MovieManiaq.ViewModel.Home
+namespace MovieManiaq.ViewModel.Search
 {
-    public class PeopleViewModel : PeopleModel
+    public class SearchPeopleViewModel : SearchPeopleModel
     {
         private readonly NetworkModel network = new NetworkModel();
 
         private readonly INavigation _navigation;
 
-        public PeopleViewModel(INavigation navigation)
+        public SearchPeopleViewModel(INavigation navigation)
         {
             _navigation = navigation;
 
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
-
-            Load_Data();
         }
 
-        private async void Load_Data()
+        public async void PeopleSearch(object obj)
         {
             bool valid_connect = network.CekJaringan;
 
@@ -31,9 +29,16 @@ namespace MovieManiaq.ViewModel.Home
 
             if (valid_connect)
             {
-                var trending = await TrendingClass.GetTrendingAsync(Page);
-                ListTrending.Clear();
-                ListTrending.Add(trending);
+                var press = obj as SearchBar;
+
+                if (!string.IsNullOrEmpty(press.Text))
+                {
+                    var search = await SearchClass.GetSearchAsync(press.Text, Page);
+                    ListSearch.Clear();
+                    ListSearch.Add(search);
+                    PeopleName = press.Text;
+                    Page = search.page;
+                }
             }
 
             else
@@ -41,26 +46,26 @@ namespace MovieManiaq.ViewModel.Home
                 NetworkModel.NoConnection();
             }
 
-            IsBusy = false;
             IsVisible = false;
+            IsBusy = false;
         }
 
         public async void PeopleSelection(SelectionChangedEventArgs e)
         {
-            var peopleID = e.CurrentSelection[0] as Result;
+            var peoplename = e.CurrentSelection[0] as Result;
 
-            if (peopleID != null)
+            if (peoplename != null)
             {
                 //Notif Only
                 //Next Time Design Detail People
-                var toast = Toast.Make(string.Format("You Have Selected {0}", peopleID.name), ToastDuration.Long);
+                var toast = Toast.Make(string.Format("You Have Selected {0}", peoplename.name), ToastDuration.Long);
                 await toast.Show();
             }
         }
 
         public async void NextPage()
         {
-            var maxPage = ListTrending[0].total_pages;
+            var maxPage = ListSearch[0].total_pages;
 
             if (Page >= maxPage)
             {
@@ -76,11 +81,11 @@ namespace MovieManiaq.ViewModel.Home
 
                 if (valid_connect)
                 {
-                    var nextPage = ListTrending[0].page + 1;
+                    var nextPage = ListSearch[0].page + 1;
 
-                    var next = await TrendingClass.GetTrendingAsync(nextPage);
-                    ListTrending.Clear();
-                    ListTrending.Add(next);
+                    var next = await SearchClass.GetSearchAsync(PeopleName, nextPage);
+                    ListSearch.Clear();
+                    ListSearch.Add(next);
                     Page = next.page;
                 }
 
@@ -110,11 +115,11 @@ namespace MovieManiaq.ViewModel.Home
 
                 if (valid_connect)
                 {
-                    var previousPage = ListTrending[0].page - 1;
+                    var previousPage = ListSearch[0].page - 1;
 
-                    var previous = await TrendingClass.GetTrendingAsync(previousPage);
-                    ListTrending.Clear();
-                    ListTrending.Add(previous);
+                    var previous = await SearchClass.GetSearchAsync(PeopleName, previousPage);
+                    ListSearch.Clear();
+                    ListSearch.Add(previous);
                     Page = previous.page;
                 }
 
