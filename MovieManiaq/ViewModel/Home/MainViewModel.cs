@@ -1,6 +1,4 @@
-﻿using CommunityToolkit.Maui.Alerts;
-using CommunityToolkit.Maui.Core;
-using MovieManiaq.Model.Home;
+﻿using MovieManiaq.Model.Home;
 using MovieManiaq.Model.Response.Movie.Index;
 using MovieManiaq.Model.Root;
 using MovieManiaq.View.Detail;
@@ -147,22 +145,9 @@ namespace MovieManiaq.ViewModel.Home
             await _navigation.PushAsync(new DetailMoviePage(PopularID));
         }
 
-        private async void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+        private void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
         {
-            bool valid_connect = network.CekJaringan;
-
-            if (!valid_connect)
-            {
-                NetworkModel.NoConnection();
-            }
-
-            else if (valid_connect)
-            {
-                var toast = Toast.Make("Back Online", ToastDuration.Long);
-                await toast.Show();
-
-                LoadData();
-            }
+            NetworkModel.Connectivity_ConnectivityChanged(sender, e);
         }
     }
 }

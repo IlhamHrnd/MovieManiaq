@@ -19,7 +19,7 @@
 		<ApplicationIdGuid>3028bf67-8a5d-4568-b01f-a4eec6465227</ApplicationIdGuid>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+		<ApplicationDisplayVersion>1.1</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
@@ -61,6 +61,7 @@
 	  <None Remove="Resources\Images\about.svg" />
 	  <None Remove="Resources\Images\homepage.svg" />
 	  <None Remove="Resources\Images\no_image.svg" />
+	  <None Remove="Resources\Images\people.svg" />
 	  <None Remove="Resources\Images\search.svg" />
 	</ItemGroup>
 
@@ -72,6 +73,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Home\MainPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\Home\PeoplePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Search\SearchMoviePage.xaml">

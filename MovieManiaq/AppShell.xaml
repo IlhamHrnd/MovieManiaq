@@ -20,6 +20,14 @@
                           Route="SearchMoviePage"/>
         </Tab>
     </FlyoutItem>
+    <FlyoutItem Title="People"
+                Icon="people.svg">
+        <Tab Title="People"
+             Icon="people.svg">
+            <ShellContent ContentTemplate="{DataTemplate Home:PeoplePage}"
+                          Route="PeoplePage"/>
+        </Tab>
+    </FlyoutItem>
     <FlyoutItem Title="About"
                 Icon="about.svg">
         <Tab Title="About"

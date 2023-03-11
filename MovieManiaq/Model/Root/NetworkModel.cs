@@ -1,15 +1,12 @@
 ﻿using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MovieManiaq.Model.Root
 {
     public class NetworkModel
     {
+        private static readonly NetworkModel network = new NetworkModel();
+
         public NetworkModel()
         {
 
@@ -36,8 +33,24 @@ namespace MovieManiaq.Model.Root
 
         public static async void NoConnection()
         {
-            var toast = Toast.Make("You're Offline", ToastDuration.Long, 30);
+            var toast = Toast.Make("You're Offline", ToastDuration.Long);
             await toast.Show();
+        }
+
+        public static async void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+        {
+            bool valid_connect = network.CekJaringan;
+
+            if (!valid_connect)
+            {
+                NoConnection();
+            }
+
+            else if (valid_connect)
+            {
+                var toast = Toast.Make("Back Online", ToastDuration.Long);
+                await toast.Show();
+            }
         }
     }
 }
