@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovieManiaq.View.Detail.DetailPeoplePage"
+             xmlns:Model="clr-namespace:MovieManiaq.Model.Detail"
+             Title="{Binding Title}">
+    <ContentPage.BindingContext>
+        <Model:DetailPeopleModel/>
+    </ContentPage.BindingContext>
+    <ScrollView Style="{StaticResource ScrollView}">
+        <StackLayout Style="{StaticResource StackLayout}">
+            <ActivityIndicator Style="{StaticResource ActivityIndicator}"
+                               IsRunning="{Binding IsBusy}"
+                               IsVisible="{Binding IsVisible}"/>
+            <CollectionView ItemsSource="{Binding ListDetail}"
+                            Margin="5">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Border Style="{StaticResource Border}"
+                                    StrokeShape="RoundRectangle, 100,100,100,100"
+                                    HeightRequest="375"
+                                    WidthRequest="250">
+                                <Image Source="{Binding profile_url}"
+                                       Aspect="AspectFit"
+                                       SemanticProperties.Description="{Binding name}"/>
+                            </Border>
+                            <Label Style="{StaticResource Label}"
+                                   FontSize="Title"
+                                   HorizontalTextAlignment="Center"
+                                   Text="{Binding name}"/>
+                            <Frame Style="{StaticResource Frame}"
+                                   Margin="5">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="40"/>
+                                        <RowDefinition Height="40"/>
+                                        <RowDefinition Height="40"/>
+                                        <RowDefinition Height="40"/>
+                                        <RowDefinition Height="40"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="30*"/>
+                                        <ColumnDefinition Width="70*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Row="0"
+                                           Grid.Column="0"
+                                           Style="{StaticResource Label}"
+                                           Text="Department"/>
+                                    <Label Grid.Row="0"
+                                           Grid.Column="1"
+                                           Style="{StaticResource Label}"
+                                           Text="{Binding known_for_department}"/>
+                                    <Label Grid.Row="1"
+                                           Grid.Column="0"
+                                           Style="{StaticResource Label}"
+                                           Text="Gender"/>
+                                    <Label Grid.Row="1"
+                                           Grid.Column="1"
+                                           Style="{StaticResource Label}"
+                                           Text="{Binding gender_url}"/>
+                                    <Label Grid.Row="2"
+                                           Grid.Column="0"
+                                           Style="{StaticResource Label}"
+                                           Text="Birthday"/>
+                                    <Label Grid.Row="2"
+                                           Grid.Column="1"
+                                           Style="{StaticResource Label}"
+                                           Text="{Binding birthday}"/>
+                                    <Label Grid.Row="3"
+                                           Grid.Column="0"
+                                           Style="{StaticResource Label}"
+                                           Text="Place Of Birth"/>
+                                    <Label Grid.Row="3"
+                                           Grid.Column="1"
+                                           Style="{StaticResource Label}"
+                                           Text="{Binding place_of_birth}"/>
+                                    <Label Grid.Row="4"
+                                           Grid.Column="0"
+                                           Style="{StaticResource Label}"
+                                           Text="Popularity"/>
+                                    <Label Grid.Row="4"
+                                           Grid.Column="1"
+                                           Style="{StaticResource Label}"
+                                           Text="{Binding popularity}"/>
+                                </Grid>
+                            </Frame>
+                            <Label Style="{StaticResource Label}"
+                                   FontSize="Title"
+                                   Text="Also Know As"/>
+                            <CollectionView ItemsSource="{Binding also_known_as}">
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout Orientation="Horizontal"
+                                                     Span="1"
+                                                     HorizontalItemSpacing="5"
+                                                     VerticalItemSpacing="10"/>
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Frame Style="{StaticResource Frame}">
+                                            <Label Style="{StaticResource Label}"
+                                                   Text="{Binding .}"/>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                            <Label Style="{StaticResource Label}"
+                                   FontSize="Title"
+                                   Text="Biography"/>
+                            <Frame Style="{StaticResource Frame}">
+                                <Label Style="{StaticResource Label}"
+                                       FontSize="Subtitle"
+                                       Text="{Binding biography}"/>
+                            </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,7 +1,6 @@
-﻿using CommunityToolkit.Maui.Alerts;
-using CommunityToolkit.Maui.Core;
-using MovieManiaq.Model.Home;
+﻿using MovieManiaq.Model.Home;
 using MovieManiaq.Model.Root;
+using MovieManiaq.View.Detail;
 using MovieManiaq.ViewModel.RestAPI.People.Index;
 using static MovieManiaq.Model.Response.People.Index.TrendingModel;
 
@@ -47,14 +46,12 @@ namespace MovieManiaq.ViewModel.Home
 
         public async void PeopleSelection(SelectionChangedEventArgs e)
         {
-            var peopleID = e.CurrentSelection[0] as Result;
+            var peopleid = e.CurrentSelection[0] as Result;
 
-            if (peopleID != null)
+            if (peopleid != null)
             {
-                //Notif Only
-                //Next Time Design Detail People
-                var toast = Toast.Make(string.Format("You Have Selected {0}", peopleID.name), ToastDuration.Long);
-                await toast.Show();
+
+                await _navigation.PushAsync(new DetailPeoplePage(peopleid.id));
             }
         }
 

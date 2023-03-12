@@ -102,7 +102,7 @@
                                     <Label Grid.Row="0"
                                            Grid.Column="1"
                                            Style="{StaticResource Label}"
-                                        Text="{Binding homepage}"/>
+                                           Text="{Binding homepage}"/>
                                     <Label Grid.Row="1"
                                            Grid.Column="0"
                                            Style="{StaticResource Label}"
