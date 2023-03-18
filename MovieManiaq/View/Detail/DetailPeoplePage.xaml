@@ -116,6 +116,129 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            <Label Style="{StaticResource Label}"
+                   Text="Credits"
+                   FontSize="Large"
+                   HorizontalTextAlignment="Start"
+                   Margin="3"/>
+            <CollectionView ItemsSource="{Binding ListCredits}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Label Style="{StaticResource Label}"
+                                   Text="Movies"
+                                   FontSize="Large"
+                                   HorizontalTextAlignment="Center"
+                                   Margin="3"/>
+                            <CollectionView ItemsSource="{Binding cast}">
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout Orientation="Horizontal"
+                                                     Span="1"
+                                                     HorizontalItemSpacing="10"
+                                                     VerticalItemSpacing="10"/>
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Style="{StaticResource Border}">
+                                            <Grid Margin="5,10">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="200" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="50*" />
+                                                    <ColumnDefinition Width="50*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Label Grid.Row="0"
+                                                       Grid.Column="0"
+                                                       Grid.ColumnSpan="2"
+                                                       FontSize="Subtitle"
+                                                       HorizontalTextAlignment="Center"
+                                                       Style="{StaticResource Label}"
+                                                       Text="{Binding title}"/>
+                                                <Image Grid.Row="1"
+                                                       Grid.Column="0"
+                                                       Source="{Binding poster_url}"
+                                                       Aspect="AspectFit"/>
+                                                <Label Grid.Row="1"
+                                                       Grid.Column="1"
+                                                       FontSize="Subtitle"
+                                                       HorizontalTextAlignment="Center"
+                                                       VerticalTextAlignment="Center"
+                                                       Style="{StaticResource Label}"
+                                                       Text="{Binding character}"/>
+                                                <Label Grid.Row="2"
+                                                       Grid.Column="0"
+                                                       Grid.ColumnSpan="2"
+                                                       FontSize="Subtitle"
+                                                       HorizontalTextAlignment="Center"
+                                                       Style="{StaticResource Label}"
+                                                       Text="{Binding release_date}"/>
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                            <Label Style="{StaticResource Label}"
+                                   Text="Crew"
+                                   FontSize="Large"
+                                   HorizontalTextAlignment="Center"
+                                   Margin="3"/>
+                            <CollectionView ItemsSource="{Binding crew}">
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout Orientation="Horizontal"
+                                                     Span="1"
+                                                     HorizontalItemSpacing="10"
+                                                     VerticalItemSpacing="10"/>
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Style="{StaticResource Border}">
+                                            <Grid Margin="5,10">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="200" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="50*" />
+                                                    <ColumnDefinition Width="50*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Label Grid.Row="0"
+                                                       Grid.Column="0"
+                                                       Grid.ColumnSpan="2"
+                                                       FontSize="Subtitle"
+                                                       HorizontalTextAlignment="Center"
+                                                       Style="{StaticResource Label}"
+                                                       Text="{Binding title}"/>
+                                                <Image Grid.Row="1"
+                                                       Grid.Column="0"
+                                                       Source="{Binding poster_url}"
+                                                       Aspect="AspectFit"/>
+                                                <Label Grid.Row="1"
+                                                       Grid.Column="1"
+                                                       FontSize="Subtitle"
+                                                       HorizontalTextAlignment="Center"
+                                                       VerticalTextAlignment="Center"
+                                                       Style="{StaticResource Label}"
+                                                       Text="{Binding job}"/>
+                                                <Label Grid.Row="2"
+                                                       Grid.Column="0"
+                                                       Grid.ColumnSpan="2"
+                                                       FontSize="Subtitle"
+                                                       HorizontalTextAlignment="Center"
+                                                       Style="{StaticResource Label}"
+                                                       Text="{Binding release_date}"/>
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </StackLayout>
     </ScrollView>
 </ContentPage>

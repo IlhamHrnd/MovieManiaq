@@ -1,5 +1,6 @@
 ﻿using MovieManiaq.Model.Root;
 using System.Collections.ObjectModel;
+using static MovieManiaq.Model.Response.People.CreditsModel;
 using static MovieManiaq.Model.Response.People.DetailModel;
 
 namespace MovieManiaq.Model.Detail
@@ -57,6 +58,22 @@ namespace MovieManiaq.Model.Detail
                 return listdetail;
             }
             set { listdetail = value; }
+        }
+
+        private IList<CreditsRoot> listcredits { get; set; }
+
+        public IList<CreditsRoot> ListCredits
+        {
+            get
+            {
+                if (listcredits == null)
+                {
+                    listcredits = new ObservableCollection<CreditsRoot>();
+                }
+
+                return listcredits;
+            }
+            set { listcredits = value; }
         }
     }
 }

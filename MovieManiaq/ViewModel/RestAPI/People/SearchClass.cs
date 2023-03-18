@@ -1,10 +1,5 @@
 ﻿using MovieManiaq.Model.Root;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static MovieManiaq.Model.Response.People.SearchModel;
 
 namespace MovieManiaq.ViewModel.RestAPI.People

@@ -18,7 +18,7 @@ public partial class MainPage : ContentPage
 		_mainViewModel.TrendingSelection(sender);
     }
 
-    private void Trending_Tapped(object sender, EventArgs e)
+    private void Trending_Tapped(object sender, TappedEventArgs e)
     {
 		_mainViewModel.TrendingCommand();
     }
@@ -28,7 +28,7 @@ public partial class MainPage : ContentPage
 		_mainViewModel.NowShowingSelection(sender);
 	}
 
-	private void NowShowing_Tapped(object sender, EventArgs e)
+	private void NowShowing_Tapped(object sender, TappedEventArgs e)
 	{
 		_mainViewModel.NowShowingCommand();
 	}
@@ -38,7 +38,7 @@ public partial class MainPage : ContentPage
 		_mainViewModel.UpCoomingSelection(sender);
 	}
 
-	private void UpComing_Tapped(object sender, EventArgs e)
+	private void UpComing_Tapped(object sender, TappedEventArgs e)
 	{
 		_mainViewModel.UpComingCommand();
 	}
@@ -48,7 +48,7 @@ public partial class MainPage : ContentPage
 		_mainViewModel.TopRatedSelection(sender);
 	}
 
-	private void TopRated_Tapped(object sender, EventArgs e)
+	private void TopRated_Tapped(object sender, TappedEventArgs e)
 	{
 		_mainViewModel.TopRatedCommand();
 	}
@@ -58,7 +58,7 @@ public partial class MainPage : ContentPage
         _mainViewModel.PopularSelection(sender);
     }
 
-    private void Popular_Tapped(object sender, EventArgs e)
+    private void Popular_Tapped(object sender, TappedEventArgs e)
     {
         _mainViewModel.PopularCommand();
     }
