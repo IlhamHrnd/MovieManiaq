@@ -436,7 +436,7 @@
 
     <Style TargetType="toolkit:MediaElement" x:Key="MediaElement">
         <Setter Property="Aspect" Value="AspectFit" />
-        <Setter Property="ShouldLoopPlayback" Value="True" />
+        <Setter Property="ShouldLoopPlayback" Value="False" />
         <Setter Property="ShouldAutoPlay" Value="False" />
         <Setter Property="ShouldKeepScreenOn" Value="True" />
     </Style>

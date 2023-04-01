@@ -2,6 +2,7 @@
 using MovieManiaq.Model.Response.Movie;
 using MovieManiaq.Model.Root;
 using MovieManiaq.ViewModel.RestAPI.Movie;
+using static MovieManiaq.Model.Response.Movie.ListYouTubeModel;
 
 namespace MovieManiaq.ViewModel.Detail
 {
@@ -30,39 +31,71 @@ namespace MovieManiaq.ViewModel.Detail
 
             if (valid_connect)
             {
-                var detail = await DetailClass.GetDetailMovieAsync(MovieID);
-                ListDetail.Clear();
-                ListDetail.Add(detail);
+                try
+                {
+                    var detail = await DetailClass.GetDetailMovieAsync(MovieID);
+                    ListDetail.Clear();
+                    ListDetail.Add(detail);
 
-                Title = detail.title;
+                    var credits = await CreditsClass.GetCreditsAsync(MovieID);
+                    ListCredits.Clear();
+                    ListCredits.Add(credits);
 
-                var credits = await CreditsClass.GetCreditsAsync(MovieID);
-                ListCredits.Clear();
-                ListCredits.Add(credits);
+                    var keyword = await KeywordClass.GetKeywordAsync(MovieID);
+                    ListKeyword.Clear();
+                    ListKeyword.Add(keyword);
 
-                var keyword = await KeywordClass.GetKeywordAsync(MovieID);
-                ListKeyword.Clear();
-                ListKeyword.Add(keyword);
+                    var images = await ImagesClass.GetImagesAsync(MovieID);
+                    ListImages.Clear();
+                    ListImages.Add(images);
 
-                var images = await ImagesClass.GetImagesAsync(MovieID);
-                ListImages.Clear();
-                ListImages.Add(images);
+                    var video = await VideoClass.GetVideoAsync(MovieID);
+                    ListVideo.Clear();
+                    ListVideo.Add(video);
 
-                var video = await VideoClass.GetVideoAsync(MovieID);
-                ListVideo.Clear();
-                ListVideo.Add(video);
+                    //List Video Sementara Hanya Dapat Satu Video
+                    ListYouTube.Clear();
+                    for (int i = 0; i < 1; i++)
+                    {
+                        if (video.results[i].site == "YouTube")
+                        {
+                            var youtube = await YouTubeClass.GetYouTubeAsync(video.results[i].key);
 
-                var recommendations = await RecommendationsClass.GetRecommendationsAsync(MovieID);
-                ListRecommendations.Clear();
-                ListRecommendations.Add(recommendations);
+                            var youtubes = new ListYouTubeRoot()
+                            {
+                                youtube = new List<YouTube>()
+                                {
+                                    new YouTube()
+                                    {
+                                        title = video.results[i].name,
+                                        url = youtube.formats[i].url,
+                                        publish = video.results[i].published_at
 
-                var similiar = await SimiliarClass.GetSimiliarAsync(MovieID);
-                ListSimiliar.Clear();
-                ListSimiliar.Add(similiar);
+                                    }
+                                }
+                            };
+                            ListYouTube.Add(youtubes);
+                        }
+                    }
 
-                var review = await ReviewClass.GetReviewAsync(MovieID);
-                ListReview.Clear();
-                ListReview.Add(review);
+                    var recommendations = await RecommendationsClass.GetRecommendationsAsync(MovieID);
+                    ListRecommendations.Clear();
+                    ListRecommendations.Add(recommendations);
+
+                    var similiar = await SimiliarClass.GetSimiliarAsync(MovieID);
+                    ListSimiliar.Clear();
+                    ListSimiliar.Add(similiar);
+
+                    var review = await ReviewClass.GetReviewAsync(MovieID);
+                    ListReview.Clear();
+                    ListReview.Add(review);
+
+                    Title = detail.title;
+                }
+                catch (Exception e)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", string.Format("{0}", e.Message), "OK");
+                }
             }
 
             else

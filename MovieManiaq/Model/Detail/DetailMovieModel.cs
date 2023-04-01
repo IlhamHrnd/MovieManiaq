@@ -4,6 +4,7 @@ using static MovieManiaq.Model.Response.Movie.CreditsModel;
 using static MovieManiaq.Model.Response.Movie.DetailModel;
 using static MovieManiaq.Model.Response.Movie.ImagesModel;
 using static MovieManiaq.Model.Response.Movie.KeywordModel;
+using static MovieManiaq.Model.Response.Movie.ListYouTubeModel;
 using static MovieManiaq.Model.Response.Movie.RecommendationsModel;
 using static MovieManiaq.Model.Response.Movie.ReviewModel;
 using static MovieManiaq.Model.Response.Movie.SimiliarModel;
@@ -177,6 +178,22 @@ namespace MovieManiaq.Model.Detail
                 return listreview;
             }
             set { listreview = value; }
+        }
+
+        private IList<ListYouTubeRoot> listyoutube { get; set; }
+
+        public IList<ListYouTubeRoot> ListYouTube
+        {
+            get
+            {
+                if (listyoutube == null)
+                {
+                    listyoutube = new ObservableCollection<ListYouTubeRoot>();
+                }
+
+                return listyoutube;
+            }
+            set { listyoutube = value; }
         }
     }
 }

@@ -564,10 +564,10 @@
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
-            <CollectionView ItemsSource="{Binding ListVideo}">
+            <CollectionView ItemsSource="{Binding ListYouTube}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <CollectionView ItemsSource="{Binding results}">
+                        <CollectionView ItemsSource="{Binding youtube}">
                             <CollectionView.ItemsLayout>
                                 <GridItemsLayout Orientation="Horizontal"
                                                  Span="1"
@@ -591,13 +591,13 @@
                                                                   Grid.Column="0"
                                                                   Grid.ColumnSpan="2"
                                                                   Style="{StaticResource MediaElement}"
-                                                                  Source="{Binding key_url}"/>
+                                                                  Source="{Binding url}"/>
                                             <Label Grid.Row="1"
                                                    Grid.Column="0"
                                                    Grid.ColumnSpan="2"
                                                    HorizontalTextAlignment="Center"
                                                    Style="{StaticResource Label}"
-                                                   Text="{Binding name}"/>
+                                                   Text="{Binding title}"/>
                                             <Label Grid.Row="2"
                                                    Grid.Column="1"
                                                    HorizontalTextAlignment="End"
