@@ -1,8 +1,11 @@
-﻿using MovieManiaq.Model.Detail;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
+using Microsoft.Maui.Animations;
+using MovieManiaq.Model.Detail;
 using MovieManiaq.Model.Response.Movie;
 using MovieManiaq.Model.Root;
 using MovieManiaq.ViewModel.RestAPI.Movie;
-using static MovieManiaq.Model.Response.Movie.ListYouTubeModel;
+using static MovieManiaq.Model.Response.Movie.List.YouTubeList;
 
 namespace MovieManiaq.ViewModel.Detail
 {
@@ -34,63 +37,83 @@ namespace MovieManiaq.ViewModel.Detail
                 try
                 {
                     var detail = await DetailClass.GetDetailMovieAsync(MovieID);
-                    ListDetail.Clear();
-                    ListDetail.Add(detail);
+                    if (detail?.id != null)
+                    {
+                        Title = detail.title;
+                        ListDetail.Clear();
+                        ListDetail.Add(detail);
+                    }
 
                     var credits = await CreditsClass.GetCreditsAsync(MovieID);
-                    ListCredits.Clear();
-                    ListCredits.Add(credits);
+                    if (credits.crew.Count > 0 && credits.cast.Count > 0)
+                    {
+                        ListCredits.Clear();
+                        ListCredits.Add(credits);
+                    }
 
                     var keyword = await KeywordClass.GetKeywordAsync(MovieID);
-                    ListKeyword.Clear();
-                    ListKeyword.Add(keyword);
+                    if (keyword.keywords.Count > 0)
+                    {
+                        ListKeyword.Clear();
+                        ListKeyword.Add(keyword);
+                    }
 
                     var images = await ImagesClass.GetImagesAsync(MovieID);
-                    ListImages.Clear();
-                    ListImages.Add(images);
-
-                    var video = await VideoClass.GetVideoAsync(MovieID);
-                    ListVideo.Clear();
-                    ListVideo.Add(video);
-
-                    //List Video Sementara Hanya Dapat Satu Video
-                    ListYouTube.Clear();
-                    for (int i = 0; i < 1; i++)
+                    if (images.logos.Count > 0 && images.posters.Count > 0 && images.backdrops.Count > 0)
                     {
-                        if (video.results[i].site == "YouTube")
-                        {
-                            var youtube = await YouTubeClass.GetYouTubeAsync(video.results[i].key);
-
-                            var youtubes = new ListYouTubeRoot()
-                            {
-                                youtube = new List<YouTube>()
-                                {
-                                    new YouTube()
-                                    {
-                                        title = video.results[i].name,
-                                        url = youtube.formats[i].url,
-                                        publish = video.results[i].published_at
-
-                                    }
-                                }
-                            };
-                            ListYouTube.Add(youtubes);
-                        }
+                        ListImages.Clear();
+                        ListImages.Add(images);
                     }
 
                     var recommendations = await RecommendationsClass.GetRecommendationsAsync(MovieID);
-                    ListRecommendations.Clear();
-                    ListRecommendations.Add(recommendations);
+                    if (recommendations.results.Count > 0)
+                    {
+                        ListRecommendations.Clear();
+                        ListRecommendations.Add(recommendations);
+                    }
 
                     var similiar = await SimiliarClass.GetSimiliarAsync(MovieID);
-                    ListSimiliar.Clear();
-                    ListSimiliar.Add(similiar);
+                    if (similiar.results.Count > 0)
+                    {
+                        ListSimiliar.Clear();
+                        ListSimiliar.Add(similiar);
+                    }
 
                     var review = await ReviewClass.GetReviewAsync(MovieID);
-                    ListReview.Clear();
-                    ListReview.Add(review);
+                    if (review.results.Count > 0)
+                    {
+                        ListReview.Clear();
+                        ListReview.Add(review);
+                    }
 
-                    Title = detail.title;
+                    var video = await VideoClass.GetVideoAsync(MovieID);
+                    if (video.results.Count > 0)
+                    {
+                        ListVideo.Clear();
+                        ListVideo.Add(video);
+
+                        //Sementara Hanya Dapat Mengambil Data Video Dari Index Pertama
+                        if (video.results[0].site == "YouTube")
+                        {
+                            var youtube = await YouTubeClass.GetYouTubeAsync(video.results[0].key);
+                            var root = new YouTubeListRoot()
+                            {
+                                result = new List<Result>
+                            {
+                                new Result
+                                {
+                                    name = video.results[0].name,
+                                    type = video.results[0].type,
+                                    url = youtube.formats[0].url,
+                                    published_at = video.results[0].published_at,
+                                    site = video.results[0].site
+                                }
+                            }
+                            };
+                            ListYouTube.Clear();
+                            ListYouTube.Add(root);
+                        }
+                    }
                 }
                 catch (Exception e)
                 {

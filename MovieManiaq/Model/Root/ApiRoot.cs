@@ -18,7 +18,7 @@ namespace MovieManiaq.Model.Root
 
         private static string youtubeapilayer = "LaPz2O7hbKLEKH5WjO7hh6l4rzEeXN6s";
 
-        public static string YoutubeAPILayer
+        public static string YouTubeAPILayer
         {
             get { return youtubeapilayer; }
             set { youtubeapilayer = value; }

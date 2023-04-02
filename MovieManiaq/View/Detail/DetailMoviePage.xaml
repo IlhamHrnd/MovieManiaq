@@ -559,70 +559,6 @@
                    Margin="3">
                 <Label.FormattedText>
                     <FormattedString>
-                        <Span Text="Video "/>
-                        <Span Text="{Binding Title}"/>
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
-            <CollectionView ItemsSource="{Binding ListYouTube}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <CollectionView ItemsSource="{Binding youtube}">
-                            <CollectionView.ItemsLayout>
-                                <GridItemsLayout Orientation="Horizontal"
-                                                 Span="1"
-                                                 HorizontalItemSpacing="5"
-                                                 VerticalItemSpacing="10"/>
-                            </CollectionView.ItemsLayout>
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate>
-                                    <Frame Style="{StaticResource Frame}">
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="150" />
-                                                <RowDefinition Height="80" />
-                                                <RowDefinition Height="25" />
-                                            </Grid.RowDefinitions>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="70" />
-                                                <ColumnDefinition Width="140" />
-                                            </Grid.ColumnDefinitions>
-                                            <toolkit:MediaElement Grid.Row="0"
-                                                                  Grid.Column="0"
-                                                                  Grid.ColumnSpan="2"
-                                                                  Style="{StaticResource MediaElement}"
-                                                                  Source="{Binding url}"/>
-                                            <Label Grid.Row="1"
-                                                   Grid.Column="0"
-                                                   Grid.ColumnSpan="2"
-                                                   HorizontalTextAlignment="Center"
-                                                   Style="{StaticResource Label}"
-                                                   Text="{Binding title}"/>
-                                            <Label Grid.Row="2"
-                                                   Grid.Column="1"
-                                                   HorizontalTextAlignment="End"
-                                                   Style="{StaticResource Label}">
-                                                <Label.FormattedText>
-                                                    <FormattedString>
-                                                        <Span Text="Source : "/>
-                                                        <Span Text="{Binding site}"/>
-                                                    </FormattedString>
-                                                </Label.FormattedText>
-                                            </Label>
-                                        </Grid>
-                                    </Frame>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-            <Label Style="{StaticResource Label}"
-                   FontSize="Large"
-                   HorizontalTextAlignment="Start"
-                   Margin="3">
-                <Label.FormattedText>
-                    <FormattedString>
                         <Span Text="Recommended By "/>
                         <Span Text="{Binding Title}"/>
                     </FormattedString>
@@ -781,6 +717,70 @@
                                 </CollectionView.ItemTemplate>
                             </CollectionView>
                         </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Label Style="{StaticResource Label}"
+                   FontSize="Large"
+                   HorizontalTextAlignment="Start"
+                   Margin="3">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Video "/>
+                        <Span Text="{Binding Title}"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <CollectionView ItemsSource="{Binding ListYouTube}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <CollectionView ItemsSource="{Binding result}">
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Orientation="Horizontal"
+                                                 Span="1"
+                                                 HorizontalItemSpacing="5"
+                                                 VerticalItemSpacing="10"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame Style="{StaticResource Frame}">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="150" />
+                                                <RowDefinition Height="80" />
+                                                <RowDefinition Height="25" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="70" />
+                                                <ColumnDefinition Width="140" />
+                                            </Grid.ColumnDefinitions>
+                                            <toolkit:MediaElement Grid.Row="0"
+                                                                  Grid.Column="0"
+                                                                  Grid.ColumnSpan="2"
+                                                                  Style="{StaticResource MediaElement}"
+                                                                  Source="{Binding url}"/>
+                                            <Label Grid.Row="1"
+                                                   Grid.Column="0"
+                                                   Grid.ColumnSpan="2"
+                                                   HorizontalTextAlignment="Center"
+                                                   Style="{StaticResource Label}"
+                                                   Text="{Binding name}"/>
+                                            <Label Grid.Row="2"
+                                                   Grid.Column="1"
+                                                   HorizontalTextAlignment="End"
+                                                   Style="{StaticResource Label}">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="Source : "/>
+                                                        <Span Text="{Binding site}"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </Grid>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

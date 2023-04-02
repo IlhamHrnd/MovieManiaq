@@ -17,7 +17,7 @@ namespace MovieManiaq.ViewModel.RestAPI.Movie
         {
             YouTubeRoot root = new YouTubeRoot();
             HttpClient client = new HttpClient();
-            string url = string.Format(YouTubeQuery, youtubeid, ApiRoot.YoutubeAPILayer);
+            string url = string.Format(YouTubeQuery, youtubeid, ApiRoot.YouTubeAPILayer);
             var response = await client.GetAsync(url);
 
             try

@@ -4,11 +4,11 @@ using static MovieManiaq.Model.Response.Movie.CreditsModel;
 using static MovieManiaq.Model.Response.Movie.DetailModel;
 using static MovieManiaq.Model.Response.Movie.ImagesModel;
 using static MovieManiaq.Model.Response.Movie.KeywordModel;
-using static MovieManiaq.Model.Response.Movie.ListYouTubeModel;
 using static MovieManiaq.Model.Response.Movie.RecommendationsModel;
 using static MovieManiaq.Model.Response.Movie.ReviewModel;
 using static MovieManiaq.Model.Response.Movie.SimiliarModel;
 using static MovieManiaq.Model.Response.Movie.VideoModel;
+using static MovieManiaq.Model.Response.Movie.List.YouTubeList;
 
 namespace MovieManiaq.Model.Detail
 {
@@ -180,15 +180,15 @@ namespace MovieManiaq.Model.Detail
             set { listreview = value; }
         }
 
-        private IList<ListYouTubeRoot> listyoutube { get; set; }
+        private IList<YouTubeListRoot> listyoutube { get; set; }
 
-        public IList<ListYouTubeRoot> ListYouTube
+        public IList<YouTubeListRoot> ListYouTube
         {
             get
             {
                 if (listyoutube == null)
                 {
-                    listyoutube = new ObservableCollection<ListYouTubeRoot>();
+                    listyoutube = new ObservableCollection<YouTubeListRoot>();
                 }
 
                 return listyoutube;
