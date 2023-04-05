@@ -1,5 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
 using MovieManiaq.Model.Root;
+using Newtonsoft.Json;
+using RestSharp;
 using static MovieManiaq.Model.Response.Movie.Index.NowShowingModel;
 
 namespace MovieManiaq.ViewModel.RestAPI.Movie.Index
@@ -16,27 +19,34 @@ namespace MovieManiaq.ViewModel.RestAPI.Movie.Index
         public static async Task<NowShowingRoot> GetNowShowingAsync()
         {
             NowShowingRoot root = new NowShowingRoot();
-            HttpClient client = new HttpClient();
             string url = string.Format(NowShowingQuery, ApiRoot.TheMovieDB);
-            var response = await client.GetAsync(url);
+            var client = new RestClient(url);
+            var request = new RestRequest
+            {
+                Method = Method.Get,
+                Timeout = 10000
+            };
+            request.AddHeader("Content-Type", "application/json");
+            var response = await client.ExecuteGetAsync(request);
 
             try
             {
                 if (response.IsSuccessStatusCode)
                 {
-                    var content = await response.Content.ReadAsStringAsync();
-                    var post = JsonConvert.DeserializeObject<NowShowingRoot>(content);
-                    root = post;
+                    var content = response.Content;
+                    var get = JsonConvert.DeserializeObject<NowShowingRoot>(content);
+                    root = get;
                 }
                 else
                 {
-                    await Application.Current.MainPage.DisplayAlert("Error", "Input Data Salah", "OK");
+                    var toast = Toast.Make(response.ErrorException.Message, ToastDuration.Long);
+                    await toast.Show();
                 }
             }
-
             catch (Exception e)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "Error " + e.Message + "", "OK");
+                var toast = Toast.Make(e.Message, ToastDuration.Long);
+                await toast.Show();
             }
             return root;
         }
