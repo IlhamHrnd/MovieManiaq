@@ -1,5 +1,7 @@
 ﻿using MovieManiaq.Model.Detail;
+using MovieManiaq.Model.Response.People;
 using MovieManiaq.Model.Root;
+using MovieManiaq.View.Detail;
 using MovieManiaq.ViewModel.RestAPI.People;
 
 namespace MovieManiaq.ViewModel.Detail
@@ -48,6 +50,27 @@ namespace MovieManiaq.ViewModel.Detail
             IsBusy = false;
             IsVisible = false;
         }
+
+        public async void CastSelection(SelectionChangedEventArgs e)
+        {
+            var movieID = e.CurrentSelection[0] as CreditsModel.Cast;
+
+            if (movieID != null)
+            {
+                await _navigation.PushAsync(new DetailMoviePage(movieID.id));
+            }
+        }
+
+        public async void CrewSelection(SelectionChangedEventArgs e)
+        {
+            var movieID = e.CurrentSelection[0] as CreditsModel.Crew;
+
+            if (movieID != null)
+            {
+                await _navigation.PushAsync(new DetailMoviePage(movieID.id ));
+            }
+        }
+
         private void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
         {
             NetworkModel.Connectivity_ConnectivityChanged(sender, e);

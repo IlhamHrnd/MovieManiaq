@@ -24,7 +24,7 @@ namespace MovieManiaq.ViewModel.RestAPI.Movie
             var request = new RestRequest
             {
                 Method = Method.Get,
-                Timeout = 10000
+                Timeout = 15000
             };
             var response = await client.ExecuteGetAsync(request);
 

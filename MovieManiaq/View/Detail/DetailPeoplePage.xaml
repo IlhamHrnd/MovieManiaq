@@ -130,7 +130,9 @@
                                    FontSize="Large"
                                    HorizontalTextAlignment="Center"
                                    Margin="3"/>
-                            <CollectionView ItemsSource="{Binding cast}">
+                            <CollectionView ItemsSource="{Binding cast}"
+                                            SelectionMode="Single"
+                                            SelectionChanged="PeopleCast_SelectionChanged">
                                 <CollectionView.ItemsLayout>
                                     <GridItemsLayout Orientation="Horizontal"
                                                      Span="1"
@@ -140,41 +142,24 @@
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>
                                         <Border Style="{StaticResource Border}">
-                                            <Grid Margin="5,10">
+                                            <Grid Margin="15,10">
                                                 <Grid.RowDefinitions>
-                                                    <RowDefinition Height="Auto" />
                                                     <RowDefinition Height="200" />
                                                     <RowDefinition Height="Auto" />
                                                 </Grid.RowDefinitions>
                                                 <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="50*" />
-                                                    <ColumnDefinition Width="50*" />
+                                                    <ColumnDefinition Width="*" />
                                                 </Grid.ColumnDefinitions>
-                                                <Label Grid.Row="0"
-                                                       Grid.Column="0"
-                                                       Grid.ColumnSpan="2"
-                                                       FontSize="Subtitle"
-                                                       HorizontalTextAlignment="Center"
-                                                       Style="{StaticResource Label}"
-                                                       Text="{Binding title}"/>
-                                                <Image Grid.Row="1"
+                                                <Image Grid.Row="0"
                                                        Grid.Column="0"
                                                        Source="{Binding poster_url}"
                                                        Aspect="AspectFit"/>
                                                 <Label Grid.Row="1"
-                                                       Grid.Column="1"
-                                                       FontSize="Subtitle"
-                                                       HorizontalTextAlignment="Center"
-                                                       VerticalTextAlignment="Center"
-                                                       Style="{StaticResource Label}"
-                                                       Text="{Binding character}"/>
-                                                <Label Grid.Row="2"
                                                        Grid.Column="0"
-                                                       Grid.ColumnSpan="2"
                                                        FontSize="Subtitle"
                                                        HorizontalTextAlignment="Center"
                                                        Style="{StaticResource Label}"
-                                                       Text="{Binding release_date}"/>
+                                                       Text="{Binding title}"/>
                                             </Grid>
                                         </Border>
                                     </DataTemplate>
@@ -185,7 +170,9 @@
                                    FontSize="Large"
                                    HorizontalTextAlignment="Center"
                                    Margin="3"/>
-                            <CollectionView ItemsSource="{Binding crew}">
+                            <CollectionView ItemsSource="{Binding crew}"
+                                            SelectionMode="Single"
+                                            SelectionChanged="PeopleCrew_SelectionChanged">
                                 <CollectionView.ItemsLayout>
                                     <GridItemsLayout Orientation="Horizontal"
                                                      Span="1"
@@ -195,41 +182,24 @@
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>
                                         <Border Style="{StaticResource Border}">
-                                            <Grid Margin="5,10">
+                                            <Grid Margin="15,10">
                                                 <Grid.RowDefinitions>
-                                                    <RowDefinition Height="Auto" />
                                                     <RowDefinition Height="200" />
                                                     <RowDefinition Height="Auto" />
                                                 </Grid.RowDefinitions>
                                                 <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="50*" />
-                                                    <ColumnDefinition Width="50*" />
+                                                    <ColumnDefinition Width="*" />
                                                 </Grid.ColumnDefinitions>
-                                                <Label Grid.Row="0"
-                                                       Grid.Column="0"
-                                                       Grid.ColumnSpan="2"
-                                                       FontSize="Subtitle"
-                                                       HorizontalTextAlignment="Center"
-                                                       Style="{StaticResource Label}"
-                                                       Text="{Binding title}"/>
-                                                <Image Grid.Row="1"
+                                                <Image Grid.Row="0"
                                                        Grid.Column="0"
                                                        Source="{Binding poster_url}"
                                                        Aspect="AspectFit"/>
                                                 <Label Grid.Row="1"
-                                                       Grid.Column="1"
-                                                       FontSize="Subtitle"
-                                                       HorizontalTextAlignment="Center"
-                                                       VerticalTextAlignment="Center"
-                                                       Style="{StaticResource Label}"
-                                                       Text="{Binding job}"/>
-                                                <Label Grid.Row="2"
                                                        Grid.Column="0"
-                                                       Grid.ColumnSpan="2"
                                                        FontSize="Subtitle"
                                                        HorizontalTextAlignment="Center"
                                                        Style="{StaticResource Label}"
-                                                       Text="{Binding release_date}"/>
+                                                       Text="{Binding title}"/>
                                             </Grid>
                                         </Border>
                                     </DataTemplate>

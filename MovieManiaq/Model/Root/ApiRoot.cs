@@ -1,7 +1,6 @@
-﻿using System;
-namespace MovieManiaq.Model.Root
+﻿namespace MovieManiaq.Model.Root
 {
-	public class ApiRoot
+    public class ApiRoot
 	{
 		public ApiRoot()
 		{
@@ -16,7 +15,7 @@ namespace MovieManiaq.Model.Root
             set { themoviedb = value; }
         }
 
-        private static string youtubeapilayer = "LaPz2O7hbKLEKH5WjO7hh6l4rzEeXN6s";
+        private static string youtubeapilayer = "n6oWHaCuwow1sDzEIi5b1aRsAkri2943";
 
         public static string YouTubeAPILayer
         {

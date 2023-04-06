@@ -1,7 +1,4 @@
-﻿using CommunityToolkit.Maui.Alerts;
-using CommunityToolkit.Maui.Core;
-using Microsoft.Maui.Animations;
-using MovieManiaq.Model.Detail;
+﻿using MovieManiaq.Model.Detail;
 using MovieManiaq.Model.Response.Movie;
 using MovieManiaq.Model.Root;
 using MovieManiaq.ViewModel.RestAPI.Movie;
