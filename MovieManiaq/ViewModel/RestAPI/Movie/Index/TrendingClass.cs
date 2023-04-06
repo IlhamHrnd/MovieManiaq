@@ -26,7 +26,6 @@ namespace MovieManiaq.ViewModel.RestAPI.Movie.Index
                 Method = Method.Get,
                 Timeout = 1000
             };
-            request.AddHeader("Accept", "application/json");
             var response = await client.ExecuteGetAsync(request);
 
             try

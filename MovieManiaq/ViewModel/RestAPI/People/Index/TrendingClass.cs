@@ -1,5 +1,8 @@
-﻿using MovieManiaq.Model.Root;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
+using MovieManiaq.Model.Root;
 using Newtonsoft.Json;
+using RestSharp;
 using static MovieManiaq.Model.Response.People.Index.TrendingModel;
 
 namespace MovieManiaq.ViewModel.RestAPI.People.Index
@@ -16,28 +19,35 @@ namespace MovieManiaq.ViewModel.RestAPI.People.Index
         public static async Task<TrendingRoot> GetTrendingAsync(int page)
         {
             TrendingRoot root = new TrendingRoot();
-            HttpClient client = new HttpClient();
             string url = string.Format(TrendingQuery, ApiRoot.TheMovieDB, page);
-            var response = await client.GetAsync(url);
+            var client = new RestClient(url);
+            var request = new RestRequest
+            {
+                Method = Method.Get,
+                Timeout = 10000
+            };
+            var response = await client.ExecuteGetAsync(request);
 
             try
             {
                 if (response.IsSuccessStatusCode)
                 {
-                    var content = await response.Content.ReadAsStringAsync();
-                    var post = JsonConvert.DeserializeObject<TrendingRoot>(content);
-                    root = post;
+                    var content = response.Content;
+                    var get = JsonConvert.DeserializeObject<TrendingRoot>(content);
+                    root = get;
                 }
                 else
                 {
-                    await Application.Current.MainPage.DisplayAlert("Error", "Input Data Salah", "OK");
+                    var toast = Toast.Make(response.ErrorException.Message, ToastDuration.Long);
+                    await toast.Show();
                 }
             }
-
             catch (Exception e)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "Error " + e.Message + "", "OK");
+                var toast = Toast.Make(e.Message, ToastDuration.Long);
+                await toast.Show();
             }
+
             return root;
         }
     }
