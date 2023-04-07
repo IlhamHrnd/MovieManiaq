@@ -33,6 +33,14 @@
                           Route="SearchPeoplePage"/>
         </Tab>
     </FlyoutItem>
+    <FlyoutItem Title="Changelog"
+                Icon="history.svg">
+        <Tab Title="Changelog"
+             Icon="history.svg">
+            <ShellContent ContentTemplate="{DataTemplate Home:GithubCommitPage}"
+                          Route="GithubCommitHistory"/>
+        </Tab>
+    </FlyoutItem>
     <FlyoutItem Title="About"
                 Icon="about.svg">
         <Tab Title="About"

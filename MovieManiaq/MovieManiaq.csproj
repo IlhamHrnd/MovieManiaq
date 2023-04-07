@@ -59,6 +59,7 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <None Remove="Resources\Images\about.svg" />
+	  <None Remove="Resources\Images\history.svg" />
 	  <None Remove="Resources\Images\homepage.svg" />
 	  <None Remove="Resources\Images\no_image.svg" />
 	  <None Remove="Resources\Images\people.svg" />
@@ -73,6 +74,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Detail\DetailPeoplePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\Home\GithubCommitPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Home\MainPage.xaml">

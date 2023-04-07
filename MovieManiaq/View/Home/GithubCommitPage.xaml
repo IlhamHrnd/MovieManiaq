@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovieManiaq.View.Home.GithubCommitPage"
+             xmlns:Model="clr-namespace:MovieManiaq.Model.Home"
+             Title="{Binding Title}">
+    <ContentPage.BindingContext>
+        <Model:GithubCommitModel/>
+    </ContentPage.BindingContext>
+    <ScrollView Style="{StaticResource ScrollView}">
+        <StackLayout Style="{StaticResource StackLayout}">
+            <ActivityIndicator Style="{StaticResource ActivityIndicator}"
+                               IsRunning="{Binding IsBusy}"/>
+            <CollectionView ItemsSource="{Binding ListCommitHistory}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                     Span="1"
+                                     HorizontalItemSpacing="5"
+                                     VerticalItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Style="{StaticResource Frame}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="20" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="20*" />
+                                    <ColumnDefinition Width="80*" />
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Row="0"
+                                       Grid.Column="0"
+                                       Grid.RowSpan="3"
+                                       Source="{Binding commit.committer.avatar_url}"/>
+                                <Label Grid.Row="0"
+                                       Grid.Column="1"
+                                       FontSize="Subtitle"
+                                       HorizontalTextAlignment="Center"
+                                       Style="{StaticResource Label}"
+                                       Text="{Binding commit.committer.name}"/>
+                                <Label Grid.Row="1"
+                                       Grid.Column="1"
+                                       FontSize="Subtitle"
+                                       Style="{StaticResource Label}"
+                                       Text="{Binding commit.message}"/>
+                                <Label Grid.Row="2"
+                                       Grid.Column="1"
+                                       FontSize="Subtitle"
+                                       Style="{StaticResource Label}"
+                                       Text="{Binding commit.committer.date}"/>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>            
+    </ScrollView>
+</ContentPage>
