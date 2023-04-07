@@ -32,12 +32,18 @@ namespace MovieManiaq.ViewModel.Detail
             if (valid_connect)
             {
                 var detail = await DetailClass.GetDetailMovieAsync(PeopleID);
-                ListDetail.Clear();
-                ListDetail.Add(detail);
+                if (detail != null)
+                {
+                    ListDetail.Clear();
+                    ListDetail.Add(detail);
+                }
 
-                var credis = await CreditsClass.GetCreditsAsync(PeopleID);
-                ListCredits.Clear();
-                ListCredits.Add(credis);
+                var credits = await CreditsClass.GetCreditsAsync(PeopleID);
+                if (credits.crew.Count > 0 || credits.cast.Count > 0)
+                {
+                    ListCredits.Clear();
+                    ListCredits.Add(credits);
+                }
 
                 Title = detail.name;
             }

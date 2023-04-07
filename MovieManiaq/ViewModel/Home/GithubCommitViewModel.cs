@@ -29,10 +29,13 @@ namespace MovieManiaq.ViewModel.Home
             if (valid_connect)
             {
                 var commithistory = await CommitHistoryClass.GetCommitHistoryAsync();
-                ListCommitHistory.Clear();
-                for (int i = 0; i < commithistory.Count; i++)
+                if (commithistory.Count > 0)
                 {
-                    ListCommitHistory.Add(commithistory[i]);
+                    ListCommitHistory.Clear();
+                    for (int i = 0; i < commithistory.Count; i++)
+                    {
+                        ListCommitHistory.Add(commithistory[i]);
+                    }
                 }
             }
             else

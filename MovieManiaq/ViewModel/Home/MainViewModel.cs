@@ -31,24 +31,39 @@ namespace MovieManiaq.ViewModel.Home
             if (valid_connect)
             {
                 var nowshowing = await NowShowingClass.GetNowShowingAsync();
-                ListNowShowing.Clear();
-                ListNowShowing.Add(nowshowing);
+                if (nowshowing.results.Count > 0)
+                {
+                    ListNowShowing.Clear();
+                    ListNowShowing.Add(nowshowing);
+                }
 
                 var trending = await TrendingClass.GetTrendingAsync();
-                ListTrending.Clear();
-                ListTrending.Add(trending);
+                if (trending.results.Count > 0)
+                {
+                    ListTrending.Clear();
+                    ListTrending.Add(trending);
+                }
 
                 var upcoming = await UpComingClass.GetUpComingAsync();
-                ListUpComing.Clear();
-                ListUpComing.Add(upcoming);
+                if (upcoming.results.Count > 0)
+                {
+                    ListUpComing.Clear();
+                    ListUpComing.Add(upcoming);
+                }
 
                 var toprated = await TopRatedClass.GetTopRatedAsync();
-                ListTopRated.Clear();
-                ListTopRated.Add(toprated);
+                if (toprated.results.Count > 0)
+                {
+                    ListTopRated.Clear();
+                    ListTopRated.Add(toprated);
+                }
 
                 var popular = await PopularClass.GetPopularAsync();
-                ListPopular.Clear();
-                ListPopular.Add(popular);
+                if (popular.results.Count > 0)
+                {
+                    ListPopular.Clear();
+                    ListPopular.Add(popular);
+                }
             }
 
             else

@@ -21,7 +21,7 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame Style="{StaticResource Frame}">
-                            <Grid>
+                            <Grid ColumnSpacing="10">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="50" />
                                     <RowDefinition Height="Auto" />

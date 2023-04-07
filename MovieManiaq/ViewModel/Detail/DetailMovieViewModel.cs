@@ -42,7 +42,7 @@ namespace MovieManiaq.ViewModel.Detail
                     }
 
                     var credits = await CreditsClass.GetCreditsAsync(MovieID);
-                    if (credits.crew.Count > 0 && credits.cast.Count > 0)
+                    if (credits.crew.Count > 0 || credits.cast.Count > 0)
                     {
                         ListCredits.Clear();
                         ListCredits.Add(credits);
@@ -56,7 +56,7 @@ namespace MovieManiaq.ViewModel.Detail
                     }
 
                     var images = await ImagesClass.GetImagesAsync(MovieID);
-                    if (images.logos.Count > 0 && images.posters.Count > 0 && images.backdrops.Count > 0)
+                    if (images.logos.Count > 0 || images.posters.Count > 0 || images.backdrops.Count > 0)
                     {
                         ListImages.Clear();
                         ListImages.Add(images);
@@ -90,22 +90,23 @@ namespace MovieManiaq.ViewModel.Detail
                         ListVideo.Add(video);
 
                         //Sementara Hanya Dapat Mengambil Data Video Dari Index Pertama
+                        //Handler Saat Proses Pengambilan Data Youtube Masih Error Saat RTO
                         if (video.results[0].site == "YouTube")
                         {
                             var youtube = await YouTubeClass.GetYouTubeAsync(video.results[0].key);
                             var root = new YouTubeListRoot()
                             {
                                 result = new List<Result>
-                            {
-                                new Result
                                 {
-                                    name = video.results[0].name,
-                                    type = video.results[0].type,
-                                    url = youtube.formats[0].url,
-                                    published_at = video.results[0].published_at,
-                                    site = video.results[0].site
+                                    new Result
+                                    {
+                                        name = video.results[0].name,
+                                        type = video.results[0].type,
+                                        url = youtube.formats[0].url,
+                                        published_at = video.results[0].published_at,
+                                        site = video.results[0].site
+                                    }
                                 }
-                            }
                             };
                             ListYouTube.Clear();
                             ListYouTube.Add(root);

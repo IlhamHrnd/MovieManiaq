@@ -31,8 +31,11 @@ namespace MovieManiaq.ViewModel.Home
             if (valid_connect)
             {
                 var trending = await TrendingClass.GetTrendingAsync(Page);
-                ListTrending.Clear();
-                ListTrending.Add(trending);
+                if (trending.results.Count > 0)
+                {
+                    ListTrending.Clear();
+                    ListTrending.Add(trending);
+                }
             }
 
             else
