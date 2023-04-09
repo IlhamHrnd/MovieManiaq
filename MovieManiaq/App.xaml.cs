@@ -1,4 +1,6 @@
-﻿namespace MovieManiaq;
+﻿using MovieManiaq.Model.Root;
+
+namespace MovieManiaq;
 
 public partial class App : Application
 {
@@ -8,4 +10,9 @@ public partial class App : Application
 
 		MainPage = new AppShell();
 	}
+
+    protected override async void OnStart()
+    {
+		await PermissionRoot.RequestPermission();
+    }
 }
