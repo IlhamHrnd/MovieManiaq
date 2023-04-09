@@ -28,5 +28,7 @@
 	</array>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/appicon.appiconset</string>
+  <key>NSLocationWhenInUseUsageDescription</key>
+  <string>Movie Maniaq need your location to showing movie list reference by your recently country</string>
 </dict>
 </plist>

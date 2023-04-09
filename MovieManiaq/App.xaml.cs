@@ -1,4 +1,6 @@
-﻿using MovieManiaq.Model.Root;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
+using MovieManiaq.Model.Root;
 
 namespace MovieManiaq;
 

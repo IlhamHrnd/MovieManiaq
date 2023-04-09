@@ -22,6 +22,13 @@
             {
                 await Permissions.RequestAsync<Permissions.StorageWrite>();
             }
+
+            var statusLocation = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
+
+            if (statusLocation != PermissionStatus.Granted)
+            {
+                await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
+            }
         }
     }
 }
