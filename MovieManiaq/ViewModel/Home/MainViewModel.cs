@@ -65,6 +65,7 @@ namespace MovieManiaq.ViewModel.Home
                     var toast = Toast.Make(ex.Message, ToastDuration.Long);
                     await toast.Show();
                 }
+
                 var nowshowing = await NowShowingClass.GetNowShowingAsync(Region);
                 if (nowshowing.results.Count > 0)
                 {

@@ -44,13 +44,7 @@ namespace MovieManiaq.Model.Response.Movie
             }
             public object belongs_to_collection { get; set; }
             public long budget { get; set; }
-            public string budget_currency
-            {
-                get
-                {
-                    return budget.ToString("C", CultureInfo.CreateSpecificCulture("en-US"));
-                }
-            }
+            public string budget_currency { get; set; }
             public List<Genre> genres { get; set; }
             public string homepage { get; set; }
             public int id { get; set; }
@@ -75,7 +69,7 @@ namespace MovieManiaq.Model.Response.Movie
             {
                 get
                 {
-                    return budget.ToString("C", CultureInfo.CreateSpecificCulture("en-US"));
+                    return revenue.ToString("C", CultureInfo.CreateSpecificCulture("en-US"));
                 }
             }
             public int runtime { get; set; }

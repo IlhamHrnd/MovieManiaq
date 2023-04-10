@@ -30,6 +30,14 @@
             get { return geoapify; }
             set { geoapify = value; }
         }
+
+        private static string rapidapi = "6219c891camsh4b45be529f36f81p1c71cfjsn8bf7cb5004f7";
+
+        public static string RapidAPI
+        {
+            get { return rapidapi; }
+            set { rapidapi = value; }
+        }
     }
 }
 

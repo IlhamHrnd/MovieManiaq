@@ -1,6 +1,11 @@
-﻿using MovieManiaq.Model.Detail;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
+using MovieManiaq.Model.Detail;
 using MovieManiaq.Model.Response.Movie;
 using MovieManiaq.Model.Root;
+using MovieManiaq.ViewModel.RestAPI.Country;
+using MovieManiaq.ViewModel.RestAPI.Currency;
+using MovieManiaq.ViewModel.RestAPI.Geocoding;
 using MovieManiaq.ViewModel.RestAPI.Movie;
 using static MovieManiaq.Model.Response.Movie.List.YouTubeList;
 
@@ -81,6 +86,33 @@ namespace MovieManiaq.ViewModel.Detail
                     {
                         ListReview.Clear();
                         ListReview.Add(review);
+                    }
+
+                    var status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
+
+                    if (status == PermissionStatus.Granted)
+                    {
+                        var GeoRequest = new GeolocationRequest(GeolocationAccuracy.Lowest, TimeSpan.FromSeconds(15));
+                        var location = await Geolocation.Default.GetLocationAsync(GeoRequest);
+
+                        if (location != null)
+                        {
+                            var loc = await ReverseGeocodingClass.GetReverseGeocodingAsync(location.Latitude.ToString(), location.Longitude.ToString());
+
+                            if (loc.results[0].country_code != null)
+                            {
+                                var country = await CountryClass.GetCountryAsync(loc.results[0].country_code);
+
+                                if (country.data[0].code != null)
+                                {
+                                    var currency = await CurrencyClass.GetCurrencyAsync(country.data[0].code, detail.budget.ToString());
+
+                                    //Data Sudah Ter Convert Tinggal Proses Passing Ke Model Detail
+                                    var toast = Toast.Make(string.Format("From {0} To {1}", detail.budget.ToString(), currency.result), ToastDuration.Long);
+                                    await toast.Show();
+                                }
+                            }
+                        }
                     }
 
                     var video = await VideoClass.GetVideoAsync(MovieID);
