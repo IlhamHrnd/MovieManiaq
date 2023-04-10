@@ -1,7 +1,11 @@
-﻿using MovieManiaq.Model.Home;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
+using Microsoft.Maui.Devices.Sensors;
+using MovieManiaq.Model.Home;
 using MovieManiaq.Model.Response.Movie.Index;
 using MovieManiaq.Model.Root;
 using MovieManiaq.View.Detail;
+using MovieManiaq.ViewModel.RestAPI.Geocoding;
 using MovieManiaq.ViewModel.RestAPI.Movie.Index;
 
 namespace MovieManiaq.ViewModel.Home
@@ -30,7 +34,38 @@ namespace MovieManiaq.ViewModel.Home
 
             if (valid_connect)
             {
-                var nowshowing = await NowShowingClass.GetNowShowingAsync();
+                string Region = string.Empty;
+
+                try
+                {
+                    var status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
+
+                    if (status == PermissionStatus.Granted)
+                    {
+                        var GeoRequest = new GeolocationRequest(GeolocationAccuracy.Lowest, TimeSpan.FromSeconds(15));
+                        var location = await Geolocation.Default.GetLocationAsync(GeoRequest);
+
+                        if (location != null)
+                        {
+                            var loc = await ReverseGeocodingClass.GetReverseGeocodingAsync(location.Latitude.ToString(), location.Longitude.ToString());
+
+                            if (loc != null)
+                            {
+                                Region = string.Format("&region={0}", loc.results[0].country_code);
+                            }
+                            else
+                            {
+                                Region = string.Empty;
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    var toast = Toast.Make(ex.Message, ToastDuration.Long);
+                    await toast.Show();
+                }
+                var nowshowing = await NowShowingClass.GetNowShowingAsync(Region);
                 if (nowshowing.results.Count > 0)
                 {
                     ListNowShowing.Clear();
@@ -44,21 +79,21 @@ namespace MovieManiaq.ViewModel.Home
                     ListTrending.Add(trending);
                 }
 
-                var upcoming = await UpComingClass.GetUpComingAsync();
+                var upcoming = await UpComingClass.GetUpComingAsync(Region);
                 if (upcoming.results.Count > 0)
                 {
                     ListUpComing.Clear();
                     ListUpComing.Add(upcoming);
                 }
 
-                var toprated = await TopRatedClass.GetTopRatedAsync();
+                var toprated = await TopRatedClass.GetTopRatedAsync(Region);
                 if (toprated.results.Count > 0)
                 {
                     ListTopRated.Clear();
                     ListTopRated.Add(toprated);
                 }
 
-                var popular = await PopularClass.GetPopularAsync();
+                var popular = await PopularClass.GetPopularAsync(Region);
                 if (popular.results.Count > 0)
                 {
                     ListPopular.Clear();

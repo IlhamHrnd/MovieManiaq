@@ -1,25 +1,25 @@
-﻿using Newtonsoft.Json;
-using RestSharp;
-using CommunityToolkit.Maui.Alerts;
+﻿using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
 using MovieManiaq.Model.Root;
-using static MovieManiaq.Model.Response.Movie.Index.TopRatedModel;
+using Newtonsoft.Json;
+using RestSharp;
+using static MovieManiaq.Model.Response.Geocoding.ReverseGeocodingModel;
 
-namespace MovieManiaq.ViewModel.RestAPI.Movie.Index
+namespace MovieManiaq.ViewModel.RestAPI.Geocoding
 {
-    public class TopRatedClass
+    public class ReverseGeocodingClass
     {
-        public TopRatedClass()
+        public ReverseGeocodingClass()
         {
-
+            
         }
 
-        private const string TopRatedQuery = "https://api.themoviedb.org/3/movie/top_rated?api_key={0}&page=1{1}";
+        private const string ReverseGeocodingQuery = "https://api.geoapify.com/v1/geocode/reverse?lat={0}&lon={1}&type=country&limit=1&format=json&apiKey={2}";
 
-        public static async Task<TopRatedRoot> GetTopRatedAsync(string region)
+        public static async Task<ReverseGeocodingRoot> GetReverseGeocodingAsync(string lat, string lon)
         {
-            TopRatedRoot root = new TopRatedRoot();
-            string url = string.Format(TopRatedQuery, ApiRoot.TheMovieDB, region);
+            ReverseGeocodingRoot root = new ReverseGeocodingRoot();
+            string url = string.Format(ReverseGeocodingQuery, lat, lon, ApiRoot.GeoAPify);
             var client = new RestClient(url);
             var request = new RestRequest
             {
@@ -33,7 +33,7 @@ namespace MovieManiaq.ViewModel.RestAPI.Movie.Index
                 if (response.IsSuccessStatusCode)
                 {
                     var content = response.Content;
-                    var get = JsonConvert.DeserializeObject<TopRatedRoot>(content);
+                    var get = JsonConvert.DeserializeObject<ReverseGeocodingRoot>(content);
                     root = get;
                 }
                 else
@@ -47,6 +47,7 @@ namespace MovieManiaq.ViewModel.RestAPI.Movie.Index
                 var toast = Toast.Make(e.Message, ToastDuration.Long);
                 await toast.Show();
             }
+
             return root;
         }
     }

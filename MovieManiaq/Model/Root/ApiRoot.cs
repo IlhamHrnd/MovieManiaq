@@ -22,6 +22,14 @@
             get { return youtubeapilayer; }
             set { youtubeapilayer = value; }
         }
+
+        private static string geoapify = "38ae614765f24647ac2f3dbe6c8a1035";
+
+        public static string GeoAPify
+        {
+            get { return geoapify; }
+            set { geoapify = value; }
+        }
     }
 }
 

@@ -14,12 +14,12 @@ namespace MovieManiaq.ViewModel.RestAPI.Movie.Index
 
         }
 
-        private const string UpComingQuery = "https://api.themoviedb.org/3/movie/upcoming?api_key={0}&page=1";
+        private const string UpComingQuery = "https://api.themoviedb.org/3/movie/upcoming?api_key={0}&page=1{1}";
 
-        public static async Task<UpComingRoot> GetUpComingAsync()
+        public static async Task<UpComingRoot> GetUpComingAsync(string region)
         {
             UpComingRoot root = new UpComingRoot();
-            string url = string.Format(UpComingQuery, ApiRoot.TheMovieDB);
+            string url = string.Format(UpComingQuery, ApiRoot.TheMovieDB, region);
             var client = new RestClient(url);
             var request = new RestRequest
             {

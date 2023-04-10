@@ -14,12 +14,12 @@ namespace MovieManiaq.ViewModel.RestAPI.Movie.Index
 
         }
 
-        private const string PopularQuery = "https://api.themoviedb.org/3/movie/popular?api_key={0}&page=1";
+        private const string PopularQuery = "https://api.themoviedb.org/3/movie/popular?api_key={0}&page=1{1}";
 
-        public static async Task<PopularRoot> GetPopularAsync()
+        public static async Task<PopularRoot> GetPopularAsync(string region)
         {
             PopularRoot root = new PopularRoot();
-            string url = string.Format(PopularQuery, ApiRoot.TheMovieDB);
+            string url = string.Format(PopularQuery, ApiRoot.TheMovieDB, region);
             var client = new RestClient(url);
             var request = new RestRequest
             {
