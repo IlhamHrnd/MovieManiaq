@@ -46,6 +46,37 @@ namespace MovieManiaq.ViewModel.Detail
                         ListDetail.Add(detail);
                     }
 
+                    var status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
+
+                    if (status == PermissionStatus.Granted)
+                    {
+                        var GeoRequest = new GeolocationRequest(GeolocationAccuracy.Lowest, TimeSpan.FromSeconds(15));
+                        var location = await Geolocation.Default.GetLocationAsync(GeoRequest);
+
+                        if (location != null)
+                        {
+                            var loc = await ReverseGeocodingClass.GetReverseGeocodingAsync(location.Latitude.ToString(), location.Longitude.ToString());
+
+                            if (loc.results[0].country_code != null)
+                            {
+                                var country = await CountryClass.GetCountryAsync(loc.results[0].country_code);
+
+                                if (country.data[0].code != null)
+                                {
+                                    var budget = await CurrencyClass.GetCurrencyAsync(country.data[0].code, detail.budget.ToString());
+
+                                    if (budget.success && detail?.id != null)
+                                    {
+                                        //Data Sudah Terkonversi Ke Negara Masing Masing Lokasi User
+                                        //Passing Data Dari Model Currency Ke Model Detail Error Retrieve Null Data
+                                        var toast = Toast.Make(string.Format("From {0} To {1}", detail.budget.ToString(), budget.result), ToastDuration.Long);
+                                        await toast.Show();
+                                    }
+                                }
+                            }
+                        }
+                    }
+
                     var credits = await CreditsClass.GetCreditsAsync(MovieID);
                     if (credits.crew.Count > 0 || credits.cast.Count > 0)
                     {
@@ -86,33 +117,6 @@ namespace MovieManiaq.ViewModel.Detail
                     {
                         ListReview.Clear();
                         ListReview.Add(review);
-                    }
-
-                    var status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
-
-                    if (status == PermissionStatus.Granted)
-                    {
-                        var GeoRequest = new GeolocationRequest(GeolocationAccuracy.Lowest, TimeSpan.FromSeconds(15));
-                        var location = await Geolocation.Default.GetLocationAsync(GeoRequest);
-
-                        if (location != null)
-                        {
-                            var loc = await ReverseGeocodingClass.GetReverseGeocodingAsync(location.Latitude.ToString(), location.Longitude.ToString());
-
-                            if (loc.results[0].country_code != null)
-                            {
-                                var country = await CountryClass.GetCountryAsync(loc.results[0].country_code);
-
-                                if (country.data[0].code != null)
-                                {
-                                    var currency = await CurrencyClass.GetCurrencyAsync(country.data[0].code, detail.budget.ToString());
-
-                                    //Data Sudah Ter Convert Tinggal Proses Passing Ke Model Detail
-                                    var toast = Toast.Make(string.Format("From {0} To {1}", detail.budget.ToString(), currency.result), ToastDuration.Long);
-                                    await toast.Show();
-                                }
-                            }
-                        }
                     }
 
                     var video = await VideoClass.GetVideoAsync(MovieID);

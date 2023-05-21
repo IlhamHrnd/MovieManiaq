@@ -8,7 +8,7 @@
             {
                 if (string.IsNullOrEmpty(avatar_url))
                 {
-                    avatar_url = "https://avatars.githubusercontent.com/u/79568527?v=4";
+                    avatar_url = "no_image.svg";
                 }
             }
 
@@ -52,7 +52,7 @@
             {
                 if (string.IsNullOrEmpty(avatar_url))
                 {
-                    avatar_url = "https://avatars.githubusercontent.com/u/79568527?v=4";
+                    avatar_url = "no_image.svg";
                 }
             }
 
