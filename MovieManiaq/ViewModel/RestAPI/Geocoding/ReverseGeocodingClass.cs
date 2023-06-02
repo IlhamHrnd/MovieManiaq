@@ -44,7 +44,7 @@ namespace MovieManiaq.ViewModel.RestAPI.Geocoding
             }
             catch (Exception e)
             {
-                var toast = Toast.Make(e.Message, ToastDuration.Long);
+                var toast = Toast.Make("Failed Retrieve Geolocation Data", ToastDuration.Long);
                 await toast.Show();
             }
 

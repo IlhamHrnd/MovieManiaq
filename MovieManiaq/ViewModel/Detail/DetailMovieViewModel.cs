@@ -69,8 +69,10 @@ namespace MovieManiaq.ViewModel.Detail
                                     {
                                         //Data Sudah Terkonversi Ke Negara Masing Masing Lokasi User
                                         //Passing Data Dari Model Currency Ke Model Detail Error Retrieve Null Data
-                                        var toast = Toast.Make(string.Format("From {0} To {1}", detail.budget.ToString(), budget.result), ToastDuration.Long);
+                                        var toast = Toast.Make(string.Format("From {0}{1} To {2}{3}", country.data[0].symbol, detail.budget.ToString(), country.data[0].symbol, budget.result), ToastDuration.Long);
                                         await toast.Show();
+
+
                                     }
                                 }
                             }
@@ -127,31 +129,37 @@ namespace MovieManiaq.ViewModel.Detail
 
                         //Sementara Hanya Dapat Mengambil Data Video Dari Index Pertama
                         //Handler Saat Proses Pengambilan Data Youtube Masih Error Saat RTO
-                        if (video.results[0].site == "YouTube")
+                        for (int i = 0; i < 2; i++)
                         {
-                            var youtube = await YouTubeClass.GetYouTubeAsync(video.results[0].key);
-                            var root = new YouTubeListRoot()
+                            if (video.results[i].site == "YouTube")
                             {
-                                result = new List<Result>
+                                var youtube = await YouTubeClass.GetYouTubeAsync(video.results[i].key);
+                                if (youtube != null)
                                 {
-                                    new Result
+                                    var root = new YouTubeListRoot()
                                     {
-                                        name = video.results[0].name,
-                                        type = video.results[0].type,
-                                        url = youtube.formats[0].url,
-                                        published_at = video.results[0].published_at,
-                                        site = video.results[0].site
-                                    }
+                                            result = new List<Result>
+                                        {
+                                            new Result
+                                            {
+                                                name = video.results[i].name,
+                                                type = video.results[i].type,
+                                                url = youtube.formats[i].url,
+                                                published_at = video.results[i].published_at,
+                                                site = video.results[i].site
+                                            }
+                                        }
+                                    };
+                                    ListYouTube.Add(root);
                                 }
-                            };
-                            ListYouTube.Clear();
-                            ListYouTube.Add(root);
+                            }
                         }
                     }
                 }
                 catch (Exception e)
                 {
-                    await Application.Current.MainPage.DisplayAlert("Error", string.Format("{0}", e.Message), "OK");
+                    var toast = Toast.Make(e.Message, ToastDuration.Long);
+                    await toast.Show();
                 }
             }
 

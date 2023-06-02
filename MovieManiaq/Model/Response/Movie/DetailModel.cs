@@ -31,6 +31,12 @@ namespace MovieManiaq.Model.Response.Movie
             public string name { get; set; }
         }
 
+        public class Currency
+        {
+            public double budget { get; set; }
+            public double revenue { get; set; }
+        }
+
         public class DetailRoot
         {
             public bool adult { get; set; }
@@ -92,6 +98,7 @@ namespace MovieManiaq.Model.Response.Movie
             public bool video { get; set; }
             public double vote_average { get; set; }
             public int vote_count { get; set; }
+            public Currency currency { get; set; }
         }
 
         public class SpokenLanguage

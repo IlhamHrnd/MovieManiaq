@@ -43,17 +43,18 @@
                                                 <ColumnDefinition Width="30*"/>
                                                 <ColumnDefinition Width="70*"/>
                                             </Grid.ColumnDefinitions>
-                                            <Image Grid.Row="1"
-                                                   Grid.Column="0"
-                                                   Source="{Binding poster_url}"
-                                                   Margin="5"
-                                                   Aspect="AspectFit"/>
                                             <Label Grid.Row="0"
                                                    Grid.Column="0"
                                                    Grid.ColumnSpan="2"
+                                                   LineBreakMode="TailTruncation"
                                                    HorizontalTextAlignment="Center"
                                                    Style="{StaticResource Label}"
                                                    Text="{Binding title}"/>
+                                            <Image Grid.Row="1"
+                                                   Grid.Column="0"
+                                                   Source="{Binding poster_url}"
+                                                   Margin="2"
+                                                   Aspect="AspectFit"/>
                                             <Label Grid.Row="1"
                                                    Grid.Column="1"
                                                    HorizontalTextAlignment="Start"

@@ -44,7 +44,7 @@ namespace MovieManiaq.ViewModel.RestAPI.People
             }
             catch (Exception e)
             {
-                var toast = Toast.Make(e.Message, ToastDuration.Long);
+                var toast = Toast.Make("Failed Retrieve Search Data", ToastDuration.Long);
                 await toast.Show();
             }
 

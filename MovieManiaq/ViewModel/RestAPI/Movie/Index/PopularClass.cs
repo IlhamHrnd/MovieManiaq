@@ -44,7 +44,7 @@ namespace MovieManiaq.ViewModel.RestAPI.Movie.Index
             }
             catch (Exception e)
             {
-                var toast = Toast.Make(e.Message, ToastDuration.Long);
+                var toast = Toast.Make("Failed Retrieve Popular Data", ToastDuration.Long);
                 await toast.Show();
             }
             return root;

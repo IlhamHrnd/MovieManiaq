@@ -45,7 +45,7 @@ namespace MovieManiaq.ViewModel.RestAPI.Movie
             }
             catch (Exception e)
             {
-                var toast = Toast.Make(e.Message, ToastDuration.Long);
+                var toast = Toast.Make("Failed Retrieve Credits Data", ToastDuration.Long);
                 await toast.Show();
             }
 

@@ -46,7 +46,7 @@ namespace MovieManiaq.ViewModel.RestAPI.Country
             }
             catch (Exception e)
             {
-                var toast = Toast.Make(e.Message, ToastDuration.Long);
+                var toast = Toast.Make("Failed Retrieve Country Data", ToastDuration.Long);
                 await toast.Show();
             }
             return root;
