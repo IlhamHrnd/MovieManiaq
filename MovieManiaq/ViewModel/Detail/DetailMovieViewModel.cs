@@ -7,6 +7,7 @@ using MovieManiaq.ViewModel.RestAPI.Country;
 using MovieManiaq.ViewModel.RestAPI.Currency;
 using MovieManiaq.ViewModel.RestAPI.Geocoding;
 using MovieManiaq.ViewModel.RestAPI.Movie;
+using static MovieManiaq.Model.Response.Movie.List.CurrencyList;
 using static MovieManiaq.Model.Response.Movie.List.YouTubeList;
 
 namespace MovieManiaq.ViewModel.Detail
@@ -61,20 +62,36 @@ namespace MovieManiaq.ViewModel.Detail
                             {
                                 var country = await CountryClass.GetCountryAsync(loc.results[0].country_code);
 
-                                if (country.data[0].code != null)
+                                if (country.data[0].code != null && detail?.id != null)
                                 {
-                                    var budget = await CurrencyClass.GetCurrencyAsync(country.data[0].code, detail.budget.ToString());
+                                    List<int> Currency = new List<int>();
 
-                                    if (budget.success && detail?.id != null)
+                                    Currency = new List<int>
                                     {
-                                        //Data Sudah Terkonversi Ke Negara Masing Masing Lokasi User
-                                        //Passing Data Dari Model Currency Ke Model Detail Error Retrieve Null Data
-                                        var toast = Toast.Make(string.Format("From {0}{1} To {2}{3}", country.data[0].symbol, detail.budget.ToString(), country.data[0].symbol, budget.result), ToastDuration.Long);
-                                        await toast.Show();
+                                        (int)detail.budget,
+                                        (int)detail.revenue
+                                    };
 
+                                    for (int i = 0; i < Currency.Count; i++)
+                                    {
+                                        var currency = await CurrencyClass.GetCurrencyAsync(country.data[0].code, Currency[i].ToString());
 
+                                        if (currency.success && detail?.id != null)
+                                        {
+                                            var root = new CurrencyListRoot
+                                            {
+                                                results = new Model.Response.Movie.List.CurrencyList.Result
+                                                {
+                                                    budget = currency.result,
+                                                    revenue = currency.result
+                                                },
+                                                Symbols = country.data[0].code
+                                            };
+                                            ListCurrency.Add(root);
+                                        }
                                     }
                                 }
+
                             }
                         }
                     }
@@ -138,9 +155,9 @@ namespace MovieManiaq.ViewModel.Detail
                                 {
                                     var root = new YouTubeListRoot()
                                     {
-                                            result = new List<Result>
+                                        result = new List<Model.Response.Movie.List.YouTubeList.Result>
                                         {
-                                            new Result
+                                            new Model.Response.Movie.List.YouTubeList.Result
                                             {
                                                 name = video.results[i].name,
                                                 type = video.results[i].type,

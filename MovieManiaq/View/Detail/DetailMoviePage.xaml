@@ -88,8 +88,6 @@
                                         <RowDefinition Height="40"/>
                                         <RowDefinition Height="40"/>
                                         <RowDefinition Height="40"/>
-                                        <RowDefinition Height="40"/>
-                                        <RowDefinition Height="40"/>
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="50*"/>
@@ -114,24 +112,8 @@
                                     <Label Grid.Row="2"
                                            Grid.Column="0"
                                            Style="{StaticResource Label}"
-                                           Text="Budget"/>
-                                    <Label Grid.Row="2"
-                                           Grid.Column="1"
-                                           Style="{StaticResource Label}"
-                                           Text="{Binding budget_currency}"/>
-                                    <Label Grid.Row="3"
-                                           Grid.Column="0"
-                                           Style="{StaticResource Label}"
-                                           Text="Revenue"/>
-                                    <Label Grid.Row="3"
-                                           Grid.Column="1"
-                                           Style="{StaticResource Label}"
-                                           Text="{Binding revenue_currency}"/>
-                                    <Label Grid.Row="4"
-                                           Grid.Column="0"
-                                           Style="{StaticResource Label}"
                                            Text="Status"/>
-                                    <Label Grid.Row="4"
+                                    <Label Grid.Row="2"
                                            Grid.Column="1"
                                            Style="{StaticResource Label}"
                                            Text="{Binding status}"/>
@@ -154,7 +136,7 @@
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>
                                         <Frame Style="{StaticResource Frame}">
-                                            <Grid>
+                                            <Grid ColumnSpacing="10">
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="50"/>
                                                 </Grid.RowDefinitions>
@@ -207,6 +189,40 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            <Frame Style="{StaticResource Frame}"
+                   Margin="5">
+                <Grid ColumnSpacing="10"
+                      RowSpacing="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30*"/>
+                        <ColumnDefinition Width="70*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0"
+                           Grid.Column="0"
+                           Style="{StaticResource Label}"
+                           Text="Budget"
+                           HorizontalTextAlignment="Center"/>
+                    <Label Grid.Row="1"
+                           Grid.Column="0"
+                           Style="{StaticResource Label}"
+                           Text="Revenue"
+                           HorizontalTextAlignment="Center"/>
+                    <Label Grid.Row="0"
+                           Grid.Column="1"
+                           Style="{StaticResource Label}"
+                           Text="{Binding ListCurrency[0].results.budget}"
+                           HorizontalTextAlignment="Center"/>
+                    <Label Grid.Row="1"
+                           Grid.Column="1"
+                           Style="{StaticResource Label}"
+                           Text="{Binding ListCurrency[1].results.revenue}"
+                           HorizontalTextAlignment="Center"/>
+                </Grid>
+            </Frame>
             <Label Style="{StaticResource Label}"
                    Text="Keyword"
                    FontSize="Large"

@@ -31,12 +31,6 @@ namespace MovieManiaq.Model.Response.Movie
             public string name { get; set; }
         }
 
-        public class Currency
-        {
-            public double budget { get; set; }
-            public double revenue { get; set; }
-        }
-
         public class DetailRoot
         {
             public bool adult { get; set; }
@@ -50,10 +44,6 @@ namespace MovieManiaq.Model.Response.Movie
             }
             public object belongs_to_collection { get; set; }
             public long budget { get; set; }
-            public string budget_currency
-            {
-                get { return budget.ToString("C", CultureInfo.CreateSpecificCulture("en-US")); }
-            }
             public List<Genre> genres { get; set; }
             public string homepage { get; set; }
             public int id { get; set; }
@@ -74,13 +64,6 @@ namespace MovieManiaq.Model.Response.Movie
             public List<ProductionCountry> production_countries { get; set; }
             public string release_date { get; set; }
             public long revenue { get; set; }
-            public string revenue_currency
-            {
-                get
-                {
-                    return revenue.ToString("C", CultureInfo.CreateSpecificCulture("en-US"));
-                }
-            }
             public int runtime { get; set; }
             public string runtime_hours
             {
@@ -98,7 +81,6 @@ namespace MovieManiaq.Model.Response.Movie
             public bool video { get; set; }
             public double vote_average { get; set; }
             public int vote_count { get; set; }
-            public Currency currency { get; set; }
         }
 
         public class SpokenLanguage

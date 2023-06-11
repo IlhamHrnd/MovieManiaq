@@ -9,6 +9,7 @@ using static MovieManiaq.Model.Response.Movie.ReviewModel;
 using static MovieManiaq.Model.Response.Movie.SimiliarModel;
 using static MovieManiaq.Model.Response.Movie.VideoModel;
 using static MovieManiaq.Model.Response.Movie.List.YouTubeList;
+using static MovieManiaq.Model.Response.Movie.List.CurrencyList;
 
 namespace MovieManiaq.Model.Detail
 {
@@ -194,6 +195,21 @@ namespace MovieManiaq.Model.Detail
                 return listyoutube;
             }
             set { listyoutube = value; }
+        }
+
+        private IList<CurrencyListRoot> listcurrency { get; set; }
+        public IList<CurrencyListRoot> ListCurrency
+        {
+            get
+            {
+                if (listcurrency == null)
+                {
+                    listcurrency = new ObservableCollection<CurrencyListRoot>();
+                }
+
+                return listcurrency;
+            }
+            set { listcurrency =  value; }
         }
     }
 }
