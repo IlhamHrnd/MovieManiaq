@@ -94,10 +94,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="CommunityToolkit.Maui" Version="5.0.0" />
-	  <PackageReference Include="CommunityToolkit.Maui.MediaElement" Version="1.0.2" />
+	  <PackageReference Include="CommunityToolkit.Maui" Version="5.2.0" />
+	  <PackageReference Include="CommunityToolkit.Maui.MediaElement" Version="2.0.0" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-	  <PackageReference Include="RestSharp" Version="110.1.0" />
+	  <PackageReference Include="RestSharp" Version="110.2.1-alpha.0.3" />
+	  <PackageReference Include="Syncfusion.Maui.Core" Version="22.1.36" />
 	</ItemGroup>
 
 </Project>

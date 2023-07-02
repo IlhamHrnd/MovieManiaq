@@ -7,6 +7,15 @@
 
 		}
 
+        //API Key UI Kit
+        private static string syncfucion = "MjUzNDA1MkAzMjMyMmUzMDJlMzBMRjZHK0NBTXhhVWluNTd5OGFHMnM4T0lpejZ6d0hPMzZ4ZWF1QUhJZFVBPQ==";
+
+        public static string Syncfucion
+        {
+            get { return syncfucion; }
+            set { syncfucion = value; }
+        }
+
         //API Key Untuk Production
         private static string themoviedb = "a173a42ac2309ccc70dc04a4fa1188cc";
 

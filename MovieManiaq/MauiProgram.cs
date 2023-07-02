@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Maui;
+using Syncfusion.Maui.Core.Hosting;
 
 namespace MovieManiaq;
 
@@ -11,6 +12,7 @@ public static class MauiProgram
 			.UseMauiApp<App>()
             .UseMauiCommunityToolkitMediaElement()
             .UseMauiCommunityToolkit()
+			.ConfigureSyncfusionCore()
             .ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

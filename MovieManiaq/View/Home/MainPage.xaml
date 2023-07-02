@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MovieManiaq.View.Home.MainPage"
              xmlns:Model="clr-namespace:MovieManiaq.Model.Home"
+             xmlns:core="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
              Title="{Binding Title}">
     <ContentPage.BindingContext>
         <Model:MainModel/>
@@ -23,7 +24,7 @@
                         <CarouselView Style="{StaticResource CarouselView}"
                                       ItemsSource="{Binding results}"
                                       IndicatorView="{x:Reference Indicator_NowShowing}"
-                                      HeightRequest="250"
+                                      HeightRequest="300"
                                       CurrentItemChanged="NowShowing_CurrentItemChanged">
                             <CarouselView.ItemsLayout>
                                 <LinearItemsLayout Orientation="Horizontal"
@@ -31,51 +32,48 @@
                             </CarouselView.ItemsLayout>
                             <CarouselView.ItemTemplate>
                                 <DataTemplate>
-                                    <Frame Style="{StaticResource Frame}"
-                                           HeightRequest="250">
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="15*"/>
-                                                <RowDefinition Height="75*"/>
-                                                <RowDefinition Height="10*"/>
-                                            </Grid.RowDefinitions>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="30*"/>
-                                                <ColumnDefinition Width="70*"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Label Grid.Row="0"
-                                                   Grid.Column="0"
-                                                   Grid.ColumnSpan="2"
-                                                   LineBreakMode="TailTruncation"
-                                                   HorizontalTextAlignment="Center"
-                                                   Style="{StaticResource Label}"
-                                                   Text="{Binding title}"/>
-                                            <Image Grid.Row="1"
-                                                   Grid.Column="0"
-                                                   Source="{Binding poster_url}"
-                                                   Margin="2"
-                                                   Aspect="AspectFit"/>
-                                            <Label Grid.Row="1"
-                                                   Grid.Column="1"
-                                                   HorizontalTextAlignment="Start"
-                                                   Style="{StaticResource Label}"
-                                                   Text="{Binding overview}"/>
-                                            <Label Grid.Row="2"
-                                                   Grid.Column="1"
-                                                   HorizontalTextAlignment="Center"
-                                                   Style="{StaticResource Label}"
-                                                   Text="{Binding release_date}"/>
-                                            <Label Grid.Row="2"
-                                                   Grid.Column="0"
-                                                   HorizontalTextAlignment="Center"
-                                                   Style="{StaticResource Label}"
-                                                   Text="Read More">
-                                                <Label.GestureRecognizers>
-                                                    <TapGestureRecognizer Tapped="NowShowing_Tapped"/>
-                                                </Label.GestureRecognizers>
-                                            </Label>
-                                        </Grid>
-                                    </Frame>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="250"/>
+                                            <RowDefinition Height="25"/>
+                                            <RowDefinition Height="25"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <core:SfBadgeView Grid.Column="0"
+                                                          Grid.Row="0"
+                                                          BadgeText="{Binding vote_average}">
+                                            <core:SfBadgeView.Content>
+                                                <Frame Style="{StaticResource Frame}">
+                                                    <Image Source="{Binding poster_url}"/>
+                                                </Frame>
+                                            </core:SfBadgeView.Content>
+                                            <core:SfBadgeView.BadgeSettings>
+                                                <core:BadgeSettings FontSize="25" Position="BottomLeft" TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}"
+                                                                    CornerRadius="15,0,0,15" BadgeAlignment="Center" Animation="Scale"
+                                                                    Background="{AppThemeBinding Light={StaticResource Key=Gray100},Dark={StaticResource Key=Black100},Default={StaticResource Key=Gray100}}"/>
+                                            </core:SfBadgeView.BadgeSettings>
+                                        </core:SfBadgeView>
+                                        <Label Grid.Column="0"
+                                               Grid.Row="1"
+                                               LineBreakMode="TailTruncation"
+                                               HorizontalTextAlignment="Center"
+                                               FontSize="Header"
+                                               Style="{StaticResource Label}"
+                                               Text="{Binding title}">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="NowShowing_Tapped"/>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <Label Grid.Column="0"
+                                               Grid.Row="2"
+                                               LineBreakMode="TailTruncation"
+                                               HorizontalTextAlignment="Center"
+                                               FontSize="Body"
+                                               Style="{StaticResource Label}"
+                                               Text="{Binding release_date}"/>
+                                    </Grid>
                                 </DataTemplate>
                             </CarouselView.ItemTemplate>
                         </CarouselView>
@@ -96,7 +94,7 @@
                         <CarouselView Style="{StaticResource CarouselView}"
                                       ItemsSource="{Binding results}"
                                       IndicatorView="{x:Reference Indicator_Trending}"
-                                      HeightRequest="250"
+                                      HeightRequest="300"
                                       CurrentItemChanged="Trending_CurrentItemChanged">
                             <CarouselView.ItemsLayout>
                                 <LinearItemsLayout Orientation="Horizontal"
@@ -104,50 +102,48 @@
                             </CarouselView.ItemsLayout>
                             <CarouselView.ItemTemplate>
                                 <DataTemplate>
-                                    <Frame Style="{StaticResource Frame}"
-                                           HeightRequest="250">
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="15*"/>
-                                                <RowDefinition Height="75*"/>
-                                                <RowDefinition Height="10*"/>
-                                            </Grid.RowDefinitions>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="30*"/>
-                                                <ColumnDefinition Width="70*"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Image Grid.Row="1"
-                                                   Grid.Column="0"
-                                                   Source="{Binding poster_url}"
-                                                   Margin="5"
-                                                   Aspect="AspectFit"/>
-                                            <Label Grid.Row="0"
-                                                   Grid.Column="0"
-                                                   Grid.ColumnSpan="2"
-                                                   HorizontalTextAlignment="Center"
-                                                   Style="{StaticResource Label}"
-                                                   Text="{Binding title}"/>
-                                            <Label Grid.Row="1"
-                                                   Grid.Column="1"
-                                                   HorizontalTextAlignment="Start"
-                                                   Style="{StaticResource Label}"
-                                                   Text="{Binding overview}"/>
-                                            <Label Grid.Row="2"
-                                                   Grid.Column="1"
-                                                   HorizontalTextAlignment="Center"
-                                                   Style="{StaticResource Label}"
-                                                   Text="{Binding release_date}"/>
-                                            <Label Grid.Row="2"
-                                                   Grid.Column="0"
-                                                   HorizontalTextAlignment="Center"
-                                                   Style="{StaticResource Label}"
-                                                   Text="Read More">
-                                                <Label.GestureRecognizers>
-                                                    <TapGestureRecognizer Tapped="Trending_Tapped"/>
-                                                </Label.GestureRecognizers>
-                                            </Label>
-                                        </Grid>
-                                    </Frame>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="250"/>
+                                            <RowDefinition Height="25"/>
+                                            <RowDefinition Height="25"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <core:SfBadgeView Grid.Column="0"
+                                                          Grid.Row="0"
+                                                          BadgeText="{Binding vote_average}">
+                                            <core:SfBadgeView.Content>
+                                                <Frame Style="{StaticResource Frame}">
+                                                    <Image Source="{Binding poster_url}"/>
+                                                </Frame>
+                                            </core:SfBadgeView.Content>
+                                            <core:SfBadgeView.BadgeSettings>
+                                                <core:BadgeSettings FontSize="25" Position="BottomLeft" TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}"
+                                                                    CornerRadius="15,0,0,15" BadgeAlignment="Center" Animation="Scale"
+                                                                    Background="{AppThemeBinding Light={StaticResource Key=Gray100},Dark={StaticResource Key=Black100},Default={StaticResource Key=Gray100}}"/>
+                                            </core:SfBadgeView.BadgeSettings>
+                                        </core:SfBadgeView>
+                                        <Label Grid.Column="0"
+                                               Grid.Row="1"
+                                               LineBreakMode="TailTruncation"
+                                               HorizontalTextAlignment="Center"
+                                               FontSize="Header"
+                                               Style="{StaticResource Label}"
+                                               Text="{Binding title}">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="Trending_Tapped"/>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <Label Grid.Column="0"
+                                               Grid.Row="2"
+                                               LineBreakMode="TailTruncation"
+                                               HorizontalTextAlignment="Center"
+                                               FontSize="Body"
+                                               Style="{StaticResource Label}"
+                                               Text="{Binding release_date}"/>
+                                    </Grid>
                                 </DataTemplate>
                             </CarouselView.ItemTemplate>
                         </CarouselView>
@@ -168,7 +164,7 @@
                         <CarouselView Style="{StaticResource CarouselView}"
                                       ItemsSource="{Binding results}"
                                       IndicatorView="{x:Reference Indicator_UpComing}"
-                                      HeightRequest="250"
+                                      HeightRequest="300"
                                       CurrentItemChanged="UpComing_CurrentItemChanged">
                             <CarouselView.ItemsLayout>
                                 <LinearItemsLayout Orientation="Horizontal"
@@ -176,50 +172,48 @@
                             </CarouselView.ItemsLayout>
                             <CarouselView.ItemTemplate>
                                 <DataTemplate>
-                                    <Frame Style="{StaticResource Frame}"
-                                           HeightRequest="250">
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="15*"/>
-                                                <RowDefinition Height="75*"/>
-                                                <RowDefinition Height="10*"/>
-                                            </Grid.RowDefinitions>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="30*"/>
-                                                <ColumnDefinition Width="70*"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Image Grid.Row="1"
-                                                   Grid.Column="0"
-                                                   Source="{Binding poster_url}"
-                                                   Margin="5"
-                                                   Aspect="AspectFit"/>
-                                            <Label Grid.Row="0"
-                                                   Grid.Column="0"
-                                                   Grid.ColumnSpan="2"
-                                                   HorizontalTextAlignment="Center"
-                                                   Style="{StaticResource Label}"
-                                                   Text="{Binding title}"/>
-                                            <Label Grid.Row="1"
-                                                   Grid.Column="1"
-                                                   HorizontalTextAlignment="Start"
-                                                   Style="{StaticResource Label}"
-                                                   Text="{Binding overview}"/>
-                                            <Label Grid.Row="2"
-                                                   Grid.Column="1"
-                                                   HorizontalTextAlignment="Center"
-                                                   Style="{StaticResource Label}"
-                                                   Text="{Binding release_date}"/>
-                                            <Label Grid.Row="2"
-                                                   Grid.Column="0"
-                                                   HorizontalTextAlignment="Center"
-                                                   Style="{StaticResource Label}"
-                                                   Text="Read More">
-                                                <Label.GestureRecognizers>
-                                                    <TapGestureRecognizer Tapped="UpComing_Tapped"/>
-                                                </Label.GestureRecognizers>
-                                            </Label>
-                                        </Grid>
-                                    </Frame>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="250"/>
+                                            <RowDefinition Height="25"/>
+                                            <RowDefinition Height="25"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <core:SfBadgeView Grid.Column="0"
+                                                          Grid.Row="0"
+                                                          BadgeText="{Binding vote_average}">
+                                            <core:SfBadgeView.Content>
+                                                <Frame Style="{StaticResource Frame}">
+                                                    <Image Source="{Binding poster_url}"/>
+                                                </Frame>
+                                            </core:SfBadgeView.Content>
+                                            <core:SfBadgeView.BadgeSettings>
+                                                <core:BadgeSettings FontSize="25" Position="BottomLeft" TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}"
+                                                                    CornerRadius="15,0,0,15" BadgeAlignment="Center" Animation="Scale"
+                                                                    Background="{AppThemeBinding Light={StaticResource Key=Gray100},Dark={StaticResource Key=Black100},Default={StaticResource Key=Gray100}}"/>
+                                            </core:SfBadgeView.BadgeSettings>
+                                        </core:SfBadgeView>
+                                        <Label Grid.Column="0"
+                                               Grid.Row="1"
+                                               LineBreakMode="TailTruncation"
+                                               HorizontalTextAlignment="Center"
+                                               FontSize="Header"
+                                               Style="{StaticResource Label}"
+                                               Text="{Binding title}">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="UpComing_Tapped"/>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <Label Grid.Column="0"
+                                               Grid.Row="2"
+                                               LineBreakMode="TailTruncation"
+                                               HorizontalTextAlignment="Center"
+                                               FontSize="Body"
+                                               Style="{StaticResource Label}"
+                                               Text="{Binding release_date}"/>
+                                    </Grid>
                                 </DataTemplate>
                             </CarouselView.ItemTemplate>
                         </CarouselView>
@@ -240,7 +234,7 @@
                         <CarouselView Style="{StaticResource CarouselView}"
                                       ItemsSource="{Binding results}"
                                       IndicatorView="{x:Reference Indicator_TopRated}"
-                                      HeightRequest="250"
+                                      HeightRequest="300"
                                       CurrentItemChanged="TopRated_CurrentItemChanged">
                             <CarouselView.ItemsLayout>
                                 <LinearItemsLayout Orientation="Horizontal"
@@ -248,50 +242,48 @@
                             </CarouselView.ItemsLayout>
                             <CarouselView.ItemTemplate>
                                 <DataTemplate>
-                                    <Frame Style="{StaticResource Frame}"
-                                           HeightRequest="250">
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="15*"/>
-                                                <RowDefinition Height="75*"/>
-                                                <RowDefinition Height="10*"/>
-                                            </Grid.RowDefinitions>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="30*"/>
-                                                <ColumnDefinition Width="70*"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Image Grid.Row="1"
-                                                   Grid.Column="0"
-                                                   Source="{Binding poster_url}"
-                                                   Margin="5"
-                                                   Aspect="AspectFit"/>
-                                            <Label Grid.Row="0"
-                                                   Grid.Column="0"
-                                                   Grid.ColumnSpan="2"
-                                                   HorizontalTextAlignment="Center"
-                                                   Style="{StaticResource Label}"
-                                                   Text="{Binding title}"/>
-                                            <Label Grid.Row="1"
-                                                   Grid.Column="1"
-                                                   HorizontalTextAlignment="Start"
-                                                   Style="{StaticResource Label}"
-                                                   Text="{Binding overview}"/>
-                                            <Label Grid.Row="2"
-                                                   Grid.Column="1"
-                                                   HorizontalTextAlignment="Center"
-                                                   Style="{StaticResource Label}"
-                                                   Text="{Binding release_date}"/>
-                                            <Label Grid.Row="2"
-                                                   Grid.Column="0"
-                                                   HorizontalTextAlignment="Center"
-                                                   Style="{StaticResource Label}"
-                                                   Text="Read More">
-                                                <Label.GestureRecognizers>
-                                                    <TapGestureRecognizer Tapped="TopRated_Tapped"/>
-                                                </Label.GestureRecognizers>
-                                            </Label>
-                                        </Grid>
-                                    </Frame>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="250"/>
+                                            <RowDefinition Height="25"/>
+                                            <RowDefinition Height="25"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <core:SfBadgeView Grid.Column="0"
+                                                          Grid.Row="0"
+                                                          BadgeText="{Binding vote_average}">
+                                            <core:SfBadgeView.Content>
+                                                <Frame Style="{StaticResource Frame}">
+                                                    <Image Source="{Binding poster_url}"/>
+                                                </Frame>
+                                            </core:SfBadgeView.Content>
+                                            <core:SfBadgeView.BadgeSettings>
+                                                <core:BadgeSettings FontSize="25" Position="BottomLeft" TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}"
+                                                                    CornerRadius="15,0,0,15" BadgeAlignment="Center" Animation="Scale"
+                                                                    Background="{AppThemeBinding Light={StaticResource Key=Gray100},Dark={StaticResource Key=Black100},Default={StaticResource Key=Gray100}}"/>
+                                            </core:SfBadgeView.BadgeSettings>
+                                        </core:SfBadgeView>
+                                        <Label Grid.Column="0"
+                                               Grid.Row="1"
+                                               LineBreakMode="TailTruncation"
+                                               HorizontalTextAlignment="Center"
+                                               FontSize="Header"
+                                               Style="{StaticResource Label}"
+                                               Text="{Binding title}">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="TopRated_Tapped"/>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <Label Grid.Column="0"
+                                               Grid.Row="2"
+                                               LineBreakMode="TailTruncation"
+                                               HorizontalTextAlignment="Center"
+                                               FontSize="Body"
+                                               Style="{StaticResource Label}"
+                                               Text="{Binding release_date}"/>
+                                    </Grid>
                                 </DataTemplate>
                             </CarouselView.ItemTemplate>
                         </CarouselView>
@@ -312,7 +304,7 @@
                         <CarouselView Style="{StaticResource CarouselView}"
                                       ItemsSource="{Binding results}"
                                       IndicatorView="{x:Reference Indicator_Popular}"
-                                      HeightRequest="250"
+                                      HeightRequest="300"
                                       CurrentItemChanged="Popular_CurrentItemChanged">
                             <CarouselView.ItemsLayout>
                                 <LinearItemsLayout Orientation="Horizontal"
@@ -320,50 +312,49 @@
                             </CarouselView.ItemsLayout>
                             <CarouselView.ItemTemplate>
                                 <DataTemplate>
-                                    <Frame Style="{StaticResource Frame}"
-                                           HeightRequest="250">
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="15*"/>
-                                                <RowDefinition Height="75*"/>
-                                                <RowDefinition Height="10*"/>
-                                            </Grid.RowDefinitions>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="30*"/>
-                                                <ColumnDefinition Width="70*"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Image Grid.Row="1"
-                                                   Grid.Column="0"
-                                                   Source="{Binding poster_url}"
-                                                   Margin="5"
-                                                   Aspect="AspectFit"/>
-                                            <Label Grid.Row="0"
-                                                   Grid.Column="0"
-                                                   Grid.ColumnSpan="2"
-                                                   HorizontalTextAlignment="Center"
-                                                   Style="{StaticResource Label}"
-                                                   Text="{Binding title}"/>
-                                            <Label Grid.Row="1"
-                                                   Grid.Column="1"
-                                                   HorizontalTextAlignment="Start"
-                                                   Style="{StaticResource Label}"
-                                                   Text="{Binding overview}"/>
-                                            <Label Grid.Row="2"
-                                                   Grid.Column="1"
-                                                   HorizontalTextAlignment="Center"
-                                                   Style="{StaticResource Label}"
-                                                   Text="{Binding release_date}"/>
-                                            <Label Grid.Row="2"
-                                                   Grid.Column="0"
-                                                   HorizontalTextAlignment="Center"
-                                                   Style="{StaticResource Label}"
-                                                   Text="Read More">
-                                                <Label.GestureRecognizers>
-                                                    <TapGestureRecognizer Tapped="Popular_Tapped"/>
-                                                </Label.GestureRecognizers>
-                                            </Label>
-                                        </Grid>
-                                    </Frame>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="250"/>
+                                            <RowDefinition Height="25"/>
+                                            <RowDefinition Height="25"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <core:SfBadgeView Grid.Column="0"
+                                                          Grid.Row="0"
+                                                          BadgeText="{Binding vote_average}"
+                                                          Style="{StaticResource SfBadgeView}">
+                                            <core:SfBadgeView.Content>
+                                                <Frame Style="{StaticResource Frame}">
+                                                    <Image Source="{Binding poster_url}"/>
+                                                </Frame>
+                                            </core:SfBadgeView.Content>
+                                            <core:SfBadgeView.BadgeSettings>
+                                                <core:BadgeSettings FontSize="25" Position="BottomLeft" TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}"
+                                                                    CornerRadius="15,0,0,15" BadgeAlignment="Center" Animation="Scale"
+                                                                    Background="{AppThemeBinding Light={StaticResource Key=Gray100},Dark={StaticResource Key=Black100},Default={StaticResource Key=Gray100}}"/>
+                                            </core:SfBadgeView.BadgeSettings>
+                                        </core:SfBadgeView>
+                                        <Label Grid.Column="0"
+                                               Grid.Row="1"
+                                               LineBreakMode="TailTruncation"
+                                               HorizontalTextAlignment="Center"
+                                               FontSize="Header"
+                                               Style="{StaticResource Label}"
+                                               Text="{Binding title}">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="Popular_Tapped"/>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <Label Grid.Column="0"
+                                               Grid.Row="2"
+                                               LineBreakMode="TailTruncation"
+                                               HorizontalTextAlignment="Center"
+                                               FontSize="Body"
+                                               Style="{StaticResource Label}"
+                                               Text="{Binding release_date}"/>
+                                    </Grid>
                                 </DataTemplate>
                             </CarouselView.ItemTemplate>
                         </CarouselView>
