@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Caching.Memory;
 using MovieManiaq.ViewModel.Home;
 
 namespace MovieManiaq.View.Home;
@@ -5,11 +6,12 @@ namespace MovieManiaq.View.Home;
 public partial class MainPage : ContentPage
 {
 	private readonly MainViewModel _mainViewModel;
+	private readonly MemoryCache memoryCache;
 
 	public MainPage()
 	{
 		InitializeComponent();
-		_mainViewModel = new MainViewModel(Navigation);
+		_mainViewModel = new MainViewModel(Navigation, memoryCache);
 		BindingContext	= _mainViewModel;
 	}
 

@@ -16,14 +16,7 @@ namespace MovieManiaq.Model.Root
         {
             NetworkAccess access = Connectivity.Current.NetworkAccess;
 
-            if (access == NetworkAccess.Internet)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return access == NetworkAccess.Internet;
         }
 
         public bool CekJaringan
@@ -39,14 +32,11 @@ namespace MovieManiaq.Model.Root
 
         public static async void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
         {
-            bool valid_connect = network.CekJaringan;
-
-            if (!valid_connect)
+            if (!network.CekJaringan)
             {
                 NoConnection();
             }
-
-            else if (valid_connect)
+            else
             {
                 var toast = Toast.Make("Back Online", ToastDuration.Long);
                 await toast.Show();

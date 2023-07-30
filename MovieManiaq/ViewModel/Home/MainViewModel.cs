@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Maui.Devices.Sensors;
 using MovieManiaq.Model.Home;
 using MovieManiaq.Model.Response.Movie.Index;
@@ -16,9 +17,11 @@ namespace MovieManiaq.ViewModel.Home
 
         private readonly INavigation _navigation;
 
-        public MainViewModel(INavigation navigation)
+        private readonly IMemoryCache _memoryCache;
+        public MainViewModel(INavigation navigation, IMemoryCache memoryCache)
         {
             _navigation = navigation;
+            _memoryCache = memoryCache;
 
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
 
